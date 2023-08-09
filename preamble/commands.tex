@@ -15,3 +15,33 @@
 
 % absolute value
 \newcommand{\abs}[1]{\ensuremath\lvert#1\rvert}
+
+% wf and wfs
+\newcommand{\wf}[0]{\textit{wf}}
+\newcommand{\wfs}[0]{\textit{wf}s}
+
+% ra for right arrow
+% NOTE \to does the same thing, but this is more readable
+\newcommand{\ra}[0]{\ensuremath\rightarrow}
+
+% cursive letters
+\newcommand{\cua}[0]{\ensuremath\mathscr{A}}
+\newcommand{\cub}[0]{\ensuremath\mathscr{B}}
+\newcommand{\cuc}[0]{\ensuremath\mathscr{C}}
+\newcommand{\cud}[0]{\ensuremath\mathscr{D}}
+\newcommand{\cue}[0]{\ensuremath\mathscr{E}}
+\newcommand{\Cua}[0]{\(\ensuremath\mathscr{A}\)}
+\newcommand{\Cub}[0]{\(\ensuremath\mathscr{B}\)}
+\newcommand{\Cuc}[0]{\(\ensuremath\mathscr{C}\)}
+\newcommand{\Cud}[0]{\(\ensuremath\mathscr{D}\)}
+\newcommand{\Cue}[0]{\(\ensuremath\mathscr{E}\)}
+
+% deduction
+\newcommand{\ded}[1]{\ensuremath\vdash_{#1}}
+\newcommand{\dedL}[0]{\ensuremath\vdash_{L}}
+
+\newcommand{\centeredAlign}[1]{
+  \hfill\(\begin{aligned}[t]
+    #1
+  \end{aligned}\)\hfill\null
+}

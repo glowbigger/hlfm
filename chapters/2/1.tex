@@ -1,5 +1,7 @@
 % TODO proving a -> b from \Gamma \cup a without using the deduction theorem to internalize the theorem
 % TODO prove that a -> a is a theorem alone, since it used in the deduction theorem and is a good exercise in general
+% TODO 3(c) is good
+% TODO 4(b) is good, very simply after double ded. thm.
 
 \section{The formal system \texorpdfstring{\(L\)}{L}}
 
@@ -61,7 +63,7 @@ Instead of using the word theorem to discuss a result about formal system, we wi
 
 \setcounter{definition}{7}
 \begin{proposition}[The Deduction Theorem]
-  If \(\Gamma \cup \{\cua\} \dedL \cub\), then \(\Gamma \dedL (\cua \ra \cub)\), where \Cua{} and \Cub{} are \wfs{} of \(L\), and \(\Gamma\) is a set of \wfs{} of \(L\) (possibly empty).
+  If \(\Gamma \cup \{\cua\} \dedL \cub\), then \(\Gamma \dedL (\cua \ra \cub)\), where \(\cua\) and \(\cub\) are \wfs{} of \(L\), and \(\Gamma\) is a set of \wfs{} of \(L\) (possibly empty).
 
   \prf{} The proof is by strong induction on the number of \wfs{} in the sequence forming the deduction of \(\cub\) from \(\Gamma \cup \{\cua\}\).
 
@@ -213,7 +215,7 @@ Instead of using the word theorem to discuss a result about formal system, we wi
 \end{corollary}
 
 \begin{proposition}
-  For any \wfs{} \Cua and \Cub of \(L\), the following are theorems of \(L\).
+  For any \wfs{} \(\cua\) and \(\cub\) of \(L\), the following are theorems of \(L\).
   \begin{enumerate}[label=(\alph*)]
     \item \(((\sim\cua) \ra (\cub \ra \cua))\)
     \item \((((\sim\cua) \ra \cua) \ra \cua)\)
@@ -292,34 +294,12 @@ Instead of using the word theorem to discuss a result about formal system, we wi
   \end{enumerate}
 \end{proposition}
 
-\subsection*{Exercises}
-
-\begin{enumerate}
-  \item Write out proofs in \(L\) for the following \wfs.
-
-    \begin{enumerate}[label=(\alph*)]
-      \item \(((p_1 \ra p_2) \ra ((\sim p_1 \ra \sim p_2) \ra (p_2 \ra p_1)))\)
-      \item \((((p_1 \ra (p_2 \ra p_3)) \ra (p_1 \ra p_2)) \ra ((p_1 \ra (p_2 \ra p_3)) \ra (p_1 \ra p_3)))\)
-      \item \(((p_1 \ra (p_1 \ra p_2)) \ra (p_1 \ra p_2))\)
-      \item \((p_1 \ra (p_2 \ra (p_1 \ra p_2)))\)
-    \end{enumerate}
-
-  \item Show that the following hold for any \wfs{} \(\cua, \cub, \cuc\) of \(L\).
-  \begin{enumerate}
-    \item \(\{(\sim\cua)\} \dedL (\cua \ra \cub)\);
-    \item \(\{(\sim(\sim\cua))\} \dedL \cua\);
-    \item \(\{(\cua \ra \cub), (\sim(\cub \ra \cuc) \ra (\sim\cua))\} \dedL (\cua \ra \cuc)\);
-    \item \(\{(\cua \ra (\cub \ra \cuc))\} \dedL (\cub \ra (\cua \ra \cuc))\);
-  \end{enumerate}
-
-  \item Using the Deduction Theorem for \(L\), to be continued...
-\end{enumerate}
-
 \subsection*{Solutions}
 
+\note All formulas are fully parenthesized, so they may look different from how they appear in the book. Additionally, any metatheorems are referenced as if though they were rules of deduction, just like in the book.
+
 \begin{enumerate}
-  % 1
-  \item 
+  \item % 1 
     \begin{enumerate}[label=(\alph*)]
       % a
       \item
@@ -418,8 +398,7 @@ Instead of using the word theorem to discuss a result about formal system, we wi
         % TODO just write the original problems and stop substituting variables, it will make things easier
     \end{enumerate}
 
-  % 2
-  \item 
+  \item % 2
     \begin{enumerate}[label=(\alph*)]
       \item \centeredAlign{
           \text{1}&&
@@ -534,5 +513,191 @@ Instead of using the word theorem to discuss a result about formal system, we wi
         }
     \end{enumerate}
 
-    \note{} Once again, a true proof would involve a few more lines instead of employing the HS metatheorem.
+  \item % 3
+    \begin{enumerate}[label=(\alph*)]
+      \item We apply the deduction theorem to exercise to the result of exercise 2(b) and get \(\dedL (\sim(\sim\cua) \ra \cua)\), which will be referred to as \(\star\).
+        \begin{align*}
+          \text{1}&&
+          \cua&&
+          \text{assumption}\\
+          %
+          \text{2}&&
+          (\sim(\sim(\sim\cua)) \ra (\sim\cua))&&
+          \star\\
+          %
+          \text{3}&&
+          ((\sim(\sim(\sim\cua)) \ra (\sim\cua)) \ra (\cua \ra (\sim(\sim\cua))))&&
+          \text{(L3)}\\
+          %
+          \text{4}&&
+          (\cua \ra (\sim(\sim\cua)))&&
+          \text{2, 3, MP}\\
+          %
+          \text{5}&&
+          (\sim(\sim\cua))&&
+          \text{1, 4, MP}
+        \end{align*}
+      By the deduction theorem, \(\dedL (\cua \ra (\sim(\sim\cua)))\).
+
+      \item This solution relies on the solutions for 3(a) and 2(b).
+        \begin{align*}
+          \text{1}&&
+          (\cub \ra \cua)&&
+          \text{assumption}\\
+          %
+          \text{2}&&
+          (\cua \ra (\sim(\sim\cua)))&&
+          \star\\
+          %
+          \text{3}&&
+          ((\sim(\sim\cub)) \ra \cub)&&
+          \text{exercise 3(a)}\\
+          %
+          \text{4}&&
+          (\cub \ra (\sim(\sim\cua)))&&
+          \text{1, 2, HP}\\
+          %
+          \text{5}&&
+          ((\sim(\sim\cub)) \ra (\sim(\sim\cua)))&&
+          \text{3, 4, HP}\\
+          %
+          \text{6}&&
+          (((\sim(\sim\cub)) \ra (\sim(\sim\cua))) \ra ((\sim\cua) \ra (\sim\cub)))&&
+          \text{(L3)}\\
+          %
+          \text{7}&&
+          ((\sim\cua) \ra (\sim\cub))&&
+          \text{5, 6, MP}
+        \end{align*}
+        By the deduction theorem, \(\dedL ((\cub \ra \cua) \ra ((\sim\cua) \ra (\sim\cub)))\).
+
+      \item
+        \centeredAlign{
+          \text{1}&&
+          ((\cua \ra \cub) \ra \cua)&&
+          \text{assumption}\\
+          %
+          \text{2}&&
+          ((\sim\cua) \ra (\cua \ra \cub))&&
+          \text{Proposition 2.11(a)}\\
+          %
+          \text{3}&&
+          (\sim\cua \ra \cua)&&
+          \text{1, 2, HS}\\
+          %
+          \text{4}&&
+          ((\sim\cua \ra \cua) \ra \cua)&&
+          \text{Proposition 2.11(b)}\\
+          %
+          \text{5}&&
+          \cua&&
+          \text{3, 4, MP}
+        }
+
+        By the deduction theorem, \(\dedL (((\cua \ra \cub) \ra \cua) \ra \cua)\).
+        
+      \item \centeredAlign{
+          \text{1}&&
+          (\sim(\cua \ra \cub))&&
+          \text{assumption}\\
+          %
+          \text{2}&&
+          ((\cub \ra (\cua \ra \cub)) \ra (\sim(\cua \ra \cub) \ra (\sim\cub)))&&
+          \text{exercise 3(b)}\\
+          %
+          \text{3}&&
+          (\cub \ra (\cua \ra \cub))&&
+          \text{(L1)}\\
+          %
+          \text{4}&&
+          (\sim(\cua \ra \cub) \ra (\sim\cub))&&
+          \text{2, 3, MP}\\
+          %
+          \text{5}&&
+          (\sim\cub)&&
+          \text{1, 4, MP}\\
+          %
+          \text{6}&&
+          (\sim\cub \ra (\cub \ra \cua))&&
+          \text{Proposition 2.11(a)}\\
+          %
+          \text{7}&&
+          (\cub \ra \cua)&&
+          \text{5, 6, MP}
+        }
+
+        By the deduction theorem, \(\dedL ((\sim(\cua \ra \cub)) \ra (\cub \ra \cua))\).
+    \end{enumerate}
+
+  \item % 4
+    \begin{enumerate}[(i)]
+      \item \centeredAlign{
+          \text{1}&&
+          ((\sim\cua) \ra (\sim\cub))&&
+          \text{assumption}\\
+          %
+          \text{2}&&
+          ((\sim\cua) \ra \cub)&&
+          \text{assumption}\\
+          %
+          \text{3}&&
+          (((\sim\cua) \ra (\sim\cub)) \ra (\cub \ra \cua))&&
+          \text{(L3)}\\
+          %
+          \text{4}&&
+          (\cub \ra \cua)&&
+          \text{1, 3, MP}\\
+          %
+          \text{5}&&
+          ((\sim\cua) \ra \cua)&&
+          \text{2, 4, HS}\\
+          %
+          \text{6}&&
+          (((\sim\cua) \ra \cua) \ra \cua)&&
+          \text{2.11(b)}\\
+          %
+          \text{7}&&
+          \cua&&
+          \text{5, 6, MP}
+        }
+
+        By the deduction theorem, which is valid since its proof relies only on \((L'1)\) and \((L'2)\), \(\ded{L'} (((\sim\cua) \ra (\sim\cub)) \ra (((\sim\cua) \ra \cub) \ra \cua))\).
+
+      \item We will prove \(\{((\sim\cua) \ra (\sim\cub)), \cub\} \ded{L'} \cua\)
+        \begin{align*}
+          \text{1}&&
+          ((\sim\cua) \ra (\sim\cub))&&
+          \text{assumption}\\
+          %
+          \text{2}&&
+          \cub&&
+          \text{assumption}\\
+          %
+          \text{3}&&
+          (((\sim\cua) \ra (\sim\cub)) \ra (((\sim\cua) \ra \cub) \ra \cua))&&
+          \text{(L'3)}\\
+          %
+          \text{4}&&
+          (((\sim\cua) \ra \cub) \ra \cua)&&
+          \text{1, 3, MP}\\
+          %
+          \text{5}&&
+          (\cub \ra ((\sim\cua) \ra \cub))&&
+          \text{(L'2)}\\
+          %
+          \text{6}&&
+          ((\sim\cua) \ra \cub)&&
+          \text{2, 5, MP}\\
+          %
+          \text{7}&&
+          \cua&&
+          \text{4, 6, MP}
+        \end{align*}
+
+        By the deduction theorem twice, \(\ded{L'} (((\sim\cua) \ra (\sim\cub)) \ra (\cub \ra \cua))\).
+    \end{enumerate}
+    Suppose a \wf is proved in \(L\). By definition, it follows from (L1), (L2), and (L3) and MP. Since (L1), (L2) and MP are properties of \(L'\), and since we just proved that \(\ded{L'} \text{(L3)}\), the \wf can also be proved in \(L'\). The other direction is argued for in the same way, so a \wf is a theorem in \(L\) if and only if it is a theorem in \(L'\).
+
+  \item % 5
+    The rule is valid, see example 2.6 (where \(\cua\) and \(\cub\) in the exercise appear switched in the example).
 \end{enumerate}

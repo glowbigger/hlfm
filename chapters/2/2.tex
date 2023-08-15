@@ -1,0 +1,190 @@
+\newcommand{\Lext}{\(L^{\ast}\)}
+\newcommand{\mLext}{\L^{\ast}}
+\newcommand{\Lextext}{\(L^{\ast\ast}\)}
+
+\section{The Adequacy Theorem for \texorpdfstring{\(L\)}{L}}
+
+\begin{definition}
+  A \textit{valuation} of \(L\) is a function \(v\) whose domain is the set of \wfs{} of \(L\) and whose range is the set \(\{T, F\}\) such that, for any \wfs{} \(\cua, \cub\) of \(L\),
+
+  \begin{enumerate}[(i)]
+    \item \(v(\cua) \neq v((\sim\cua))\) and
+    \item \(v((\cua \ra \cub)) = F\) if and only if \(v(\cua) = T\) and \(v(\cub) = F\).
+  \end{enumerate}
+\end{definition}
+
+This definition formalizes the previous idea of truth functions for statement forms. Note that (i) and (ii) simply define the behavior of the two logic operators in \(L\) such that they correspond to truth tables in the last chapter. Since each \(p_1, p_2, \dots\) is a \wf{}, all other \wfs{} are comprised of \(p_1, p_2, \dots\) and \(\ra, \sim\), and the behavior of \(\ra\) and \(\sim\) are determined by the rules above, every possible valuation corresponds to a different combination of values of \(p_1, p_2, \dots\).
+
+\begin{definition}
+  A \wf{} \(\cua\) of \(L\) is a \textit{tautology} if for every valuation \(v\), \(v(\cua) = T\). If for every valuation \(v\), \(v(\cua) = F\), it is a \textit{contradiction}.
+
+  \note{} The definition of a contradiction isn't in the book, but the term is used later on.
+\end{definition}
+
+The goal of this chapter is to prove that every \wf{} in \(L\) is a tautology if and only if it is a theorem in \(L\). One direction can be done immediately.
+
+\begin{proposition}[The Soundness Theorem]
+  Every theorem of \(L\) is a tautology.
+
+  \prf{} Let \(\cua\) be a \wf{} in \(L\). It is a theorem if and only if it is the last member of a proof in \(L\). The proof is by strong induction on the number of \wfs{} in the proof of \(\cua\).
+
+  Suppose that all theorems containing up to \(n\) \wfs{} in their proofs are tautologies. Now suppose that \(\cua\) has \(n\) \wfs{} in its proof. In the proof, any \wf{} preceding \(\cua\) must necessarily be a tautology because it is a theorem with fewer than \(n\) \wfs{} in its proof. So the only thing to prove is that \(\cua\) is a tautology, and \(\cua\) can either be an axiom, in which case it is a tautology (see exercise 6) or a product of MP and two previous \wfs{}. These two \wfs{} must necessarily be of the form \(\cub\) and \((\cub \ra \cua)\). By Proposition 1.9 (see the note below), \(\cua\) must be a tautology.
+
+  \note{} In the above proof, since strong induction was used, no base case was necessary. An optional base case (when \(n = 1\)) would have verified that all axioms of \(L\) are tautologies, which would have been redundant to include.
+
+  \note{} Proposition 1.9 is actually not strictly applicable here because it uses  the previous informal notion of a tautology. But re-proving it using \(v\) would be nearly identical.
+
+  \note{} A formal system is said to be sound if everything statement that is provable in it is true, and \(L\) has this property, as seen from this theorem, hence the name.
+\end{proposition}
+
+\begin{definition}
+  An \textit{extension of \(L\)} is a formal system obtained by altering or enlarging the set of axioms so that all theorems of \(L\) remain theorems.
+
+  \note{} By this definition, \(L\) is not an extension on \(L\). Additionally, an extension of \(L\) may not actually extend the list of theorems of \(L\).
+\end{definition}
+
+\begin{definition}
+  An extension of \(L\) or \(L\) itself is \textit{consistent} if for no \wf{} \(\cua\) of \(L\) are both \(\cua\) and \((\sim\cua)\) theorems of the extension.
+
+  \note{} This definition has been generalized slightly to be defined for \(L\).
+\end{definition}
+
+\begin{proposition}
+  \(L\) is consistent.
+
+  \prf{} Suppose that \(L\) is not consistent. Then there exists a \wf{} \(\cua\) such that \(\cua\) and \((\sim\cua)\) are both theorems of \(L\). Since all theorems of \(L\) are tautologies (Proposition 2.14), \(\cua\) and \((\sim\cua)\) must be tautologies, meaning that for any valuation \(v\), \(v(\cua) = v((\sim\cua)) = T\). But this contradicts \(v\) being a valuation (see Definition 2.12(i)).
+
+  \note{} Therefore, consistency of \(L\) is a consequence of its soundness, Proposition 2.14.
+\end{proposition}
+
+\begin{proposition}
+  An extension \(L^{\ast}\) of \(L\) is consistent if and only if there is a \wf{} which is not a theorem of \(L^{\ast}\).
+
+  \prf{} \Ra{} Let \(L^{\ast}\) be consistent. Then, for any \wf{} \(\cua\), either \(\cua\) or \(\sim\cua\) is not a theorem.
+
+  \La{} For the other direction, we use contrapositive reasoning. Suppose that \Lext{} is not consistent, which is to say that there exists a \wf{} \(\cub\) such that \(\cub\) and \((\sim\cub)\) are both theorems of \Lext{}. Now let \(\cua\) be any \wf{} of \Lext{}. Since, by Proposition 2.11(a), \(((\sim\cub) \ra (\cub \ra \cua))\) is a theorem of \(L\), it is a theorem of \Lext{}. So by MP and since \((\sim\cub)\) is a theorem, \((\cub \ra \cua)\) is a theorem. By MP and since \(\cub\) is a theorem, \(\cua\) is a theorem. Therefore, there any \wf{} \(\cua\) is a theorem of \Lext.
+
+  \note The above proposition says that in a system with a contradiction in it, that contradiction can be used to vacuously prove anything, so a consistent system need only have one \wf{} which is not a theorem.
+\end{proposition}
+
+Adding axioms to \(L\) or any of its extension can break its consistency. Consider a \wf{} \(\cua\). Either it is true or false in \Lext{} in the sense that \(\ded{L^{\ast}} \cua\) or \(\ded{L^{\ast}} (\sim\cua)\), or it is undecidable in the sense that neither \(\ded{L^{\ast}} \cua\) or \(\ded{L^{\ast}} (\sim\cua)\). In the latter case, would arbitrary adding \(\cua\) or \((\sim\cua)\) break the consistency of \(L\)? The answer is no, as the following proposition shows.
+
+\begin{proposition}
+  Let \(L^{\ast}\) be a consistent extension of \(L\) and let \(\cua\) be a \wf{} of \(L\) which is not a theorem of \(L^{\ast}\). Then \Lextext{} also consistent, where \Lextext{} is the extension of \(L\) obtained from \(L^{\ast}\) by including \((\sim\cua)\) as an additional axiom.
+
+  \prf{} Suppose that \Lextext{} is not consistent. Then there exists some \wf{} \(\cub\) such that both \(\cub\) and \((\sim\cub)\) are theorems of \Lextext{}. Now by Proposition 2.18 (see the note below), \(\cua\) must be a theorem of \Lextext{}. But since any theorem of \Lextext{} is a deduction from \((\sim\cua)\) in \Lext{}, which is to say that \(\{(\sim\cua)\} \ded{L^{\ast}} \cua\) it follows from the deduction theorem that \(\ded{L^{\ast}} ((\sim\cua) \ra \cua)\). From Proposition 2.11(b) and since all theorems of \(L\) are theorems of \Lext{}, we have \(\ded{L^{\ast}} ((\sim\cua) \ra \cua) \ra \cua)\), and so \(\ded{L^{\ast}} \cua\) by MP. But this contradicts \(\cua\) not being a theorem of \Lext{}. Therefore, \Lextext{} must be consistent.
+
+  \note{} Proposition 2.18 is not strictly applicable here, but its proof can be easily generalized to \Lextext{}.
+
+  \note{} Clearly if \((\sim\cua)\) is a theorem of \Lext{}, then adding it as an axiom in \Lextext{} will not break consistency. Only when \(\cua\) is ''neither true nor false`` is this theorem interesting.
+\end{proposition}
+
+\begin{definition}
+  An extension of \(L\) is \textit{complete} if for each \wf{} \(\cua\), either \(\cua\) or \((\sim\cua)\) is a theorem of the extension.
+  
+  \note{} Completeness is the converse of soundness.
+\end{definition}
+
+% TODO prove this
+
+\begin{proposition*}
+  The set of \wfs{} of \(L\) is countable.  
+
+  \prf{} Prove this.
+\end{proposition*}
+
+\begin{proposition}
+  Let \Lext{} be a consistent extension of \(L\). Then there is a consistent complete extension of \Lext{}.
+
+  \proof{} Since the set of all \wfs{} of \(L\) is countable, let \(\cua_1, \cua_2, \cua_3\) be an enumerations of the \wfs{}. Define a sequence \(J_0, J_1, J_2, \dots\) by the following rules.
+
+  \begin{enumerate}
+    \item If \(n = 0\), let \(J_0\) be \(L^{\ast}\).
+
+    \item If \(n > 0\), let \(J_n\) be \(J_{n - 1}\) if \(\ded{J_{n - 1}} \cua_n\).
+
+    \item If \(n > 0\), let \(J_n\) be \(J_{n - 1}\) extended with \((\sim\cua_n)\) as an additional axiom if \(\cua_n\) is not a theorem of \(J_{n - 1}\).
+  \end{enumerate}
+
+  Notice that since \(J_0 = L^{\ast}\) is consistent and every following member of the sequence is either the previous member or a consistent extension by Proposition 2.19, every member of the sequence is consistent.
+
+  Now define \(J\) to be an extension of \Lext{} such that a \wf{} is an axiom of \(J\) if and only if it is an axiom of \(J_n\) for any \(n\). Notice that by construction of the sequence, for any \(k\), either \(\cua_k\) or \((\sim\cua_k)\) is a theorem of \(J_k\). So \(J_k\) or \((\sim J_k)\) must be a theorem of \(J\), which extends \(J_k\). Therefore, \(J\) is complete.
+
+  Now suppose that \(J\) is not consistent. Then there is a \wf{} \(\cua\) such that \(\ded{J} \cua\) and \(\ded{J} (\sim\cua)\). Now in these proofs, there are a finite number of axioms used, and each axiom must of course appear in the list of all numbered \wfs{}. Let \(\cua_k\) refer to the axiom with the highest index \(k\). So both \(\ded{J_k} \cua_k\) and \(\ded{J_k} (\sim\cua_k)\), contradicting the consistency of \(J_k\). Hence, \(J\) must be consistent.
+
+  \note{} An extension of \Lext{} is defined in the same way as an extension of \(L\) is.
+
+  \note{} The set of \wfs{} is purposely indexed starting from 1 instead of 0 like in the book so that \(\cua_n\) or \((\sim\cua_n)\) is a theorem of \(\cub_n\).
+\end{proposition}
+
+\begin{proposition}
+  If \Lext{} is a consistent extension of \(L\) then there is a valuation in which each theorem of \Lext{} takes value \(T\).
+
+  \prf{} Let \(J\) be the consistent complete extension of \Lext{} given in the proof of Proposition 2.21. Define \(v\) on \wfs{} of \(L\) by \(v(\cua) = T\) if \(\cua\) is a theorem of \(J\) and \(v(\cua) = F\) otherwise.
+
+  Now it remains to be shown that \(v\) is a valuation consistent with Definition 2.12. Since \(J\) is complete, \(v\) is defined on all \wfs{}. For any \(\cua\), \(v(\cua) \neq v((\sim\cua))\), since \(J\) is consistent. It remains to show that \(v(\cua \ra \cub) = F\) if and only if \(v(\cua) = T\) and \(v(\cub) = F\).
+
+  \Ra{} Suppose that \(v(\cua \ra \cub) = F\) and that either \(v(\cua) = F\) or \(v(\cub) = T\). Since \(J\) is consistent, \(\sim(\cua \ra \cub)\) must be a theorem of \(J\) and either \((\sim\cua)\) or \(\cub\) is also theorem of \(J\). If \((\sim\cua)\), then
+  \begin{align*}
+    \text{1}&&
+    (\sim\cua)&&
+    \text{assumption}\\
+    %
+    \text{2}&&
+    ((\sim\cua) \ra ((\sim\cub) \ra (\sim\cua)))&&
+    \text{(L1)}\\
+    %
+    \text{3}&&
+    ((\sim\cub) \ra (\sim\cua))&&
+    \text{1, 2, MP}\\
+    %
+    \text{4}&&
+    (((\sim\cub) \ra (\sim\cua)) \ra (\cua \ra \cub))&&
+    \text{(L3)}\\
+    %
+    \text{5}&&
+    (\cua \ra \cub)&&
+    \text{3, 4, MP}
+  \end{align*}
+  %
+  or if \(\cub\), then
+  \begin{align*}
+    \text{1}&&
+    \cub&&
+    \text{assumption}\\
+    %
+    \text{2}&&
+    (\cub \ra (\cua \ra \cub))&&
+    \text{(L2)}\\
+    %
+    \text{3}&&
+    (\cua \ra \cub)&&
+    \text{1, 2, MP}
+  \end{align*}
+  %
+  and so in either case, \((\cua \ra \cub)\) is a theorem of \(J\) along with \((\sim(\cua \ra \cub))\), contradicting the consistency of \(J\). Therefore, if \(v(\cua \ra \cub)\), then \(v(\cua) = T\) and \(v(\cub) = F\).
+
+  \La{} Suppose that \(v(\cua) = T, v(\cub) = F\) and that \(v((\cua \ra \cub)) = T\). Then \(\cua\), \((\sim\cub)\), and \((\cua \ra \cub)\) are theorems of \(J\). Then by MP, \(\cua\), and \((\cua \ra \cub)\), it follows that \(\cub\) is a theorem of \(J\) as well along with \((\sim\cub)\), contradicting the consistency of \(J\). Therefore, if \(v(\cua) = T, v(\cub) = F\) implies that \(v((\cua \ra \cub)) = F\).
+
+  In conclusion, \(v\) is indeed a valuation and so if \(\cua\) is a theorem of \Lext{}, then it must be a theorem of the extension \(J\), in which case it takes the value \(T\) under the valuation \(v\), making \(v\) a valuation in which each theorem of \Lext{} takes value \(T\).
+\end{proposition}
+
+\begin{proposition}[The Adequacy Theorem for \(L\)]
+  If \(\cua\) is a \wf{} of \(L\) and \(\cua\) is a tautology, then \(\cua\) is a theorem of \(L\).
+
+  \prf{} Let \(\cua\) be a tautology and suppose that it is not a theorem of \(L\). Then \((\sim\cua)\) must be a theorem of the extension \Lext{} by Proposition 2.21. Therefore, by Proposition 2.22, there exists a valuation \(v\) in which \(v(\sim\cua) = T\). But \(v(\cua) = T\), since \(\cua\) is a tautology. This contradiction demonstrates that \(\cua\) must be a theorem of \(L\).
+\end{proposition}
+
+\begin{proposition}
+  \(L\) is \textit{decidable}, i.e., there is an effective method for deciding, given any \wf{} of \(L\), whether it is a theorem of \(L\).
+
+  \prf{} The effective method of determining whether a \wf{} is a tautology is to show that any valuation assigns the \wf{} the value of \(T\). If so, then it is a tautology, and by Proposition 2.23, it must be a theorem of \(L\).
+
+  \note{} Showing that any valuation assigns the \wf{} the value of \(T\) can be done by creating truth tables like in the first chapter.
+\end{proposition}
+
+\subsection*{Solutions}
+
+\begin{enumerate}
+  \item
+\end{enumerate}

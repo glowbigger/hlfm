@@ -1,6 +1,9 @@
+% TODO exercise 10 is particularly good
+
 \newcommand{\Lext}{\(L^{\ast}\)}
-\newcommand{\mLext}{\L^{\ast}}
 \newcommand{\Lextext}{\(L^{\ast\ast}\)}
+\newcommand{\Lp}{\(L^{+}\)}
+\newcommand{\Lpp}{\(L^{++}\)}
 
 \section{The Adequacy Theorem for \texorpdfstring{\(L\)}{L}}
 
@@ -13,7 +16,7 @@
   \end{enumerate}
 \end{definition}
 
-This definition formalizes the previous idea of truth functions for statement forms. Note that (i) and (ii) simply define the behavior of the two logic operators in \(L\) such that they correspond to truth tables in the last chapter. Since each \(p_1, p_2, \dots\) is a \wf{}, all other \wfs{} are comprised of \(p_1, p_2, \dots\) and \(\ra, \sim\), and the behavior of \(\ra\) and \(\sim\) are determined by the rules above, every possible valuation corresponds to a different combination of values of \(p_1, p_2, \dots\).
+This definition formalizes the previous idea of truth functions for statement forms. Note that (i) and (ii) simply define the behavior of the two logic operators in \(L\) such that they correspond to the truth tables introduced in the last chapter.
 
 \begin{definition}
   A \wf{} \(\cua\) of \(L\) is a \textit{tautology} if for every valuation \(v\), \(v(\cua) = T\). If for every valuation \(v\), \(v(\cua) = F\), it is a \textit{contradiction}.
@@ -64,10 +67,10 @@ The goal of this chapter is to prove that every \wf{} in \(L\) is a tautology if
 
   \La{} For the other direction, we use contrapositive reasoning. Suppose that \Lext{} is not consistent, which is to say that there exists a \wf{} \(\cub\) such that \(\cub\) and \((\sim\cub)\) are both theorems of \Lext{}. Now let \(\cua\) be any \wf{} of \Lext{}. Since, by Proposition 2.11(a), \(((\sim\cub) \ra (\cub \ra \cua))\) is a theorem of \(L\), it is a theorem of \Lext{}. So by MP and since \((\sim\cub)\) is a theorem, \((\cub \ra \cua)\) is a theorem. By MP and since \(\cub\) is a theorem, \(\cua\) is a theorem. Therefore, there any \wf{} \(\cua\) is a theorem of \Lext.
 
-  \note The above proposition says that in a system with a contradiction in it, that contradiction can be used to vacuously prove anything, so a consistent system need only have one \wf{} which is not a theorem.
+  \note{} The above proposition says that in a system with a contradiction in it, that contradiction can be used to vacuously prove anything, so a consistent system need only have one \wf{} which is not a theorem.
 \end{proposition}
 
-Adding axioms to \(L\) or any of its extension can break its consistency. Consider a \wf{} \(\cua\). Either it is true or false in \Lext{} in the sense that \(\ded{L^{\ast}} \cua\) or \(\ded{L^{\ast}} (\sim\cua)\), or it is undecidable in the sense that neither \(\ded{L^{\ast}} \cua\) or \(\ded{L^{\ast}} (\sim\cua)\). In the latter case, would arbitrary adding \(\cua\) or \((\sim\cua)\) break the consistency of \(L\)? The answer is no, as the following proposition shows.
+Adding axioms to \(L\) or any of its extension can break its consistency. Consider a \wf{} \(\cua\). Either it is true or false or maybe even both in \Lext{} in the sense that \(\ded{L^{\ast}} \cua\) and/or \(\ded{L^{\ast}} (\sim\cua)\), or it is undecidable in the sense that neither \(\ded{L^{\ast}} \cua\) or \(\ded{L^{\ast}} (\sim\cua)\). In the latter case, would arbitrarily adding \(\cua\) or \((\sim\cua)\) break the consistency of \(L\)? The answer is no, as the following proposition shows.
 
 \begin{proposition}
   Let \(L^{\ast}\) be a consistent extension of \(L\) and let \(\cua\) be a \wf{} of \(L\) which is not a theorem of \(L^{\ast}\). Then \Lextext{} also consistent, where \Lextext{} is the extension of \(L\) obtained from \(L^{\ast}\) by including \((\sim\cua)\) as an additional axiom.
@@ -186,5 +189,278 @@ Adding axioms to \(L\) or any of its extension can break its consistency. Consid
 \subsection*{Solutions}
 
 \begin{enumerate}
-  \item
+  \setcounter{enumi}{5}
+  \item % 6
+    The truth tables for each scheme of \(L\) are shown below, and since the values for any assignment of \(T\) or \(F\) to the \wfs{} is \(T\), the axioms must all be tautologies.
+
+    For \((L1)\),
+    \begin{center}
+      \begin{tabular}{ccccc}
+        \((\cua\)&
+        \(\ra\)&
+        \((\cub\)&
+        \(\ra\)&
+        \(\cua))\)\\\hline
+
+        T&
+        \underline{T}&
+        T&
+        T&
+        T\\
+        
+        T&
+        \underline{T}&
+        F&
+        T&
+        T\\
+
+        F&
+        \underline{T}&
+        T&
+        F&
+        F\\
+        
+        F&
+        \underline{T}&
+        F&
+        T&
+        F
+      \end{tabular}
+    \end{center}
+
+    For \((L2)\),
+    \begin{center}
+      \begin{tabular}{ccccccccccccc}
+        \(((\cua\)&
+        \(\ra\)&
+        \((\cub\)&
+        \(\ra\)&
+        \(\cuc))\)&
+        \(\ra\)&
+        \(((\cua\)&
+        \(\ra\)&
+        \(\cub)\)&
+        \(\ra\)&
+        \((\cua\)&
+        \(\ra\)&
+        \(\cuc)))\)\\\hline
+
+        T& % a
+        T& % ->
+        T& % b
+        T& % ->
+        T& % c
+        \underline{T}&
+        T& % a
+        T& % ->
+        T& % b
+        T& % ->
+        T& % a
+        T& % ->
+        T\\% c
+
+        T& % a
+        F& % ->
+        T& % b
+        F& % ->
+        F& % c
+        \underline{T}&
+        T& % a
+        T& % ->
+        T& % b
+        F& % ->
+        T& % a
+        F& % ->
+        F\\% c
+
+        T& % a
+        T& % ->
+        F& % b
+        T& % ->
+        T& % c
+        \underline{T}&
+        T& % a
+        F& % ->
+        F& % b
+        T& % ->
+        T& % a
+        T& % ->
+        T\\% c
+
+        T& % a
+        T& % ->
+        F& % b
+        T& % ->
+        F& % c
+        \underline{T}&
+        T& % a
+        F& % ->
+        F& % b
+        T& % ->
+        T& % a
+        F& % ->
+        F\\% c
+
+        F& % a
+        T& % ->
+        T& % b
+        T& % ->
+        T& % c
+        \underline{T}&
+        F& % a
+        T& % ->
+        T& % b
+        T& % ->
+        F& % a
+        T& % ->
+        T\\% c
+
+        F& % a
+        T& % ->
+        T& % b
+        F& % ->
+        F& % c
+        \underline{T}&
+        F& % a
+        T& % ->
+        T& % b
+        T& % ->
+        T& % a
+        F& % ->
+        F\\% c
+
+        F& % a
+        T& % ->
+        F& % b
+        T& % ->
+        T& % c
+        \underline{T}&
+        F& % a
+        T& % ->
+        F& % b
+        T& % ->
+        F& % a
+        T& % ->
+        T\\% c
+
+        F& % a
+        T& % ->
+        F& % b
+        T& % ->
+        F& % c
+        \underline{T}&
+        F& % a
+        T& % ->
+        F& % b
+        T& % ->
+        F& % a
+        T& % ->
+        F\\% c
+      \end{tabular}
+    \end{center}
+
+    For \((L3)\),
+    \begin{center}
+      \begin{tabular}{ccccccccc}
+        \((((\sim\)&
+        \(\cua)\)&
+        \(\ra\)&
+        \((\sim\)&
+        \(\cub))\)&
+        \(\ra\)&
+        \((\cub\)&
+        \(\ra\)&
+        \(\cua))\)\\\hline
+
+        F& % (((~
+        T& % a)
+        T& % ->
+        F& % (~
+        T& % b))
+        \underline{T}& % ->
+        T& % (b
+        T& % ->
+        T\\% a))
+
+        F& % (((~
+        T& % a)
+        T& % ->
+        T& % (~
+        F& % b))
+        \underline{T}& % ->
+        F& % (b
+        T& % ->
+        T\\% a))
+
+        T& % (((~
+        F& % a)
+        F& % ->
+        F& % (~
+        T& % b))
+        \underline{T}& % ->
+        T& % (b
+        F& % ->
+        F\\% a))
+
+        T& % (((~
+        F& % a)
+        T& % ->
+        T& % (~
+        F& % b))
+        \underline{T}& % ->
+        F& % (b
+        T& % ->
+        F\\% a))
+      \end{tabular}
+    \end{center}
+
+  \item % 7
+    Let \(\cua\) be a \wf{} of \(L\) and let \(L^+\) be the extension of \(L\) obtained by including \(\cua\) as a new axiom. It is to be proved that the set of theorems of \Lp{} is different from the set of theorems of \(L\) if and only if \(\cua\) is not a theorem of \(L\).
+
+    \Ra{} Proceeding by contrapositive, suppose that \(\cua\) is a theorem of \(L\). Then let \(\cub\) any theorem of \(L^+\). We will demonstrate that \(\cub\) is a theorem of \(L\).
+
+    If the proof of \(\cub\) does not involve the axiom \(\cua\), then \(\cub\) is a theorem of \(L\), since \(L\) differs from \Lp{} only in not having \(\cua\) as an axiom.
+
+    Otherwise, the proof of \(\cub\) does involve the axiom \(\cua\), which is to say that \(\{\cua\} \dedL \cub\), and by the deduction theorem \(\dedL (\cua \ra \cub)\). By MP and \(\cua\) being a theorem in \(L\), \(\cub\) is a theorem in \(L\).
+
+    Therefore, any theorem in \Lp{} is a theorem in \(L\).
+
+    \La{} Suppose that \(\cua\) is not a theorem of \(L\). Then since \(\cua\) is a theorem of \Lp{} by virtue of all axioms being theorems, the set of theorems of \Lp{} must be different from the set of theorems of \Lp{}.
+
+  \item % 8
+    Notice that \(\cua\) is neither a tautology nor a contradiction. Therefore, neither \(\cua\) nor \((\sim\cua)\) are theorems of \(L\). Therefore, by the previous exercise, \Lp{}, the extension of \(L\) with \(\cua\) as an axiom, has a larger set of theorems than \(L\), in the sense that more \wfs{} are theorems of \Lp{}.
+
+    Now suppose that \Lp{} is inconsistent. In an inconsistent system, every \wf{} is a theorem, so \((\sim\cua)\) must be a theorem of \Lp. But since \Lp{} is \(L\) with \(\cua\) as an additional axiom, it follows that \(\{\cua\} \dedL (\sim\cua)\), and by the deduction theorem, \((\cua \ra (\sim\cua))\) is a theorem of \(L\). But since \((\cua \ra (\sim\cua))\) is not a tautology, it cannot be a theorem of \(L\). With this contradiction, it is seen that \Lp{} must be consistent.
+
+  \item % 9
+    Suppose that \(\cub\) is a contradiction as well as a theorem in \Lp{}. For a contradiction, suppose that \Lp{} is a consistent extension of \(L\). Then by Proposition 2.22, there is a valuation \(v\) such that every theorem of \Lext{} takes value \(T\). So \(v(\cub) = T\), but this contradicts \(\cub\) being a contradiction.
+
+    \note{See the note in Definition 2.13.}
+
+  \item % 10
+    \Lpp{} must have the contradiction
+    \[(((\sim(p_1 \ra p_1)) \ra (p_1 \ra p_1)) \ra ((p_1 \ra p_1) \ra (\sim (p_1 \ra p_1))))\]
+    as a theorem, since it is an instance of the given axiom scheme. By the previous exercise, \Lpp{} cannot be consistent.
+
+  \item % 11
+    Let \(J\) be a consistent complete extension of \(L\), and let \(\cua\) be a \wf{} of \(L\). Let \(J^+\) be the extension of \(J\) obtained by including \(\cua\) as an additional axiom. It is to be proved that \(J^+\) is consistent if and only if \(\cua\) is a theorem of \(J\).
+
+    \Ra{} Suppose that \(J^+\) is consistent. For a contradiction, suppose that \(\cua\) is not a theorem of \(J\). Then \((\sim\cua)\) must be a theorem of \(J\), since \(J\) is consistent and complete. Since \(J^+\) is an extension of \(J\), \((\sim\cua)\) must also be a theorem of \(J^+\), which contradicts the consistency of \(J^+\), since \(\cua\) is an axiom and hence a theorem of \(J\).
+
+    \La{} Suppose that \(\cua\) is a theorem of \(J\) and let \(\cub\) be any theorem in \(J^+\). We will demonstrate that \(\cub\) must be a theorem in \(J\).
+
+    If the proof of \(\cub\) in \(J^+\) does not rely on \(\cua\), then \(\cub\) is a theorem of \(J\), since \(J^+\) extends \(J\) with only \(\cua\) as an additional axiom.
+
+    The other possibility is that the proof of \(\cub\) does involve \(\cua\), which is to say that \(\{\cua\} \ded{J} \cub\), and so by the deduction theorem \(\ded{J} (\cua \ra \cub)\). By MP and \(\cua\) being a theorem in \(J\), \(\cub\) is a theorem in \(J\). Therefore, any theorem in \(J^+\) is a theorem in \(J\), and since \(J\) is consistent, \(J^+\) must be so as well.
+
+  \item % 12
+    We will prove this using strong induction on the number of \wfs{} in the proof of \(\cua\).
+
+    Suppose as an induction hypothesis that for any theorem \(\cua\) in \(L\) in which statement letters appear and in which its proof involves less than \(n\) \wfs{}, \(\cub\), a \wf{} with any \wfs{} substituted for the statement letters, is also a theorem of \(L\).
+
+    It may be the case that \(\cua\) is an instance of an axiom, in which case \(\cub\) is also an instance of axiom and hence a theorem of \(L\).
+
+    Otherwise, \(\cua\) proceeds from two prior \wfs{} in the proof via MP. These two \wfs{} have less than \(n\) \wfs{} in their proof, and therefore by the induction hypothesis, there exist theorems in \(L\) with the same substitutions of \wfs{} for the statement letters described above. By MP and these two statements, \(\cub\) is a theorem of \(L\) as well.
+
+    \note{} In other words, \(\cub\) can be proved in an identical manner as \(\cua\), except by substituting the proper \wfs{} for each \wf{} in the proof of \(\cua\).
 \end{enumerate}

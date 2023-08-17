@@ -1,0 +1,171 @@
+\section{First order languages}
+
+A \textit{first order language} \(\cul\) will have as its alphabet of symbols:
+\begin{itemize}
+  \item the countably infinite list of \textit{variables} \(x_1, x_2, \dots\)
+  \item some or none of the \textit{constants} \(a_1, a_2, \dots\)
+  \item some or none of the \textit{predicate letters} \(A^1_1, A^1_2, \dots; A^2_1, A^2_2, \dots; A^3_1, A^3_1, \dots; \dots\)
+  \item some or none of the \textit{function letters} \(f^1_1, f^1_2, \dots; f^2_1, f^2_2, \dots; f^3_1, f^3_1, \dots; \dots\)
+    \begin{itemize}
+      \item the predicate and function letters are countably infinite lists of countably infinite lists
+      \item the subscripts are used to distinguish different functions of the same arity, while the superscript indicates the arity
+      \item the function letters are not strictly necessary, as they can be expressed as relations as well, but the redundancy is kept for purposes of intuitive clarity
+    \end{itemize}
+  \item the left and right parentheses ( and ) and the comma , as \textit{punctuation symbols}
+  \item the \textit{connectives} \(\sim\) and \(\ra\)
+  \item the quantifier \(\forall\)
+    \begin{itemize}
+      \item the existential quantifier \(\exists\) can be expressed in terms of the universal quantifier along with the \(\sim\) connective, so it is not included
+    \end{itemize}
+\end{itemize}
+
+\setcounter{definition}{5}
+\begin{definition}
+  A \textit{term} in a first order language \cl{} is defined as follows
+  \begin{enumerate}[(i)]
+    \item Variables and individual constants are terms.
+    \item If \(f^n_i\) is a function letter in \cl{}, and \(t_1, \dots, t_2\) are terms in \cl{}, then \(f^n_i(t_1, \dots, t_2)\) is a term in \cl{}.
+    \item The set of all terms is generated as in (i) and (ii).
+  \end{enumerate}
+
+  An \textit{atomic formula} in \cl{} is defined by: if \(A^k_j\) is a predicate letter in \cl{} and \(t_1, \dots, t_n\) are terms in \(L\), then \(A^k_j(t_1, \dots, t_n)\) is an atomic formula of \cl{}.
+
+  A \textit{well-formed formula} of \cl{} is defined by:
+  \begin{enumerate}[(i)]
+    \item Every atomic formula of \cl{} is a \wf{} of \cl{}.
+    \item If \(\cua\) and \(\cub\) are \wfs{}, so are \((\sim\cua), (\cua \ra \cub)\) and \((\forall x_i)\cua\), where \(x_i\) is any variable.
+    \item The set of all \wfs{} of \cl{} is generated as in (i) and (ii)
+  \end{enumerate}
+
+  Terms are to be considered as objects in the language, a \wf{} as a statement, and an atomic formula as the most simple kind of statement.
+\end{definition}
+
+\medskip
+
+The symbols \(\exists, \land\) and \(\lor\) are treated as shorthand.
+\begin{itemize}
+  \item \((\exists x_i) \cua\) is an abbreviation for \((\sim((\forall x_i)(\sim\cua))\)
+  \item \((\cua \land \cub)\) is an abbreviation for \((\sim(\cua \ra (\sim\cub)))\)
+  \item \((\cua \lor \cub)\) is an abbreviation for \(((\sim\cua) \ra \cub)\)
+\end{itemize}
+
+\note{} Unlike in chapter 2, this manual will follow the book's style for omitting parentheses. That is, a \(\sim\) will be presumed to apply to the shortest possible subsequent \wf{}. Also notice that this is how the \(\forall\) quantifier is treated by definition with any omission of parentheses.
+
+\setcounter{definition}{7}
+\begin{definition}
+  In the \wf{} \((\forall x_i)\cua\), we say that \(\cua\) is the \textit{scope} of the quantifier. When \((\forall x_i)\cua\) occurs as a subformula of a \wf{} \(\cub\), the scope of the quantifier \((\forall x_i)\) is said to be \(\cua\) in \(\cub\).
+
+  A variable \(x_i\) in a \wf{} is said to be \textit{bound} if it occurs within the scope of a \((\forall x_i)\) in the \wf{} or if it is the \(x_i\) in a \((\forall x_i)\). A variable which is not bound is said to be \textit{free}.
+
+  \note{} One point of confusion is that the meaning of a formula \((\forall x_i) \cua\) is reliant on its \textit{free} variables, not its bound ones, which might be contrary to one's intuitions about the words \textit{free} and \textit{bound}.
+\end{definition}
+
+The next definition is as important as it is confusing. A few equivalent definitions will be provided.
+
+\setcounter{definition}{10}
+\begin{definition}
+  Let \(\cua\) be any \wf{} of \cl{}. A term \(t\) is \textit{free for \(x_i\) in \(\cua\)} if \(x_i\) does not occur free in \(\cua\) within the scope of a \((\forall x_j)\), where \(x_j\) is any variable occurring in \(t\).
+
+  Equivalently, a term \(t\) is \textit{free for \(x_i\) in \(\cua\)} if substituting \(t\) for any free instance of \(x_i\) in \(\cua\) would not introduce any new bound variables.
+
+  Equivalently, a term \(t\) is \textit{free for \(x_i\) in \(\cua\)} if any variable in \(t\) is free in \(\cua\) after substituting it for any free instance of \(x_i\).
+
+  An algorithm for determining whether a term \(t\) is \textit{free for \(x_i\) in \(\cua\)} goes as follows:
+
+  \begin{enumerate}
+    \item Find all free instances of \(x_i\) in \(\cua\).
+    \item For each free instance \(x_j\), repeat the following step:
+      \begin{enumerate}
+        \item For each variable \(x_k\) in \(t\), repeat the following steps:
+        \begin{enumerate}
+          \item Substitute \(x_k\) for \(x_j\).
+          \item If \(x_k\) is bound in \(\cua\), then \(t\) is not free for \(x_i\), and terminate the algorithm.
+        \end{enumerate}
+      \end{enumerate}
+    \item Conclude that \(t\) is free for \(x_i\).
+  \end{enumerate}
+
+  \note{} A term being free for a variable \(x_i\) does not necessarily indicate that it may be substituted for that variable, because the variable \(x_i\) may be bound. But if \(x_i\) only occurs free, then a term being free for it is equivalent to a term being substitutable for it. Therefore ``\(t\) being free for \(x_i\)'' can be thought of as ``\(t\) being substitutable for free instances of \(x_i\).''
+
+  \note{} It is easy to confirm that if \(x_i\) occurs only bound in \(\cua\), then any term is free for it. Also, for any \wf{} and any variable \(x_i\), \(x_i\) is free for itself in \(\cua\).
+\end{definition}
+
+\solutions{}
+
+\begin{enumerate}
+  \setcounter{enumi}{3}
+  \item % 4
+    The set of terms in a first order language with no function letters is just the set of the variables and the individual constants.
+
+  \item % 5
+    The set of terms is \(f^1_1(x_1), f^1_1(x_2), f^1_1(x_3), \dots\).
+
+  \item % 6
+    The formulas that are well-formed formulas are (a), (d), (e), (g), and (h).
+
+    \note{} The answer key in the book omits (d) as a well-formed formula, but this appears to be wrong.
+
+  \item % 7
+    \begin{enumerate}[label = (\alph*), align = left]
+      \item free
+      \item bound, bound
+      \item bound, bound, free
+      \item free, free, free, free
+    \end{enumerate}
+
+    Since all occurrences of \(x_2\) in the \wfs{} are bound, the term \(f^2_1(x_1, x_3)\) (and any other term) is free for \(x_2\) in the \wfs{}.
+
+  \item % 8
+    Suppose that \(x_j\) is free for \(x_i\) in \(\cua(x_i)\). Then \(x_i\) does not occur free in the scope of a \((\forall x_j)\) in \(\cua(x_i)\). The goal is to show that \(x_j\) does not occur free in the scope of a \((\forall x_i)\) in \(\cua(x_j)\).
+
+    Now consider an occurrence of an \(x_j\) in \(\cua(x_j)\), which is either (1) a substitution for an \(x_i\) in \(\cua(x_i)\) or (2) not a substitution for an \(x_i\) in \(\cua(x_i)\). If (1), then since \(x_1\) was assumed to occur free in \(\cua(x_i)\), it must not be in the scope of a \((\forall x_i)\), and so the substituted \(x_j\) must also not be in the scope of a \((\forall x_i)\). If (2), then it must occur the same as it does in \(\cua(x_i)\), a \wf{} in which it is assumed to occur bound, and therefore it does not occur free in the scope of a \((\forall x_i)\), or any quantifier for that matter.
+
+    Since in both (1) and (2), \(x_j\) does not occur free in the scope of a \((\forall x_i)\) in \(\cua(x_j)\), it can be concluded that \(x_i\) is free for \(x_j\) in \(\cua(x_j)\).
+
+    \note{} The hypothesis that \(x_j\) is free for \(x_i\) is never used in the proof. It seems that there is either a mistake in the proof or in the exercise. The hint/proof in the back of the book seems to agree with the proof given here.
+
+  \item % 9
+    \begin{enumerate}[label = (\alph*), align = left]
+      \item Since \((\forall x_1)\) and \((\forall x_3)\) never occur, \underline{\(t\) is free for \(x_1\)}.
+      \item Since \(x_1\) only occurs bound, \underline{\(t\) is free for \(x_1\)}.
+      \item Since \(x_1\) occurs free in the scope of a \((\forall x_3)\), \underline{\(t\) is not free for \(x_1\)}.
+      \item Since \(x_1\) occurs free in the scope of a \((\forall x_3)\), \underline{\(t\) is not free for \(x_1\)}.
+    \end{enumerate}
+
+  \item % 10
+    Here, the (a), (b), (c), and (d) refer to the \wfs{} in the exercise 9 and not the terms in exercise 10.
+
+    \note{} There is a mistake in the text, the exercise should read ``Repeat Exercise 9...'' instead of ``Repeat Exercise 6...''.
+
+    Let \(t = x_2\).
+    \begin{enumerate}[label = (\alph*), align = left]
+      \item Since \(x_1\) occurs free in the scope of a \((\forall x_2)\), \underline{\(t\) is not free for \(x_1\)}.
+      \item Since \(x_1\) only occurs bound, \underline{\(t\) is free for \(x_1\)}.
+      \item Since \(x_1\) does not occur in the scope of a \((\forall x_2)\), it does not occur free in it, so \underline{\(t\) is free for \(x_1\)}.
+      \item Since \(x_1\) occurs free in the scope of a \((\forall x_2)\), \underline{\(t\) is not free for \(x_1\)}.
+    \end{enumerate}
+
+    Let \(t = x_3\).
+    \begin{enumerate}[label = (\alph*), align = left]
+      \item Since a \((\forall x_3)\) never occurs, \underline{\(t\) is free for \(x_1\)}.
+      \item Since \(x_1\) only occurs bound, \underline{\(t\) is free for \(x_1\)}.
+      \item Since \(x_1\) occurs free in the scope of a \((\forall x_3)\), \underline{\(t\) is not free for \(x_1\)}.
+      \item Since \(x_1\) occurs free in the scope of a \((\forall x_3)\), \underline{\(t\) is not free for \(x_1\)}.
+    \end{enumerate}
+
+    Let \(t = f^2_1(a_1, x_1)\).
+    \begin{enumerate}[label = (\alph*), align = left]
+      \item Since a \((\forall x_1)\) never occurs, \underline{\(t\) is free for \(x_1\)}.
+      \item Since \(x_1\) only occurs bound, \underline{\(t\) is free for \(x_1\)}.
+      \item Since a \((\forall x_1)\) never occurs, \underline{\(t\) is free for \(x_1\)}.
+      \item Since a \((\forall x_1)\) never occurs, \underline{\(t\) is free for \(x_1\)}.
+    \end{enumerate}
+
+    Let \(f^3_1(x_1, x_2, x_3)\).
+    \begin{enumerate}[label = (\alph*), align = left]
+      \item Since \(x_1\) occurs free in the scope of a \((\forall x_2)\), \underline{\(t\) is not free for \(x_1\)}.
+      \item Since \(x_1\) only occurs bound, \underline{\(t\) is free for \(x_1\)}.
+      \item Since \(x_1\) occurs free in the scope of a \((\forall x_3)\), \underline{\(t\) is not free for \(x_1\)}.
+      \item Since \(x_1\) occurs free in the scope of a \((\forall x_2)\) and a \((\forall x_3)\), \underline{\(t\) is not free for \(x_1\)}.
+    \end{enumerate}
+\end{enumerate}

@@ -1,0 +1,35 @@
+\section{Interpretations}
+
+\setcounter{definition}{13}
+\begin{definition}
+An \textit{interpretation} \(I\) of \cl is
+  \begin{itemize}
+    \item a non-empty set \(D_I\) called the \textit{domain} of \(I\) together with a collection 
+    \item a collection of distinguished elements \((\overline{a}_1, \overline{a}_2, \dots)\) of \(D_I\)
+    \item a collection of functions from \(D_I\) to \(D_I\) denoted by \((\overline{f}^n_1, i> 0, n>0)\)
+    \item a collection of relations on \(D_I\) denoted by \((\overline{A}^n_1, i> 0, n>0)\)
+  \end{itemize}
+\end{definition}
+
+An interpretation allows a \wf{} of a first order language to be interpreted as a statement with a truth value, analogous to how a valuation of \(L\) allowed a \wf{} in \(L\) to have a truth value. This concept will be formalized in the coming sections.
+
+\solutions{}
+
+\begin{enumerate}
+  \setcounter{enumi}{10}
+  \item The interpretation of \(\cua\) in \(I\) is the statement
+    \[(\forall x_1) (\forall x_2) (x_1 - x_2 < 0 \ra x_1 < x_2)\]
+    which is a true statement in the integers. Consider the same interpretation \(I\) with \(\overline{f}^2_1(x, y)\) as \(x + y\). The interpretation of \(\cua\) in \(I\) is then
+    \[(\forall x_1) (\forall x_2) (x_1 + x_2 < 0 \ra x_1 < x_2)\]
+    which is false.
+
+  \item Let \(I\) be the interpretation described above in the previous exercise with the addition of \(\overline{f}^1_1, \overline{A}^1_1\) defined by \(\overline{f}^1_1(x) = x - 1\) and \(\overline{A}^1_1(x)\) if and only if \(x > 0\). Then the statement corresponding to the \wf{} under \(I\) is
+    \[(\forall x_i)(x_1 > 0 \ra x_1 - 1 > 0)\]
+    which is false.
+
+  \item Let \(I\) again be the interpretation described in Exercise 11 with \(\overline{A}^2_1(x, y)\) as \(x < y\). Then the interpretation of the \wf{} is
+    \[(\forall x_1)(x_1 < x_2 \ra x_2 < x_1)\]
+    which is false.
+
+    \note{} The assumption is that \(x_2\) is implicitly quantified.
+\end{enumerate}

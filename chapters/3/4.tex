@@ -1,1 +1,423 @@
 \section{Satisfaction, truth}
+
+In this chapter \(I\) will be an interpretation of the language \cl{} with notation consistent with Definition 3.14.
+
+In the previous chapter, values of true or false were informally assigned to various \wfs{} of \cl{} under some interpretation \(I\). This chapter will formalize this process of evaluating the truth of a \wf{}. The process will and must be similar to the informal process of determining the truth value of a \wf{}. First, the terms must be assigned to values. A particular assignment is formally known as a \textit{valuation}.
+
+\setcounter{definition}{16}
+\begin{definition}
+  A \textit{valuation} in \(I\) is a function \(v\) from the set of terms of \cl{} to the set domain of \(I\), \(D_I\), with the properties:
+  \begin{enumerate}[(i)]
+    \item \(v(a_i) = \overline{a}_i\) for each constant \(a_i\) of \cl{}.
+    \item \(v(f^n_i(t_1, \dots, t_n)) = f^n_i(v(t_1)), \dots, v(t_n))\), where \(f^n_i\) is any function letter in \cl{}, and \(t_1, \dots, t_n\) are any terms of \cl{}.
+  \end{enumerate}
+
+  \note{} An interpretation will have as many different valuations as there are ways of assigning the variables in \cl{} to elements of \(D_I\).
+
+  \note{} A term in \cl{} may be a variable, a constant, or a function with terms as its arguments. The variables can be assigned to any elements in \(D_I\) and no property is needed to govern the valuation of a variable. By property (i), every valuation assigns constants of \cl{} to its corresponding constant in \(D_I\). Property (ii) guarantees that the valuation of functions in \cl{} behave as expected.
+\end{definition}
+
+\setcounter{definition}{18}
+\begin{definition}
+  Two valuations \(v\) and \(v'\) are \textit{i-equivalent} if \(v(x_j) = v'(x_j)\) for every \(j \neq i\).
+
+  \note{} The purpose of this definition will be better understood after reading further on.
+\end{definition}
+
+Continuing from where we left off before Definition 3.17, after the terms are assigned values, the \wfs{} can be evaluated as true or false, depending on the particular values of the terms. If a particular \wf{} is to be interpreted as a true statement when its terms take on some particular values specified by a valuation, the valuation is said to satisfy the \wf{}. Since a \wf{} in \cl{} was defined recursively, and likewise the definition of \text{satisfaction} of a \wf{} must also be defined recursively.
+
+\begin{definition}
+  Let \(\cua\) be a \wf{} of \cl{}, and let \(I\) be an interpretation of \cl{}. A valuation \(v\) in \(I\) is said to satisfy...
+  \begin{enumerate}[(i)]
+    \item the atomic formula \(A^n_j(t_1, \dots, t_n)\) if \(\overline{A}^n_j(v(t_1), \dots, v(t_n))\) is true in \(D_I\),
+    \item the negation \((\sim\cub)\) if \(v\) does not satisfy \(\cub\),
+    \item the implication \((\cub \ra \cuc)\) if either \(v\) satisfies \((\sim\cub)\) or \(v\) satisfies \(\cuc\),
+    \item the quantified \wf{} \((\forall x_i)\cub\) if all valuations \(v'\) which are \(i\)-equivalent to \(v\) satisfy \(\cub\).
+  \end{enumerate}
+
+  \note{} The first three parts of the definition are straightforward. The last one should be explained further. It states that a valuation satisfies a quantified \wf{} if any corresponding interpretation is true when the bound variable takes on any possible value.
+\end{definition}
+
+\setcounter{definition}{22}
+\begin{proposition}
+  Let \(\cua(x_i)\) be a \wf{} of \cl{} in which \(x_i\) appears free, and let \(t\) be a term free for \(x_i\). Suppose that \(v\) is a valuation and \(v'\) is the valuation which is \(i\)-equivalent to \(v\) and has \(v'(x_i) = v(t)\). Then \(v\) satisfies \(\cua(t)\) if and only if \(v'\) satisfies \(\cua(x_i)\).
+
+  \note{} The condition that \(x_i\) appears free in \(\cua(x_i)\) can be relaxed if \(\cua(t)\) is defined as replacing all bound instances of \(x_i\).
+
+  \prf{} We will first prove a lemma.
+
+  \begin{lemma*}
+    Let \(u\) be a term in which \(x_i\) occurs. Let \(u'\) be the term obtained by substituting \(t\) for \(x_i\) in \(u\). Then \(v(u') = v'(u)\).
+
+    \prf{} The proof is by strong-induction on the number of sub-terms in \(u\). Note that this number takes sub-terms of sub-terms into account, so \(f^2_1(f^2_1(x_1, x_1), f^2_1(x_1, x_1))\) has four, not two, sub-terms.
+
+    Suppose as a hypothesis of strong induction that if a term has fewer than \(n\) sub-terms in it, then \(v(u') = v'(u)\), where \(u\) and \(u'\) are defined as above.
+
+    (base case) It may be that \(n = 1\), in which case \(u = x_i\) and \(u' = t\). Then \(v'(u) = v'(x_i) = v(t) = v(u')\) by construction of \(v'\) in the premise.
+
+    (inductive step) Otherwise, \(n > 1\), and so \(u = f^k_i(u_1, \dots, u_k)\), where \(u_1, \dots, u_k\) are sub-terms that necessarily have fewer than \(n\) sub-terms. In the same way that \(u'\) was defined for \(u\), define \(u_1', \dots, u_k'\) as the terms obtained by substituting \(t\) for \(x_i\) in \(u_1, \dots, u_k\). Finally, notice that \(u'=f^k_i(u_1', \dots, u_k')\), so
+    \begin{align*}
+      v(u') &= v(f^k_i(u_1', \dots, u_k'))                      &&\text{definition of \(u'\)}\\
+            &= \overline{f}^k_i(v(u_1'), \dots, v(u_k'))        &&\text{Definition 3.17}\\
+            &= \overline{f}^k_i(v'(u_1), \dots, v'(u_k))        &&\text{Induction hypothesis}\\
+            &= v'(f^k_i(u_1, \dots, u_k))                       &&\text{Definition 3.17}\\
+            &= v'(u)                                            &&\text{Definition of \(u\)}
+    \end{align*}
+  With this induction complete, we may conclude that \(v'(u) = v(u')\) for any \(u\).
+  \end{lemma*}
+
+  Now we prove the proposition by another strong induction on the number of connectives and quantifiers of \(\cua(x_i)\).
+
+  (base case) It may be that \(\cua(x_i)\) has non quantifiers and connectives, and so it must be an atomic formula, say \(A^n_i(u_1, \dots, u_n)\). Let \(u_1', \dots, u_n'\) be the terms \(u_1, \dots, u_n\) with \(t\) substituted for \(x_i\), so that \(\cua(t)\) must then be \(\cua(u_1', \dots, u_n')\). Then the following are all equivalent.
+  \begin{enumerate}[label=(\alph*), align=left]
+    \item \(v\) satisfies \(\cua(t)\), by assumption
+    \item \(v\) satisfies \(A^n_i(u_1', \dots, u_n')\), by definition of \(\cua(t)\)
+    \item \(A^n_i(v(u_1'), \dots, v(u_n'))\) is true in \(I\), by Definition 3.20
+    \item \(A^n_i(v'(u_1), \dots, v'(u_n))\) is true in \(I\), by the lemma above
+    \item \(v'\) satisfies \(A^n_i(u_1, \dots, u_n)\), by Definition 3.20
+    \item \(v'\) satisfies \(A^n_i(x_i)\), by Definition 3.20
+  \end{enumerate}
+  and the equivalence of (a) and (f) is what we desired to prove.
+
+  (inductive step) Otherwise, \(\cua(x_i)\) has \(k\) quantifiers and connectives. Suppose that \(\cub(x_i)\) has fewer than \(k\) quantifiers and connectives. Let \(w\) be a valuation and let \(w'\) be the valuation which is \(i\)-equivalent to \(w\) and has \(w'(x_i) = w(t)\). Suppose, as an inductive hypothesis, that \(w\) satisfies \(\cua(t)\) if and only if \(w'\) satisfies \(\cua(x_i)\).
+
+  There are three cases to check.
+  \begin{enumerate}
+    \item The \wf{} \(\cua(x_i)\) is \(\sim\cub(x_i)\), a \wf{} with fewer than \(k\) quantifiers and connectives. Note that \(\cua(t)\) is \(\sim\cub(t)\). The following are equivalent.
+      \begin{enumerate}
+        \item \(v\) satisfies \(\cua(t)\), by assumption
+        \item \(v\) satisfies \(\sim\cub(t)\), by definition of \(\cua(t)\)
+        \item \(v\) does not satisfy \(\cub(t)\), by Definition 3.20
+        \item \(v'\) does not satisfy \(\cub(t)\), by the induction hypothesis
+        \item \(v'\) satisfies \(\sim\cub(t)\), by definition of \(\cua(t)\)
+        \item \(v'\) satisfies \(\cua(x_i)\), by Definition 3.20
+      \end{enumerate}
+      The equivalence between (a) and (f) is what we desired to prove. Note that in (d), we used the equivalent negative form of the inductive hypothesis.
+
+    \item The \wf{} \(\cua(x_i)\) is \(\cub(x_i) \ra \cuc(x_i)\), where both \(\cub(x_i)\) and \(\cuc(x_i)\) are \wfs{} with fewer than \(k\) quantifiers and connectives. Note that \(\cub(t)\) is \(\cub(t) \ra \cuc(t)\). The following are equivalent.
+      \begin{enumerate}
+        \item \(v\) satisfies \(\cua(t)\), by assumption
+        \item \(v\) satisfies \(\cub(t) \ra \cuc(t)\), by definition of \(\cua(t)\)
+        \item \(v\) satisfies \(\sim\cub(t)\) or \(v\) satisfies \(\cuc(t)\), by Definition 3.20
+        \item \(v'\) satisfies \(\sim\cub(t)\) or \(v\) satisfies \(\cuc(t)\), by the induction hypothesis
+        \item \(v'\) satisfies \(\sim\cub(t) \ra \cuc(t)\), by Definition 3.20
+        \item \(v'\) satisfies \(\cua(x_i)\), by definition of \(\cua(x_i)\)
+      \end{enumerate}
+
+    \item The \wf{} \(\cua(x_i)\) is \((\forall x_j)\cub(x_i)\), where \(i \neq j\) because \(x_i\) is assumed to occur free in \(\cua\). Note that \(\cub(x_i)\) has fewer than \(k\) quantifiers and that \(\cua(t)\) is \((\forall x_j)\cub(t)\). Then the following are all equivalent.
+      \begin{enumerate}
+        \item \(v\) satisfies \(\cua(t)\), by assumption
+        \item \(v\) satisfies \((\forall x_j)\cub(t)\), by definition of \(\cua(t)\)
+        \item any \(j\)-equivalent valuation to \(v\) satisfies \(\cub(t)\), by Definition 3.20
+        \item any \(j\)-equivalent valuation to \(v'\) satisfies \(\cub(x_i)\), by the induction hypothesis, and the note below
+        \item \(v'\) satisfies \((\forall x_j)\cub(x_i)\), by Definition 3.20
+        \item \(v'\) satisfies \(\cua(x_i)\), by definition of \(\cua(x_i)\)
+      \end{enumerate}
+      Additional details needs to be given to show that (c) and (d) are equivalent.
+
+      \Ra{} Suppose that any \(j\)-equivalent valuation to \(v\) satisfies \(\cub(t)\). Then let \(w'\) be a valuation \(j\)-equivalent to \(v'\). Let \(w\) be a valuation \(j\)-equivalent to \(v\) with \(w(x_j) = w'(x_j)\) that necessarily satisfies \(\cub(t)\). By construction, we have that \(w\) is \(i\)-equivalent to \(w'\). Notice that \(v'(x_i) = v'(t)\), so \(w'(x_i) = w'(t)\), since \(w'\) is \(j\)-equivalent to \(v'\), and so we may apply the inductive hypothesis. Therefore, \(w'\) satisfies \(\cub(x_i)\).
+
+      \La{} Suppose that any \(j\)-equivalent valuation to \(v'\) satisfies \(\cub(x_i)\). Then let \(w\) be a valuation \(j\)-equivalent to \(v\). Let \(w'\) be a valuation \(j\)-equivalent to \(v'\) with \(w'(x_j) = w(x_j)\) that necessarily satisfies \(\cub(x_i)\). By construction, we have that \(w'\) is \(i\)-equivalent to \(w\). Notice that \(v'(x_i) = v'(t)\), so \(w'(x_i) = w'(t)\), since \(w'\) is \(j\)-equivalent to \(w\), and so we may apply the inductive hypothesis. Therefore, \(w\) satisfies \(\cub(t)\).
+  \end{enumerate}
+
+  \note{} In the proof in the book, there is a mistake in Case 1, it should instead read: ``\(\cua(x_i)\) is \(\sim\cub(x_i)\)''.
+\end{proposition}
+
+\begin{definition}
+  A \wf{} \(\cua\) is \text{true} in an interpretation \(I\) if every valuation in \(I\) satisfies \(\cua\). It is \textit{false} if there is no valuation in \(I\) which satisfies \(\cua\). If \(\cua\) is true in \(I\), we write \(I \models \cua\).
+
+  \note{} By part (ii) of Definition 3.20, if a given \wf{} is satisfied by all valuations, then its negation is not satisfied by all valuations and vice versa. So no \wf{} can be both true and false.
+
+  \note{} Some \wfs{} can be neither true nor false if there exists a valuation satisfying it and another one satisfying its negation.
+\end{definition}
+
+\setcounter{definition}{25}
+\begin{proposition}
+  If, in an interpretation \(I\), the \wf{} \(\cua\) and \((\cua \ra \cub)\) are true, then \(\cub\) is also true.
+
+  \prf{} Let \(v\) be a valuation in \(I\). The \wfs{} \(\cua\) and \((\cua \ra \cub)\) are true in \(I\), which is to say that they are true for any valuation, and thus true for \(v\). Since \(v\) satisfies \((\cua \ra \cub)\), it either satisfies \(\cub\) or \((\sim\cua)\). But it cannot satisfy \((\sim\cua)\), or else it would not satisfy \(\cua\). Therefore, it satisfies \(\cub\). Since \(v\) was chosen as an arbitrary valuation, every valuation satisfies \(\cub\), and so it is true in \(I\).
+\end{proposition}
+
+\begin{proposition}
+  Let \(\cua\) be a \wf{} of \cl{}, and let \(I\) be an interpretation of \cl{}. Then \(I \models \cua\) if and only if \(I \models (\forall x_i) \cua\), where \(x_i\) is any variable.
+
+  \prf{} \Ra{} Suppose that \(I \models \cua\). Let \(v\) be any valuation in \(I\) and let \(v'\) be any \(i\)-equivalent valuation to \(v\). Since all valuations satisfy \(\cua\), \(v'\) satisfies \(\cua\). Therefore, \(v\), which was chosen to be an arbitrary valuation, satisfies \((\forall x_i)\cua\), and so all valuations in \(I\) satisfy \((\forall x_i)\cua\).
+
+  \La{} Suppose that \(I \models (\forall x_i) \cua\). Let \(v\) be any valuation in \(I\). Since \(v\) is \(i\)-equivalent to \(v\), it must satisfy \(\cua\). Since \(v\) was chosen as an arbitrary valuation, all valuations in \(I\) satisfy \(\cua\).
+\end{proposition}
+
+\begin{corollary}
+  Let \(y_1, \dots, y_n\) be variables in \cl{}, let \(\cua\) be a \wf{} of \cl{}, and let \(I\) be an interpretation. Then \(I \models \cua\) if and only if \(I \models (\forall y_1) \dots (\forall y_n) \cua\).
+
+  \prf{} By repeated application of Proposition 3.27.
+\end{corollary}
+
+The above corollary is significant because it states that implicit quantification of variables is legitimate when a statement of an interpretation is known to be true. For example, \(x = x\) as a statement about the integers does not need be quantified because it is known that the statement alone is true. Similarly, if a true statement already has all of its variables quantified, then the quantifiers can be omitted with no loss of meaning. It also implies that adding quantifiers to a false or indeterminate \wf{} cannot ``upgrade'' its truth value so that the new quantified \wf{} is true. However, adding quantifiers can turn an indeterminate \wf{} into one which is false (there are many examples of this).
+
+\begin{proposition}
+  In an interpretation \(I\), a valuation \(v\) satisfies the formula \((\exists x_i) \cua\) if and only if there is at least one valuation \(v'\) which is \(i\)-equivalent to \(v\) and which satisfies \(\cua\).
+
+  \prf{} This proof is done by mechanically applying the definitions. Let \(v\) be a valuation in an interpretation \(I\).
+
+  \Ra{} Suppose \(v\) satisfies the formula \((\exists x_i) \cua\), which is to say that \(v\) satisfies \(\sim (\forall x_i) (\sim\cua)\), and therefore \(v\) does not satisfy \((\forall x_i) (\sim\cua)\). Therefore there must exist some \(v'\) which \(i\)-equivalent to \(v\) which does not satisfy \(\sim\cua\), and so this \(v'\) must satisfy \(\cua\).
+
+  \La{} Suppose that \(v'\) is an \(i\)-equivalent valuation to \(v\) that satisfies \(\cua\). Then this \(v'\) does not satisfy \((\sim\cua)\), and so \(v\) does not satisfy \((\forall x_i)(\sim\cua)\), and so \(v\) must satisfy \(\sim(\forall x_i)(\sim\cua)\), i.e., \(v\) satisfies \((\exists x_i)\cua\). 
+\end{proposition}
+
+A \wf{} of \(L\) and a \wf{} of \cl{} are both formed by possibly using the connectives \(\sim\) and \(\ra\). If we take a \wf{} \(\cua\) in \(L\) and replace all of its statement letters by the same \wf{} in \cl{}, the new formula is now a \wf{} in \cl{}, and we call it a \textit{substitution instance} of \(\cua\) in \cl{}.
+
+Note that a \wf{} in \cl{} can be a substitution instance of more than one \wf{} in \(L\), depending on how its sub-formulas are replaced. For instance,
+\[(\underbrace{(\forall x_i)A^1_1(x_1)}_{p_1} \ra (\underbrace{(\forall x_i)A^2_1(x_1)}_{p_2} \ra \underbrace{(\forall x_i)A^2_1(x_1))}_{p_3})\]
+may be considered as a substitution instance of \((p_1 \ra (p_2 \ra p_3))\). Also,
+
+\[(\underbrace{(\forall x_i)A^1_1(x_1)}_{p_1} \ra \underbrace{((\forall x_i)A^2_1(x_1) \ra (\forall x_i)A^2_1(x_1))}_{p_2})\]
+may be considered as a substitution instance of \((p_1 \ra p_2)\).
+
+The use of the term \text{tautology} may be expanded to \cl{}, and it has the expected property of being true regardless of its valuation in any interpretation.
+
+\begin{definition}
+  A \wf{} \(\cua\) of \cl{} is a \textit{tautology} if it is a substitution instance in \cl{} of a tautology in \(L\).
+\end{definition}
+
+\begin{proposition}
+  A \wf{} of \cl{} which is a tautology is true in any interpretation of \cl{}.
+
+  \prf{} Let \(\cua_{\mathscr{L}}\) be a tautology in \cl{} and let \(\cua_{L}\) be its corresponding tautology in \(L\). Then \(\cua_{L}\) consists of the statement letters \(p_1, \dots, p_n\) whose replacements in \(L\) are the \wfs{} that we shall label \(\cua_1, \dots, \cua_n\). 
+
+  Now let \(v_{\mathscr{L}}\) be a valuation in any interpretation \(I\). The goal is to prove that \(v_{\mathscr{L}}\) satisfies \(\cua_{\mathscr{L}}\). 
+
+  First notice that \(\cua_L\) can only be evaluated as true or false if its statement letters have values, and to this end. So let \(v_L\) be the valuation in \(L\) defined on the statement letters \(p_1, \dots, p_n\) in an expected way:
+  \[
+    v_L(p_i) =
+      \begin{cases}
+        T   &\text{if \(v_{\mathscr{L}}\) satisfies \(\cua_i\)}\\
+        F   &\text{if \(v_{\mathscr{L}}\) does not satisfy \(\cua_i\)}
+      \end{cases}
+  \]
+  The values of \(v_L\) for all other statement letters not appearing in \(\cua_L\) are arbitrarily set to \(T\) so that \(v_L\) is indeed a valuation.
+
+  Now we will prove that \(v_{\mathscr{L}}\) satisfies \(\cua_{\mathscr{L}}\) if and only if \(v_L(\cua_L) = T\). From this result, the proof of the proposition will immediately follow. We proceed by strong induction on the number of connectives \(\sim\) and \(\ra\) in \(\cua_L\):
+
+  Suppose as a hypothesis of string induction that if a \wf{} in \(L\) has fewer than \(k\) connectives, then \(v_{\mathscr{L}}\) satisfies the \wf{} if and only if the value of \(v_L\) when applied to the substitution instance in \cl{} is \(T\).
+
+  Now let the number of connectives of \(\cua_L\) be \(j\). If \(j = 0\), then \(\cua\) consists of a statement letter only, say \(p\). By the definition of \(v_L\), \(v_L(p) = T\) if and only if \(v_{\mathscr{L}}\) satisfies \(\cua_{\mathscr{L}}\), as desired. If \(j > 0\), then there are two cases two consider:
+
+  \begin{enumerate}
+    \item The \wf{} \(\cua_L\) is of the form \(\sim\cub_L\). Then \(\cua_{\mathscr{L}}\) is of the form \(\sim\cub_{\mathscr{L}}\), where \(\cub_{\mathscr{L}}\) is the substitution instance of \(\cub_L\). Since \(\cub_L\) has fewer than \(j\) connectives, by the induction hypothesis, \(v\) satisfies \(\cub\) if and only if \(v'(\cub_{\mathscr{L}}) = T\), which is equivalent to saying that \(v\) does not satisfy \(\cub\) if and only if \(v'(\cub_{\mathscr{L}}) = F\), which is once again equivalent, by Definition 3.20 (ii) and 2.12 (i) to saying that \(v\) satisfies \(\cua_{\mathscr{L}}\) if and only if \(v(\cua_L) = T\).
+
+    \item The \wf{} \(\cua_L\) of the form \(\cub_L \ra \cuc_L\), and so \(\cua\) is of the form \(\cub_{\mathscr{L}} \ra \cuc_{\mathscr{L}}\), where \(\cub_{\mathscr{L}}\) and \(\cuc_{\mathscr{L}}\) are the substitution instances of \(\cub_L\) and \(\cuc_L\) respectively. Note that \(\cub_L\) and \(\cuc_L\) both have fewer than \(j\) connectives. The following assertions are all equivalent:
+      \begin{enumerate}[align=left]
+        \item \(v_{\mathscr{L}}\) satisfies \(\cua_{\mathscr{L}}\)
+        \item \(v_{\mathscr{L}}\) satisfies \(\cub_{\mathscr{L}} \ra \cuc_{\mathscr{L}}\)
+        \item either \(v_{\mathscr{L}}\) satisfies \(\sim\cub_{\mathscr{L}}\) or \(\cuc_{\mathscr{L}}\) (by Definition 3.20 (iii))
+        \item either \(v\) does not satisfy \(\cub_{\mathscr{L}}\) or satisfies \(\cuc_{\mathscr{L}}\) (by Definition 3.20 (ii))
+        \item either \(v_L(\cub_L) = F\) or \(v_L(\cuc_L) = T\) (by the strong induction hypothesis)
+        \item \(v_L(\cub_L \ra \cuc_L) = T\) (by Definition 2.12)
+        \item \(v_L(\cua_L) = T\)
+      \end{enumerate}
+      and the equivalence of (a) and (g) is what we desired to prove for this case.
+  \end{enumerate}
+
+  Now with the induction complete, we can prove the original proposition. Recall that \(\cua_{\mathscr{L}}\) is a tautology in \cl{}, \(\cua_L\) is a tautology in \(L\), and \(v_{\mathscr{L}}\) is an arbitrary valuation in an arbitrary interpretation \(I\). From the above, we know that \(v_{\mathscr{L}}\) satisfies \(\cua_{\mathscr{L}}\) if and only if \(v_L(\cua_L) = T\). But \(\cua_L\) is a tautology in \(L\), so indeed \(v_L(\cua_L) = T\), and so \(v_{\mathscr{L}}\) satisfies \(\cua_{\mathscr{L}}\). Thus \(\cua_{\mathscr{L}}\) is true in any interpretation \(I\).
+
+  \note{} This proof is long, but mostly just straightforward applications of definition. Its length comes from having to define \(v_L\) 
+
+  \note{} The need for strong induction comes from case 2. Normal induction would not be sufficient because both of the \wfs{} in \(L\) might have fewer than \(j - 1\) connectives.
+\end{proposition}
+
+As stated in the warning at the beginning of this chapter (in the manual, not the textbook), if a \wf{} has all of its variables quantified, then it must be either true or false. We will prove this shortly, but first we introduce a short definition and a proposition.
+
+\begin{definition}
+  A \wf{} \(\cua\) of \cl{} is said to be \textit{closed} if all variables in \(\cua\) occurs bound.
+\end{definition}
+
+\begin{proposition}
+  Let \(I\) be an interpretation of \cl{} and let \(\cua\) be a \wf{} of \cl{}. If \(v\) and \(w\) are valuations such that \(v(x_i) = w(x_i)\) for every free variable \(x_i\) of \(\cua\), then \(v\) satisfies \(\cua\) if and only if \(w\) satisfies \(\cua\).
+
+  \note{} This is stating the obvious fact that if two valuations ``plug in'' the same values for variables, then the resulting truth values will be the same.
+
+  \prf{} The proof follows from strong induction on the numbers of connectives and quantifiers in \(\cua\).
+
+  As a hypothesis of strong induction, suppose that for any \wf{} \(\cua\) of \cl{} with fewer than \(n\) connectives, \(v\) satisfies \(\cua\) if and only if \(w\) satisfies \(\cua\), where \(v\) and \(w\) are valuations such that \(v(x_i) = w(x_i)\) for any \(x_i\) of \(\cua\).
+
+  It may be the case that \(n = 0\), in which case the \wf{} is an atomic formula with \(j\) terms of the general form \(A^j_i(t_1, \dots, t_j)\). A term \(t\) can either be a constant, in which case \(v(t) = w(t)\), since all are defined to have the same values for constants, or the term can be a variable or a function which takes terms. Since \(v\) and \(w\) agree for variables, since any variable in the atomic formula occurs free, they must also agree for functions (this can be formalized via another induction, but that is tedious). Therefore, for any atomic formula \(\cua\), \(v\) satisfies \(\cua\) if and only if \(w\) satisfies \(\cua\).
+
+  It may be the case that \(n > 0\), in which case the inductive hypothesis must be employed to prove the three distinct cases which may occur.
+  \begin{enumerate}
+    \item The \wf{} \(\cua\) is of the form \(\sim\cub\). Notice that \(\cub\) has fewer than \(n\) connectives, so \(v\) satisfies \(\cub\) if and only if \(w\) satisfies \(\cub\), which is to say that \(v\) does not satisfy \(\cub\) if and only if \(w\) does not satisfy \(\cub\), which is once again equivalent to stating that \(v\) satisfies \(\sim\cub\) if and only if \(w\) satisfies \(\sim\cub\), by Definition 3.20 (ii). And since \(\sim\cub\) is \(\cua\), we have proved the desired property for this case.
+
+    \item The \wf{} \(\cua\) is of the form \(\cub \ra \cuc\). The following are all equivalent:
+      \begin{enumerate}[align=left]
+        \item \(v\) satisfies \(\cua\)
+        \item \(v\) satisfies \(\cub \ra \cuc\)
+        \item \(v\) satisfies \(\sim\cub\) or \(v\) satisfies \(\cuc\), by Definition 3.20 (iii)
+        \item \(w\) satisfies \(\sim\cub\) or \(w\) satisfies \(\cuc\), by the induction hypothesis, and the fact that that both \(\sim\cub\) and \(\cuc\) have fewer than \(n\) connectives
+        \item \(w\) satisfies \(\cub \ra \cuc\), again by definition 3.20 (ii)
+        \item \(w\) satisfies \(\cua\)
+      \end{enumerate}
+      and the equivalence between (a) and (f) is what we desired to prove for this case.
+
+    \item The \wf{} \(\cua\) is of the form \((\forall x_i) \cub\). We are to prove that \(v\) satisfies \(\cua\) if and only if \(w\) satisfies \(\cua\).
+
+      \Ra{} Suppose that \(v\) satisfies \(\cua\). Then for any \(i\)-equivalent valuation to \(v\), \(v'\) satisfies \(\cub\). To show that \(w\) satisfies \(\cua\), which is \((\forall x_i) \cub\), we must show that any \(i\)-equivalent valuation to \(w\) satisfies \(\cub\). So let \(w'\) be \(i\)-equivalent to \(w\), and let \(v'\) be the particular valuation \(i\)-equivalent to \(v\) which satisfies \(v'(x_i) = w'(x_i)\). Now let \(y\) be a free variable of \(\cub\). There are two cases to consider.
+      \begin{enumerate}
+        \item If \(y = x_i\), then \(v'(x_i) = w'(x_i)\), since \(v'\) was chosen in this way. 
+        \item If \(y \neq x_i\), then it is a free variable of \(\cua\), since \(\cub\) differs from \(\cua\) in that only \(x_i\) may potentially be free in \(\cub\), and so
+          \begin{align*}
+            v'(y) &= v(y)       &&\text{\(v'\) and \(v\) are \(i\)-equivalent}\\
+            v(y)  &= w(y)       &&\text{\(v(x) = w(x)\) for any free variable \(x\) in \(\cua\)}\\
+            w(y)  &= w'(y)      &&\text{\(w'\) and \(w\) are \(i\)-equivalent}
+          \end{align*}
+        with the conclusion in this case being that \(v'(y) = w'(y)\).
+      \end{enumerate}
+      Therefore, whenever \(y\) is a free variable of \(\cub\), a \wf{} with fewer than \(n\) connectives, \(v'(y) = w'(y)\), and so by the induction hypothesis and since \(v'\) satisfies \(\cub\), \(w'\) satisfies \(\cub\). Since \(w'\) was chosen to be an arbitrary \(i\)-equivalent valuation to \(w\), it follows that \(w\) satisfies \((\forall x_i) \cub\), i.e., \(w\) satisfies \(\cua\).
+
+      \La{} This direction is proved in precisely the same way as the above direction except with the occurrences of \(v\) and \(w\) switched.
+  \end{enumerate}
+
+  With the induction complete, we have proved the proposition.
+
+  \note{} In case 3, \(x_i\) need not be free in \(\cub\), in which the quantifier \((\forall x_i)\) appears in \(\cub\), but in that case \(x_i\) would not be considered as a possible free variable \(y\) in \(\cub\), so it would be disregarded.
+
+  \note{} In case 1, the free variables of \(\cua\) were the same as the free variables of \(\cub\). Similarly, in case 2, the free variables of \(\cub\) and \(\cuc\) were the same as \(\cua\). Therefore, in both cases, \(v\) and \(w\) could be applied to the inductive hypothesis regarding \(\cub\) in case 2 or \(\cub\) and \(\cuc\) in case 3. In case 3, on the other hand, the free variables of \(\cua\) and \(\cub\) differed in that \(x_i\) need not have been free in \(\cub\). Instead, \(i\)-equivalent valuations of \(v\) and \(w\) were shown to agree for any free variable in \(\cub\) so that the inductive hypothesis could be applied.
+\end{proposition}
+
+\begin{corollary}
+  If \(\cua\) is a closed \wf{} of \cl{} and \(I\) is an interpretation of \cl{}, then either \(I \models \cua\) or \(I \models (\sim \cua)\).
+
+  \prf{} Let \(v\) and \(w\) be any valuations. Since \(\cua\) has no free variables, \(v(y) = w(y)\) for any free variable \(y\), vacuously. So \(v\) satisfies \(\cua\) if and only if \(w\) satisfies \(\cua\), by Proposition 3.33. So, either every valuation satisfies \(\cua\) or every valuation does not satisfy \(\cua\), which is to say that \(\cua\) is either true or false in \(I\). So either \(I \models \cua\) or \(I \models (\sim\cua)\).
+\end{corollary}
+
+\begin{definition}
+  A \wf{} \(\cua\) of \cl{} is \textit{logically valid} if \(\cua\) is true in every interpretation of \cl{} and is \textit{contradictory} if \(\cua\) is false in every interpretation of \cl{}.
+\end{definition}
+
+These terms are the analogues of \text{tautology} and \text{contradiction} in \(L\). However, there are more logically valid \wfs{} in \cl{} than there are tautologies in \cl{} in the sense that all tautologies in \cl{} are logically valid (Proposition 3.31), but there are some logically valid \wfs{} that are not tautologies, i.e., their logical validity comes not from their form involving but \(\sim\) and \(\ra\) but rather from the relationship between quantifiers and terms. The goal of the next chapter is to find all of these logically valid \wfs{}.
+
+\solutions{}
+
+\begin{enumerate}
+  \setcounter{enumi}{13}
+
+  \item % 14
+    \begin{enumerate}
+      \item The corresponding statement in \(N\) is \(x_1 + x_1 = x_2 \times x_3\). Any valuation \(v\) with \(v(x_1) = v(x_2) = v(x_3) = 0\) will satisfy the \wf{}, and any valuation \(v\) with \(v(x_1) = v(x_2) = v(x_3) = 1\) will not satisfy the \wf{}.
+      \item The corresponding statement in \(N\) is \(x_1 + 0 = x_2 \ra x_1 + x_2 = x_3\). Any valuation \(v\) with \(v(x_1) = v(x_2) = v(x_3) = 0\) will satisfy the \wf{}, and any valuation \(v\) with \(v(x_1) = v(x_2) = v(x_3) = 1\) will not satisfy the \wf{}.
+      \item The corresponding statement in \(N\) is \(\sim(x_1x_2 = x_2x_3)\). Any valuation \(v\) with \(v(x_1) = 0, v(x_2) = v(x_3) = 1\) will satisfy the \wf{}, and any valuation \(v\) with \(v(x_1) = v(x_2) = v(x_3) = 1\) will not satisfy the \wf{}.
+      \item The corresponding statement in \(N\) is \((\forall x_1) x_1x_2 = x_3\). Any valuation \(v\) with \(v(x_2) = v(x_3) = 0\) will satisfy the \wf{}, and any valuation \(v\) with \(v(x_2) = v(x_3) = 1\) will not satisfy the \wf{}.
+      \item The corresponding statement in \(N\) is \(((\forall x_1) x_1 \times 0 = x_1) \ra x_1 = x_2\). Since \((\forall x_1) x_1 \times 0 = x_1\) is false in \(N\), any valuation will vacuously satisfy the \wf{}, and so no valuation will not satisfy the \wf{}.
+    \end{enumerate}
+
+  \item % 15
+    \begin{enumerate}
+      \item The corresponding statement is \(x_1 < 0\). Any valuation \(v\) with \(v(x_1) = -1\) will satisfy the \wf{}, and any valuation \(v\) with \(v(x_1) = 1\) will not satisfy the \wf{}.
+      \item The corresponding statement is \(x_1 - x_2 < x_1 \ra 0 < x_1 - x_2\). Any valuation \(v\) with \(v(x_1) = v(x_2) = 0\) will satisfy the \wf{}, and any valuation \(v\) with \(v(x_1) = v(x_2) = 1\) will not satisfy the \wf{}.
+      \item The corresponding statement is \(\sim(x_1 < x_1 - (x_1 - x_2))\). Any valuation \(v\) with \(v(x_1) = v(x_2) = 0\) will satisfy the \wf{}, and any valuation \(v\) with \(v(x_1) = 0, v(x_2) = 1\) will not satisfy the \wf{}.
+      \item The corresponding statement is \((\forall x_1) x_1 - x_2 < x_3\), which is false, so no valuation will satisfy the \wf{}, and any valuation will not satisfy the \wf{}.
+      \item The corresponding statement is \(((\forall x_1) x_1 - 0 < x_1) \ra x_1 < x_2\). Since \(((\forall x_1) x_1 - 0 < x_1)\) is false, any valuation will vacuously satisfy the \wf{}, and no valuation will not satisfy the \wf{}.
+    \end{enumerate}
+
+  \item % 16
+    Only the \wfs{} (b), (c), and (d) are true in the interpretation.
+
+  \item % 17
+    Only the \wfs{} (c) and (d) are true in the interpretation.
+
+  \item % 18
+    We are to prove that in an interpretation \(I\), a \wf{} \((\cua \ra \cub)\) is false if and only if \(\cua\) is true and \(\cub\) is false. Let \(v\) be a valuation in \(I\). The following are all equivalent statements.
+    \begin{enumerate}[align=left]
+      \item \((\cua \ra \cub)\) is false
+      \item \(v\) does not satisfy \((\cua \ra \cub)\), by (a)
+      \item \(v\) does not satisfy \((\sim\cua)\) and \(v\) does not satisfy \(\cub\), by Definition 3.20 (iii)
+      \item \(v\) satisfies \(\cua\) and \(v\) does not satisfy \(\cub\), by Definition 3.20 (ii)
+      \item \(\cua\) is true and \(\cub\) is false, by Definition 3.24
+    \end{enumerate}
+    Note that (e) is true since \(v\) is an arbitrary valuation. The equivalence between (a) and (e) is what we set out to prove.
+
+  \item % 19 
+    In the following lemma and sub-exercises, let \(I\) be any interpretation and let \(v\) be any valuation in \(I\).
+
+    \begin{lemma*}
+      Let \(\cua\) and \(\cub\) be \wfs{} of \cl{}. Let \(\star\) be the implication ``if \(v\) satisfies \(\cua\), then \(v\) satisfies \(\cub\)''. If \(\star\) is true, then \(\cua \ra \cub\) is logically valid.
+
+      \prf{} Suppose that the implication \(\star\) is true. Then there are two cases to consider.
+      \begin{enumerate}[(i)]
+        \item The valuation \(v\) satisfies \(\cua\). By \(\star\), \(v\) satisfies \(\cub\), and therefore by Definition 3.20 (iii), \(v\) satisfies \(\cua \ra \cub\).
+        \item The valuation \(v\) does not satisfy \(\cua\). By Definition 3.20 (ii), \(v\) satisfies \(\sim\cua\). By Definition 3.20 (iii), \(v\) satisfies \(\cua \ra \cub\).
+      \end{enumerate}
+      We have proved that \(v\), an arbitrary valuation in an arbitrary interpretation, always satisfies \(\cua \ra \cub\). Therefore, \(\cua \ra \cub\) is logically valid.
+
+      \note{} This lemma can be more succinctly stated as ``if \(\cua\) being true in any \(I\) implies that \(\cub\) is true in any \(I\), then \(\cua \ra \cub\) is logically valid.'' Also notice that the relationship is an ``if and only if'', and a little more work could be done to prove the other direction.
+    \end{lemma*}
+
+    This lemma confirms that the logical validity of a \wf{} of the form \(\cua \ra \cub\) can be proved in the expected way. Using this lemma, we now prove that the \wfs{} in (a), (b), (c) and (d) are logically valid.
+    \begin{enumerate}[align=left]
+      \item Suppose that \(v\) satisfies \((\exists x_1)(\forall x_2)A^2_1(x_1, x_2)\). By Proposition 3.29, there is a valuation \(v'\) which is 1-equivalent to \(v\) which satisfies \((\forall x_2)A^2_1(x_1, x_2)\). By Definition 3.20 (iv), any 2-equivalent valuation to \(v'\) satisfies \(A^2_1(x_1, x_2)\) \((\ast)\).
+
+      Now, let \(w\) be 2-equivalent to \(v\). The goal is to show the existence of a valuation which is \(1\)-equivalent to \(w\) and satisfies \(A^2_1(x_1, x_2)\). So let \(w'\) be the valuation which is 2-equivalent to \(v'\) with \(w'(x_2) = w(x_2)\). By \((\ast)\), \(w'\) satisfies \(A^2_1(x_1, x_2)\). Now let \(x\) be any element in the domain of \(w'\) which is not \(x_1\). There are two cases to consider. 
+      \begin{enumerate}
+        \item It may be that \(x = x_2\), in which case, by construction of \(w'\), \(w'(x) = w(x)\).
+        \item Otherwise, \(x \neq x_2\). Since \(w'\) is 2-equivalent to \(v'\), \(w'(x) = v'(x)\). Since \(v'\) is 1-equivalent to \(v\), and since \(x\) is assumed not to be \(x_1\), we have \(v'(x) = v(x)\). Since \(w\) is 2-equivalent to \(v\), we have \(v(x) = w(x)\). Finally, by the chaining the equalities, \(w'(x) = v'(x) = v(x) = w(x)\).
+      \end{enumerate}
+      Therefore, \(w'\) is 1-equivalent to \(w\) and satisfies \(A^2_1(x_1, x_2)\), and by Proposition 3.29, \((\forall x_2)(\exists x_1)A^2_1(x_1, x_2)\). By the lemma above, we may conclude that \(((\exists x_1)(\forall x_2)A^2_1(x_1, x_2) \ra (\forall x_2)(\exists x_1)A^2_1(x_1, x_2))\).
+
+      \note{} In the following sub-exercises for the sake of brevity, the lemma, Definition 3.20, and Proposition 3.29 will not be explicitly referenced when they are used.
+
+      \item We will first demonstrate that if \((\forall x_1)A^1_1(x_1)\) is true in \(I\), then \((\forall x_2)A^1_1(x_2)\) is true in \(I\).
+
+        Suppose that \(v\) satisfies \((\forall x_1)A^1_1(x_1)\). Then any 1-equivalent valuation to \(v\) satisfies \(A^1_1(x_1)\). Let \(v_2\) be a 2-equivalent valuation to \(v\). Let \(v_1\) be the 1-equivalent valuation with \(v_1(x_1) = v_2(x_2)\), which must necessarily satisfy \(A^1_1(x_1)\), which is a \wf{} in which \(x_2\) is free for \(x_1\). By Proposition 3.23, \(v_2\) satisfies \(A^1_1(x_2)\) if and only if \(v_1\) satisfies \(A^1_1(x_1)\). Since \(v_1\) does indeed satisfy \(A^1_1(x_1)\), \(v_2\) must satisfy \(A^1_1(x_2)\). Therefore, \(v\) satisfies \((\forall x_2) A^1_1(x_2)\), as desired.
+
+        Now, we will prove that the original \wf{} is logically valid. Suppose that \(v\) satisfies \((\forall x_1)A^1_1(x_1)\). By the above, we know that \(v\) satisfies \((\forall x_2)A^1_1(x_2)\), and therefore it satisfies \(((\forall x_1)A^1_2(x_1) \ra (\forall x_2)A^1_1(x_2))\), and so we may conclude that \((\forall x_1)A^1_1(x_1) \ra ((\forall x_1)A^1_2(x_1) \ra (\forall x_2)A^1_1(x_2))\) is logically valid.
+
+      \item Suppose that \(v\) satisfies \((\forall x_1) (\cua \ra \cub)\). There are two cases to consider.
+        \begin{enumerate}
+          \item It may be that \(v\) satisfies \(\sim(\forall x_i)\cua\). Then \(v\) satisfies \((\forall x_i) \cua \ra (\forall x_i) \cub\).
+          \item Otherwise, \(v\) satisfies \((\forall x_i)\cua\). Now let \(v'\) be 1-equivalent to \(v\). It must satisfy \(\cua\), and therefore it cannot satisfy \(\sim\cua\). But since \(v\) also satisfies \((\forall x_1) (\cua \ra \cub)\), \(v'\) must satisfy \(\cub\) if it does not satisfy \(\sim\cua\). Therefore, \(v\) must satisfy \((\forall x_i) \cub\), and so \(v\) must satisfy \((\forall x_i) \cua \ra (\forall x_i) \cub\).
+        \end{enumerate}
+        In both cases, \((\forall x_i) \cua \ra (\forall x_i) \cub\), and so we may conclude that
+        \[(\forall x_1)(\cua \ra \cub) \ra ((\forall x_1)\cua \ra (\forall x_1)\cub).\]
+        \note{} This proof relies on applying Definition 3.20 (iii) repeatedly.
+
+      \item Suppose that \(v\) satisfies \((\forall x_1)(\forall x_2)\cua\). Then
+        \begin{enumerate}[(i)]
+          \item any valuation \(v'\) which is 1-equivalent to \(v\) satisfies \((\forall x_2)\cua\) and...
+          \item any valuation which is 2-equivalent to \(v'\) satisfies \(\cua\).
+        \end{enumerate}
+
+        Now let \(w\) be a valuation which is 2-equivalent to \(v\) and let \(w'\) be a valuation that is 1-equivalent to \(w\). The goal is to show that \(w'\) satisfies \(\cua\), from which we may deduce that \(w\) satisfies \((\forall x_1)\cua\) and hence \(v\) satisfies \((\forall x_2)(\forall x_1)\cua\).
+
+        Let \(v'\) be a valuation which is 1-equivalent to \(v\) with \(v'(x_1) = w'(x_1)\). Then by (i), \(v'\) satisfies \((\forall x_2)\cua\). Now let \(x\) be any element in the domain of \(w'\) that is not \(x_2\). There are two cases to consider.
+        \begin{enumerate}[(1)]
+          \item It may be that \(x = x_1\), in which case, by construction of \(v'\), \(v'(x) = w'(x)\).
+          \item Otherwise, \(x \neq x_1\), so
+            \begin{align*}
+              v'(x) &= v(x),      &&\text{since \(v'\) is 1-equivalent to \(v\)}\\
+              v(x) &= w(x),       &&\text{since \(w\) is 2-equivalent to \(w\)}\\
+              w(x) &= w'(x),      &&\text{since \(w'\) is 1-equivalent to \(w\)}
+            \end{align*}
+            and thus, \(v'(x) = w'(x)\) in this case as well.
+        \end{enumerate}
+        In both cases, we can see that \(v'(x) = w'(x)\), and therefore \(w'\) is 2-equivalent to \(v'\). By (ii), we may conclude that \(w'\) satisfies \(\cua\), as desired.
+    \end{enumerate}
+
+  \item % 20
+    One example is \(A^1_1(x_1) \ra A^1_1(x_1)\). It is not closed, but it is a tautology since it is a substitution instance of \(p_1 \ra p_1\). Therefore, it is logically valid.
+
+  \item % 21
+    Suppose that \(v\) is a valuation in an interpretation \(I\) that satisfies \(\cua(t)\). Let \(v'\) be \(i\)-equivalent to \(v\) with \(v'(x_i) = v(t)\). By Proposition 3.23, \(v'\) must satisfy \(\cua(x_i)\). By Proposition 3.29, \(v\) must satisfy \((\exists x_i)\cua(x_i)\). By the lemma in Exercise 19, \(\cua(t) \ra (\exists x_i)\cua(x_i)\) is logically valid.
+
+  \item % 22
+    Let \(I\) be the interpretation with the integers as the domain, \(\overline{a}_0 = 0\), the relation \(\leq\) as \(A^2_1\), and the relation \(=0\) as \(A^1_1\). Note that \(A^1_1\) does not involve \(\overline{a}_0 = 0\), since the relation is just the set \(\{(0, 0)\}\). Then the given \wfs{} (a) - (d) correspond to the following \wfs{}.
+    \begin{enumerate}[align=left]
+      \item \(((\forall x_1)(\exists x_2)\ x_1 \leq x_2) \ra ((\exists x_2)(\forall x_1)\ x_1 \leq x_2)\)
+      \item \((\forall x_1)(\forall x_2)(x_1 \leq x_2 \ra x_2 \leq x_1)\)
+      \item \((\forall x_1)(\sim(x_1 = 0)) \ra (\sim(x_1 = 0))\)
+      \item \((\forall x_1)(x_1 \leq x_1) \ra ((\exists x_2)(\forall x_1)\ x_1 \leq x_2)\)
+    \end{enumerate}
+    These statements in \(I\) are all easily seen to be false, and therefore, none of the \wfs{} are logically valid.
+    
+  \item % 23
+    This follows immediately from Proposition 3.23, since if \(v\) satisfies \(v(x_i) = v(t)\), then it itself is an \(i\)-equivalent valuation \(v'\) to \(v\) with \(v'(x_i) = v(t)\).
+
+    \note{} In the textbook, Proposition 3.23 is not proved fully, and the remainder is left as an exercise, but in this manual it is proved fully, so there is no need to elaborate more on it here.
+\end{enumerate}

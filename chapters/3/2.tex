@@ -60,7 +60,7 @@ The symbols \(\exists, \land\) and \(\lor\) are treated as shorthand.
   \note{} One point of confusion is that the meaning of a formula \((\forall x_i) \cua\) is reliant on its \textit{free} variables, not its bound ones, which might be contrary to one's intuitions about the words \textit{free} and \textit{bound}.
 \end{definition}
 
-The next definition is as important as it is confusing. A few equivalent definitions will be provided.
+From here on out, if \(\cua(x_i)\) is a \wf{} in which \(x_i\) occurs free, then \(\cua(t)\) will refer to \(\cua(x_i)\) with all \textit{free} occurrences of \(x_i\) replaced with \(t\). So if \(\cua(x_i)\) is \((\forall x_2) A^1_1(x_i) \ra (\forall x_i) A^1_1(x_i))\), then \(\cua(t)\) is \((\forall x_2) A^1_1(t) \ra (\forall x_i) A^1_1(x_i))\). We will want to only substitute \(t\) for \(x_i\) if it does not interact with quantifiers in \(\cua(x_i)\). In the previous example, \(x_2\) would be a different substitution that any other variable. For this reason, we need the next definition, which is as important as its confusing. A few equivalent definitions will be provided.
 
 \setcounter{definition}{10}
 \begin{definition}

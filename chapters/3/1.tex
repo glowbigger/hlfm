@@ -4,6 +4,14 @@
 
 \section{Predicates and sequences}
 
+\subsection*{A warning}
+
+The reader of this book, Hamilton's \textit{Logic For Mathematicians}, of course already has knowledge of formal mathematics regarding quantified statements. There is common unspoken convention in math that statements are to quantified implicitly if quantifiers are absent. A statement like \(x < y\) might be written to be short for \((\forall x) (\forall y) (x < y)\), where \(x\) and \(y\) are integers.
+
+But this assumption cannot be held while reading Chapter 3 of the textbook or when studying first-order logic in general. Some strings of symbols, which will later be called \wfs{}, are neither true nor false, and the reason for this is the absence of quantifiers. For example, the string \(x < y\) is assumed to be indeterminate in the sense that it is neither true nor false, and likewise \((\forall x) x < y\) is also indeterminate. The truth of these formulas depend on how \(x\) and \(y\) are evaluated (\(x = y = 3\) would yield a false evaluation, for example), which is an idea which will be formalized in the last chapter of this section.
+
+We will see later that all \textit{closed formulas}, which refer to formulas where all variables are quantified, are true or false, as expected. However, not all unquantified formulas are indeterminate. Consider \(x = x\), which is true, despite the formula having no quantifiers.
+
 \solutions{}
 
 \begin{enumerate}

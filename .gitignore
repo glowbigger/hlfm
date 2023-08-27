@@ -5,7 +5,6 @@
 *.out
 *.synctex.gz
 *.toc
-*.pdf
 *.syncthing*
 todo
 other

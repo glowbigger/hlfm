@@ -4,13 +4,17 @@
 \begin{proposition}
   If \(\cua\) and \((\cua \ra \cub)\) are tautologies, then \(\cub\) is a tautology.
 
-  \prf{} Suppose for a contradiction that \(\cua\) and \((\cua \ra \cub)\) are tautologies, while \(\cub\) is not a tautology. Then there is an assignment of truth values to the statement variables of \(\cub\) such that \(\cub\) is given the value \(F\), while \(\cua\), being a tautology is necessarily given the value \(T\). But then \((\cua \ra \cub)\) must have the value \(F\), which contradicts it being a tautology.
+  \begin{proof}
+    Suppose for a contradiction that \(\cua\) and \((\cua \ra \cub)\) are tautologies, while \(\cub\) is not a tautology. Then there is an assignment of truth values to the statement variables of \(\cub\) such that \(\cub\) is given the value \(F\), while \(\cua\), being a tautology is necessarily given the value \(T\). But then \((\cua \ra \cub)\) must have the value \(F\), which contradicts it being a tautology.
+  \end{proof}
 \end{proposition}
 
 \begin{proposition}
   Let \(\cua\) be the statement form in which the statement variables \(p_1, p_2, \dots, p_n\) appear, and let \(\cua_1, \cua_2, \dots, \cua_n\) be any statement forms. If \(\cua\) is a tautology, then \(\cub\), the statement form obtained by replacing \(p_i\) in \(\cua\) with \(\cua_i\), is also a tautology.
 
-  \prf{} By definition of \(\cub\), any assignment of truth values to \(\cua_1, \cua_2, \dots, \cua_n\) in \(\cub\), would result in the same truth value of \(\cua\) if the same truth values had been assigned to \(p_1, p_2, \dots, p_n\). The truth value of \(\cua\) is \(T\), and so the truth value of \(\cub\) must also be \(T\), making it a tautology as well.
+  \begin{proof}
+    By definition of \(\cub\), any assignment of truth values to \(\cua_1, \cua_2, \dots, \cua_n\) in \(\cub\), would result in the same truth value of \(\cua\) if the same truth values had been assigned to \(p_1, p_2, \dots, p_n\). The truth value of \(\cua\) is \(T\), and so the truth value of \(\cub\) must also be \(T\), making it a tautology as well.
+  \end{proof}
 
   \note{} This proof is not entirely rigorous. See the note in Proposition 1.15.
 
@@ -20,18 +24,22 @@
 \begin{proposition}
   For any statement forms \(\cua\) and \(\cub\), \((\sim (\cua \land \cub))\) is logically equivalent to \(((\sim \cua) \lor (\sim \cub))\), and \((\sim (\cua \lor \cub))\) is logically equivalent to \(((\sim \cua) \land (\sim \cub))\).
 
-  \prf{} By Example 1.8 in the book or by creating tables, it can be easily seen that
-  \[(\sim (p \land q)) \lra ((\sim p) \lor (\sim a)) \text{, and } (\sim (p \lor q)) \lra ((\sim p) \land (\sim q))\]
-  is a tautology. By application of Proposition 1.11, we may conclude that if any statement form with \(p\) and \(q\) substituted for the statement forms \(\cua\) and \(\cub\) would be a tautology as well, i.e.,
-  \[(\sim (\cua \land \cub)) \lra ((\sim \cua) \lor (\sim \cub)) \text{, and } (\sim (\cua \lor \cub)) \lra ((\sim \cua) \land (\sim \cua))\]
-  is a tautology, and therefore \((\sim (\cua \land \cub))\) is logically equivalent to \(((\sim \cua) \lor (\sim \cub))\), and \((\sim (\cua \lor \cub))\) is logically equivalent to \(((\sim \cua) \land (\sim \cub))\).
+  \begin{proof}
+    By Example 1.8 in the book or by creating tables, it can be easily seen that
+    \[(\sim (p \land q)) \lra ((\sim p) \lor (\sim a)) \text{, and } (\sim (p \lor q)) \lra ((\sim p) \land (\sim q))\]
+    is a tautology. By application of Proposition 1.11, we may conclude that if any statement form with \(p\) and \(q\) substituted for the statement forms \(\cua\) and \(\cub\) would be a tautology as well, i.e.,
+    \[(\sim (\cua \land \cub)) \lra ((\sim \cua) \lor (\sim \cub)) \text{, and } (\sim (\cua \lor \cub)) \lra ((\sim \cua) \land (\sim \cua))\]
+    is a tautology, and therefore \((\sim (\cua \land \cub))\) is logically equivalent to \(((\sim \cua) \lor (\sim \cub))\), and \((\sim (\cua \lor \cub))\) is logically equivalent to \(((\sim \cua) \land (\sim \cub))\).
+  \end{proof}
 \end{proposition}
 
 \setcounter{definition}{13}
 \begin{proposition}
   Let \(\cua\) and \(\cub\) be logically equivalent statement forms. Let \(\cua'\) be a statement form in which \(\cua\) appears. Let \(\cub'\) be the statement form in which every instance of \(\cua\) is replaced by \(\cua'\). The statement forms \(\cua'\) and \(\cub\)' are logically equivalent.
 
-  \prf{} We wish to show that \(\cua' \lra \cub'\) is a tautology, which is done by showing that the truth values of \(\cua'\) and \(\cub'\) always match under some arbitrary assignment of truth values to any statement variables. Consider the truth value of \(\cua'\) under some assignment of truth values. The truth value of \(\cub'\) must be the same, since it differs only in having \(\cub\) in place of \(\cua\), and \(\cua\) and \(\cub\) are logically equivalent. Therefore, \(\cua' \lra \cub\) must be a tautology, and so \(\cua'\) and \(\cub'\) must be logically equivalent.
+  \begin{proof}
+    We wish to show that \(\cua' \lra \cub'\) is a tautology, which is done by showing that the truth values of \(\cua'\) and \(\cub'\) always match under some arbitrary assignment of truth values to any statement variables. Consider the truth value of \(\cua'\) under some assignment of truth values. The truth value of \(\cub'\) must be the same, since it differs only in having \(\cub\) in place of \(\cua\), and \(\cua\) and \(\cub\) are logically equivalent. Therefore, \(\cua' \lra \cub\) must be a tautology, and so \(\cua'\) and \(\cub'\) must be logically equivalent.
+  \end{proof}
 
   \note{} This proof is not entirely rigorous. See the note in Proposition 1.15.
 \end{proposition}
@@ -41,21 +49,23 @@ For the remainder of Chapter 1, a statement form involving only the connectives 
 \begin{proposition}
   Let \(\cua\) be a restricted form and let \(\cua'\) be the statement form obtained from \(\cua\) by interchanging \(\land\) and \(\lor\) and replacing every statement variable \(p\) by \((\sim p)\). The statement forms \(\cua\) and \(\cua'\) are logically equivalent.
 
-  \prf{} The proof is by strong induction on \(n\), the number of connectives which appear in \(\cua\).
+  \begin{proof}
+    The proof is by strong induction on \(n\), the number of connectives which appear in \(\cua\).
 
-  (base case) It may be the case that \(n = 0\), i.e., \(\cua\) has no connectives, so \(\cua\) is \(p\), where \(p\) is any statement variable. Then \(\cua'\) must be \((\sim p)\), which is logically equivalent to \((\sim\cua)\).
+    (base case) It may be the case that \(n = 0\), i.e., \(\cua\) has no connectives, so \(\cua\) is \(p\), where \(p\) is any statement variable. Then \(\cua'\) must be \((\sim p)\), which is logically equivalent to \((\sim\cua)\).
 
-  (inductive step) It may be the case that \(n > 0\), i.e., \(\cua\) has one or more connectives. Suppose as an inductive hypothesis that any restricted statement form with fewer than \(n\) connectives is equivalent to the statement form obtained by interchanging \(\land\) and \(\lor\) and replacing each statement variable by its negation. Since \(\cua\) has one or more connectives, there are three cases to consider, based on the final connective in \(\cua\) to be evaluated.
+    (inductive step) It may be the case that \(n > 0\), i.e., \(\cua\) has one or more connectives. Suppose as an inductive hypothesis that any restricted statement form with fewer than \(n\) connectives is equivalent to the statement form obtained by interchanging \(\land\) and \(\lor\) and replacing each statement variable by its negation. Since \(\cua\) has one or more connectives, there are three cases to consider, based on the final connective in \(\cua\) to be evaluated.
 
-  \begin{enumerate}
-    \item It may be that \(\cua\) has the form \((\sim\cub)\), in which case \(\cua'\) must be \((\sim\cub')\), since the only instances of \(\land\), \(\lor\), and any statement variables must necessarily appear in \(\cub\). By the inductive hypothesis, since \(\cub\) has fewer than \(n\) connectives, \(\cub'\) is logically equivalent to \((\sim\cub)\). By Proposition 1.14, \((\sim\cub')\) must be logically equivalent to \((\sim(\sim\cub))\) which is \((\sim\cua)\). Since \((\sim\cub')\) is \(\cua'\), we have proved that \(\cua'\) is logically equivalent to \((\sim\cua)\), as desired.
+    \begin{enumerate}
+      \item It may be that \(\cua\) has the form \((\sim\cub)\), in which case \(\cua'\) must be \((\sim\cub')\), since the only instances of \(\land\), \(\lor\), and any statement variables must necessarily appear in \(\cub\). By the inductive hypothesis, since \(\cub\) has fewer than \(n\) connectives, \(\cub'\) is logically equivalent to \((\sim\cub)\). By Proposition 1.14, \((\sim\cub')\) must be logically equivalent to \((\sim(\sim\cub))\) which is \((\sim\cua)\). Since \((\sim\cub')\) is \(\cua'\), we have proved that \(\cua'\) is logically equivalent to \((\sim\cua)\), as desired.
 
-    \item It may be that \(\cua\) has the form \((\cub \lor \cuc)\). Then \(\cua'\) must be \((\cub' \land \cuc')\). By the induction hypothesis, \(\cub'\), which must have fewer than \(n\) connectives, is logically equivalent to \((\sim\cub)\). By proposition 1.14, \((\cub' \land \cuc')\) must be logically equivalent to \(((\sim\cub) \land \cuc')\), which must again be equivalent to \(((\sim\cub) \land (\sim\cuc))\) by the same reasoning applied to \(\cuc'\), which must finally be equivalent to \((\sim(\cub \lor \cuc))\) by Proposition 1.11, and this final statement form is \((\sim\cua)\), as desired.
+      \item It may be that \(\cua\) has the form \((\cub \lor \cuc)\). Then \(\cua'\) must be \((\cub' \land \cuc')\). By the induction hypothesis, \(\cub'\), which must have fewer than \(n\) connectives, is logically equivalent to \((\sim\cub)\). By proposition 1.14, \((\cub' \land \cuc')\) must be logically equivalent to \(((\sim\cub) \land \cuc')\), which must again be equivalent to \(((\sim\cub) \land (\sim\cuc))\) by the same reasoning applied to \(\cuc'\), which must finally be equivalent to \((\sim(\cub \lor \cuc))\) by Proposition 1.11, and this final statement form is \((\sim\cua)\), as desired.
 
-    \item It may be that \(\cua\) has the form \((\cub \land \cuc)\). Then \(\cua'\) must be \((\cub' \lor \cuc')\). By the induction hypothesis, \(\cub'\), which must have fewer than \(n\) connectives, is logically equivalent to \((\sim\cub)\). By proposition 1.14, \((\cub' \lor \cuc')\) must be logically equivalent to \(((\sim\cub) \lor \cuc')\), which must again be equivalent to \(((\sim\cub) \lor (\sim\cuc))\) by the same reasoning applied to \(\cuc'\), which must finally be equivalent to \((\sim(\cub \land \cuc))\) by Proposition 1.11, and this final statement form is \((\sim\cua)\), as desired.
-  \end{enumerate}
+      \item It may be that \(\cua\) has the form \((\cub \land \cuc)\). Then \(\cua'\) must be \((\cub' \lor \cuc')\). By the induction hypothesis, \(\cub'\), which must have fewer than \(n\) connectives, is logically equivalent to \((\sim\cub)\). By proposition 1.14, \((\cub' \lor \cuc')\) must be logically equivalent to \(((\sim\cub) \lor \cuc')\), which must again be equivalent to \(((\sim\cub) \lor (\sim\cuc))\) by the same reasoning applied to \(\cuc'\), which must finally be equivalent to \((\sim(\cub \land \cuc))\) by Proposition 1.11, and this final statement form is \((\sim\cua)\), as desired.
+    \end{enumerate}
 
-  Verifying the desired property for all three cases finishes the inductive step, thereby concluding the induction and the proof.
+    Verifying the desired property for all three cases finishes the inductive step, thereby concluding the induction and the proof.
+  \end{proof}
 
   \note{} Whenever induction appears in the textbook, it is referring to strong induction. The general framework for induction seen in this proof will resemble all other inductive proofs seen throughout the manual. Strictly speaking, strong induction has no base case, but practically speaking, there are usually one or more special values of the number being inducted on which require special attention since they do not rely on the inductive hypothesis. These will be referred to as the base cases.
 
@@ -74,13 +84,15 @@ For the remainder of Chapter 1, a statement form involving only the connectives 
   are logically equivalent.
   \end{enumerate}
 
-  \prf{} For (i), let \(\cua\) be the statement form
-  \[(p_1 \land p_2 \land \dots \land p_n).\]
-  Then interchanging \(\land\) and \(\lor\) and negating each statement variable results in
-  \[((\sim p_1) \lor (\sim p_2) \lor \dots \lor (\sim p_n)).\]
-  By Proposition 1.15, this is equivalent to \((\sim\cua)\), which is
-  \[(\sim(p_1 \land p_2 \land \dots \land p_n)),\]
-  as desired. Part (ii) is proved in the same way as (i).
+  \begin{proof}
+    For (i), let \(\cua\) be the statement form
+    \[(p_1 \land p_2 \land \dots \land p_n).\]
+    Then interchanging \(\land\) and \(\lor\) and negating each statement variable results in
+    \[((\sim p_1) \lor (\sim p_2) \lor \dots \lor (\sim p_n)).\]
+    By Proposition 1.15, this is equivalent to \((\sim\cua)\), which is
+    \[(\sim(p_1 \land p_2 \land \dots \land p_n)),\]
+    as desired. Part (ii) is proved in the same way as (i).
+  \end{proof}
 \end{corollary}
 
 \begin{proposition}[De Morgan's Laws]
@@ -95,7 +107,9 @@ For the remainder of Chapter 1, a statement form involving only the connectives 
   are logically equivalent.
   \end{enumerate}
 
-  \prf{} This is an application of Proposition 1.10 to Corollary 1.16.
+  \begin{proof}
+    This is an application of Proposition 1.10 to Corollary 1.16.
+  \end{proof}
 \end{proposition}
 
 \solutions{}

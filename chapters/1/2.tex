@@ -1,57 +1,47 @@
 \section{Truth functions and truth tables}
 
-\solutions{}
+\note{} For readability of truth tables, the value 1 will be used for \(T\) and the value 0 will be used for \(F\). The final operation to be evaluated, which indicates the truth value of the final statement form, will be underlined.
 
+\solutions{}
 \begin{enumerate}
   \setcounter{enumi}{2}
   \item % 3
     Because truth tables are tedious to write, only (a) has been done. The rest are done similarly.
     \begin{enumerate}[(\alph*), align=left]
-      \item
-        \begin{tabular}{ccccc}
-          \(((\sim\)&
-          \(p)\)&
-          \(\wedge\)&
-          \((\sim\)&
-          \(q))\)\\\hline
+      \item Observe the truth table below.
+        \begin{center}
+          \begin{tabular}{ccccc}
+            \(((\sim\)&
+            \(p)\)&
+            \(\underline{\wedge}\)&
+            \((\sim\)&
+            \(q))\)\\
 
-          F&
-          T&
-          \underline{F}&
-          F&
-          T\\
+            0&
+            1&
+            0&
+            0&
+            1\\
 
-          F&
-          T&
-          \underline{F}&
-          T&
-          F\\
+            0&
+            1&
+            0&
+            1&
+            0\\
 
-          T&
-          F&
-          \underline{F}&
-          F&
-          T\\
+            1&
+            0&
+            0&
+            0&
+            1\\
 
-          T&
-          F&
-          \underline{T}&
-          T&
-          F
-        \end{tabular}
-
-        % \item
-          % \begin{tabular}{ccccccccc}
-          %   \(\sim\)&
-          %   \(((p\)&
-          %   \(\ra\)&
-          %   \(q)\)&
-          %   \(\ra\)&
-          %   \((\sim\)&
-          %   \((q\)&
-          %   \(\ra\)&
-          %   \(p))\)\\\hline
-          % \end{tabular}
+            1&
+            0&
+            1&
+            1&
+            0
+          \end{tabular}
+        \end{center}
     \end{enumerate}
 
   \item % 4
@@ -63,65 +53,69 @@
   \item % 6
     Because truth tables are tedious to write, only (a) has been done. The rest are done similarly.
     \begin{enumerate}[(\alph*), align=left]
-      \item The truth table for \((p \ra q)\):
+      \item The truth table for \((p \ra q)\) is seen below.
 
-        \begin{tabular}{ccc}
-          \((p\)&
-          \(\ra\)&
-          \(q)\)\\\hline
+        \begin{center}
+          \begin{tabular}{ccc}
+            \((p\)&
+            \(\underline{\ra}\)&
+            \(q)\)\\
 
-          T&
-          \underline{T}&
-          T\\
+            1&
+            1&
+            1\\
 
-          T&
-          \underline{F}&
-          F\\
+            1&
+            0&
+            0\\
 
-          F&
-          \underline{T}&
-          T\\
+            0&
+            1&
+            1\\
 
-          F&
-          \underline{T}&
-          F
-        \end{tabular}
+            0&
+            1&
+            0
+          \end{tabular}
+        \end{center}
 
-        The truth table for \(((\sim q) \ra (\sim p))\):
+        The truth table for \(((\sim q) \ra (\sim p))\) is seen below.
 
-        \begin{tabular}{ccccc}
-          \(((\sim\)&
-          \(q)\)&
-          \(\ra\)&
-          \((\sim\)&
-          \(p))\)\\\hline
+        \begin{center}
+          \begin{tabular}{ccccc}
+            \(((\sim\)&
+            \(q)\)&
+            \(\underline{\ra}\)&
+            \((\sim\)&
+            \(p))\)\\
 
-          F&
-          T&
-          \underline{T}&
-          F&
-          T\\
+            0&
+            1&
+            1&
+            0&
+            1\\
 
-          F&
-          T&
-          \underline{T}&
-          T&
-          F\\
+            0&
+            1&
+            1&
+            1&
+            0\\
 
-          T&
-          F&
-          \underline{F}&
-          F&
-          T\\
+            1&
+            0&
+            0&
+            0&
+            1\\
 
-          T&
-          F&
-          \underline{T}&
-          T&
-          F
-        \end{tabular}
+            1&
+            0&
+            1&
+            1&
+            0
+          \end{tabular}
+        \end{center}
 
-        Notice that when \(p\) and \(q\) take on the same values in both truth tables, the underlined values, which indicate the values of the statement forms, are identical. Therefore, the two statement forms are logically equivalent.
+        Notice that when \(p\) and \(q\) take on the same values in both truth tables, the values underneath the underlined \(\ra\), which indicate the final operation to be evaluated, and therefore the truth value of the statement form, are identical. Therefore, the two statement forms are logically equivalent.
     \end{enumerate}
 
   \item % 7

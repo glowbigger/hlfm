@@ -1,3 +1,134 @@
 \section{Adequate sets of connectives}
+\setcounter{definition}{22}
+\begin{definition}
+  An \textit{adequate} set of connectives is a set such that every truth function can be represented by a statement form containing only connectives from that set.
+\end{definition}
+
+In the last chapter, we have seen that \(\{\sim, \lor, \land\}\) is an adequate set of connectives. We will use this fact to prove the next proposition.
+
+\begin{proposition}
+  The sets \(\{\sim, \land\}\), \(\{\sim, \land\}\), and \(\{\sim, \lor\}\) are adequate sets of connectives.
+
+  \begin{proof}
+    The proof is done by showing that any statement form using the connectives in the set \(\{\sim, \lor, \land\}\) can be formed by using only the connectives in the sets described above. Since the set \(\{\sim, \lor, \land\}\) is an adequate set of connectives, this method is sufficient to demonstrate that the other sets are adequate.
+
+    Let \(\cua\) and \(\cub\) be arbitrary statement forms. 
+
+    Any statement form of the form \(\cua \lor \cub\) can be expressed, via Proposition 1.17, as \(((\sim\cua) \land (\sim\cub))\). Therefore, \(\{\sim, \land\}\) is an adequate set of connectives.
+
+    Any statement form of the form \(\cua \land \cub\) can be expressed, via Proposition 1.17, as \(((\sim\cua) \lor (\sim\cub))\). Therefore, \(\{\sim, \lor\}\) is an adequate set of connectives.
+
+    Any statement form of the form \(\cua \lor \cub\) can be expressed as \((\sim\cua \ra \cub)\) and any statement form of the form \(\cua \land \cub\) can be expressed as \((\sim(\cua \ra (\sim \cub)))\). These equivalences can be easily verified by constructing truth tables. Therefore, \(\{\sim, \ra\}\) is an adequate set of connectives.
+  \end{proof}
+\end{proposition}
+
+The \textit{Nor} connective, denoted by \(\da\) is defined such that \(p \da q\) is true if and only if \(p\) and \(q\) are both false.
+
+The \textit{Nand} connective, denoted by \(\ua\) is defined such that \(p \ua q\) is false if and only if \(p\) and \(q\) are both true. In other words, it indicates that one of its operands is false.
+
+\note{} In the book, the symbol \(|\) is used for the Nand connective.
+
+\setcounter{definition}{25}
+\begin{proposition}
+  The singleton sets \(\{\da\}\) and \(\{\ua\}\) are adequate sets of connectives.
+
+  \begin{proof}
+    Let \(p\) and \(q\) be statement variables.
+
+    The statement form \(\sim p\) can be represented as \(p \da p\), and the statement form \(p \land q\) can be represented as \((p \da p) \da (q \da q)\). Since the set \(\{\sim, \land\}\) is an adequate set of connectives, the set \(\{\da\}\) must also be an adequate set of connectives.
+
+    The statement form \(\sim p\) can be represented as \(p \ua p\), and the statement form \(p \lor q\) can be represented as \((p \ua p) \ua (q \ua q)\). Since the set \(\{\sim, \lor\}\) is an adequate set of connectives, the set \(\{\ua\}\) must also be an adequate set of connectives.
+  \end{proof}
+\end{proposition}
 
 \solutions{}
+
+\note{} The solutions for exercises 14 through 16 have not been verified and were done quickly. They likely contain mistakes.
+
+\begin{enumerate}
+  \setcounter{enumi}{13}
+
+  \item % 14
+    \begin{enumerate}
+      \item \((\sim p \lor ((\sim q) \lor r))\)
+      \item \(((\sim(\sim(p \lor q))) \lor (\sim(r \lor (\sim s))))\)
+      \item \(((\sim((\sim p) \lor q)) \lor (\sim((\sim q) \lor p)))\)
+    \end{enumerate}
+
+  \item % 15
+    \begin{enumerate}
+      \item \((\sim (p \land (q \land (\sim r))))\)
+      \item \((((\sim((\sim p) \land (\sim q))) \land (\sim r)) \land (\sim((p \land q) \land r)))\)
+      \item \(((\sim(((\sim(p \land q)) \land (\sim((\sim q) \land (\sim p)))) \land (\sim r))) \land (\sim(r \land (\sim((\sim(p \land q)) \land (\sim((\sim q) \land (\sim p))))))))\)
+    \end{enumerate}
+
+  \item % 16
+    \begin{enumerate}
+      \item \(((p \ra (\sim q)) \ra (\sim(r \ra (\sim s))))\)
+      \item \((\sim((p \ra q) \ra (\sim(q \ra p))))\)
+      \item \((\sim((\sim (p \ra (\sim q))) \ra (\sim r)))\)
+    \end{enumerate}
+
+  \item % 17
+    \begin{enumerate}
+      \item The value of a statement form consisting of only \(\land\) and \(\lor\) when all statement variables take value \(T\) must also be \(T\), since \(\cub \land \cuc\) and \(\cub \lor \cuc\) both take value \(T\) when arbitrary statement forms \(\cub\) and \(\cuc\) both take value \(T\).
+
+        Thus, no contradiction can be formed by only the connectives \(\land\) and \(\lor\), so the set \(\{\land, \lor\}\) is not an adequate set of connectives.
+
+      \item We will first prove that if \(\cua\) is a statement form in which only two statement variables \(p\) and \(q\) appear and consists of only the connectives \(\sim\) and \(\lra\), the value that \(\cua\) takes when \(p\) is true and \(q\) is false is the same as the value that it takes when \(p\) is false and \(q\) is true. The proof is by strong induction on the number of connectives appearing in \(\cua\).
+
+        (base case) It is impossible for \(\cua\) to have zero connective. It may be that \(\cua\) has only one connective, and this connective must necessarily be \(\lra\), in which case \(\cua\) is \(p \lra q\). When \(p\) is true and \(q\) is false, the value of \(\cua\) is false, and when \(p\) is false and \(q\) is true, the value of \(\cua\) is also false, as desired.
+
+        (inductive step) It may be that \(\cua\) has \(n\) connectives, where \(n > 1\). Suppose as an induction hypothesis that any statement form consisting of only the statement variables \(p\) and \(q\) and fewer than \(n\) of the connectives \(\sim\) and \(\lra\) has the above property. There are two cases to check.
+        \begin{enumerate}
+          \item It may be that \(\cua\) is of the form \(\sim\cub\). If the value that \(\cub\) takes when \(p\) is true and \(q\) is false is \(T\), then \(\sim\cub\) must take value \(F\). By the induction hypothesis, \(\cub\) must also take the value \(T\) when \(p\) is false and \(q\) is true, and so \(\sim\cub\) must take value \(F\), as desired. The other case for when \(\sim\cub\) identically takes the value \(T\) under both assignments of \(p\) and \(q\) can be verified in the same way.
+
+          \item It may be that \(\cua\) is of the form \(\cub \lra \cuc\). The statement forms \(\cub\) and \(\cuc\) will take certain values when \(p\) is true and \(q\) is false. By the induction hypothesis, they will take the same values when \(p\) is false and \(q\) is true. Therefore, the value of \(\cub \lra \cuc\) will remain constant, as desired.
+        \end{enumerate}
+
+        Now that the above property has been proved, we may see that any truth function equivalent to the one generated by \(p \ra q\) can not be represented by a statement form generated by only the connectives \(\lra\) and \(\sim\). For if a statement form were to consist of only \(p\), \(q\), the connectives \(\lra\) and \(\sim\), then by the above proof, either it would take value \(T\) with \(p\) true and \(q\) false, or otherwise it would identically take value \(F\) with \(p\) false and \(q\) true.
+
+        Since the set of connectives \(\{\sim, \lra\}\) is unable to generate a statement form representing a particular truth function, the set of connectives must not be adequate.
+    \end{enumerate}
+  \item % 18
+    \((((p \ua p) \ua (p \ua p)) \ua (q \ua q))\)
+
+  \item % 19
+    Let \(\star\) be a \textit{singularly adequate} binary connective in the sense that \(\{\star\}\) is an adequate set of connectives. 
+
+    It must be able to express \(\sim p\), where \(p\) is a statement variable, in terms of \(p\) and \(\star\). It may be that when both \(p\) and \(q\) take value \(T\), \(p \star q\) takes value \(T\). But then any contradiction involving \(p\) and \(q\) cannot be expressed using only \(\star\), for the assignment of truth values of \(T\) to both \(p\) and \(q\) would result in the contradiction having a true vale, which would be contradictory. Similarly, if \(p \star q\) takes value \(F\) when both \(p\) and \(q\) take value \(F\), then no tautology involving only \(\star\) can be expressed.
+
+    Thus, a partial truth table for \(\star\) can be built.
+    \begin{center}
+      \begin{tabular}{ccc}
+        \(p\)   &\(q\)  &\(p \star q\)\\
+        1       &1      &0\\
+        1       &0      &-\\
+        0       &1      &-\\
+        0       &0      &1
+      \end{tabular}
+    \end{center}
+  Now suppose that the truth table for \(\star\) is either of the ones shown below.
+    \begin{center}
+      \begin{tabular}{ccc}
+        \(p\)   &\(q\)  &\(p \star q\)\\
+        1       &1      &0\\
+        1       &0      &1\\
+        0       &1      &0\\
+        0       &0      &1
+      \end{tabular}
+
+      \begin{tabular}{ccc}
+        \(p\)   &\(q\)  &\(p \star q\)\\
+        1       &1      &0\\
+        1       &0      &0\\
+        0       &1      &1\\
+        0       &0      &1
+      \end{tabular}
+    \end{center}
+    Then any statement form involving \(p\), \(q\) and \(\star\) as its sole connective cannot be a tautology, since its truth value when \(p\) is true and \(q\) is false is different from its value when \(p\) is true and \(q\) is false \footnote{This can be made rigorous by a tedious induction similar to one done in part (b) of Exercise 17.}. So we may conclude that \(\star\) cannot have one of the above truth tables.
+    
+
+  On the other hand, the other possible truth tables for \(\star\) correspond to \(\ua\) and \(\da\), which are both singularly adequate. So \(\star\) must be either \(\ua\) or \(\da\), as desired.
+
+\end{enumerate}

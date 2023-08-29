@@ -1,3 +1,215 @@
 \section{Normal forms}
 
+\begin{proposition}
+  Every statement form is equivalent to a restricted statement form.
+
+  \begin{proof}
+    Let \(\cua\) be a statement form in which the statement variables \(p_1, \dots, p_n\) occur. It may be the case that \(\cua\) is a contradiction, in which case \(\cua\) is equivalent to
+    \[((p_1 \land (\sim p_1)) \land p_2 \land \dots \land p_n),\]
+    a statement form with \(n\) statement variables which is a contradiction.
+
+    Now if \(\cua\) is not a contradiction, then consider the \(2^n\) possible assignments of truth values to the statement variables. For each assignment indexed by \(k\), let \(Q_k\) be the statement form defined by
+    \[q_1 \land \dots \land q_{n},\]
+    where each \(q_i\) is defined as \(p_i\) if \(p_i\) is true under the particular assignment or \((\sim p_i)\) if \(p_i\) is false under the particular assignment.
+
+    Notice that, by construction, \(Q_k\) is true under the \(k\)th assignment. Consider a different assignment of truth values to \(p_1, \dots, p_n\). Then it must assign some statement variable, say \(p_i\), a different truth value. Therefore, by construction, \(q_i\) must be either \((\sim p_i)\) if \(p_i\) is true or \(p_i\) if \(p_i\) is false. In either case \(q_i\) be false, and so \(Q_k\) must be false under the assignment which is not the \(k\)th one. 
+
+    Therefore, \(Q_k\) is true if and only if the assignment of statement variables is the \(k\)th one. In other words, there is a one-to-one correspondence between each \(Q_i\) and each assignment of truth values to the statement variables.
+
+    So let \(\{R_1, R_2, \dots, R_j\}\) be a set such that each element is a distinct \(Q_i\) that corresponds to an assignment of truth values which makes \(\cua\) true. Notice that \(\cua\) was assumed to not be a contradiction, so the set exists. Consider the statement form \(R_1 \lor \dots \lor R_j\). By construction, it is a restricted statement form and is true only when \(\cua\) is true, i.e., it is logically equivalent to \(\cua\), as desired.
+  \end{proof}
+
+  \note{} This proposition is slightly different in meaning from the textbook.
+\end{proposition}
+
+A statement form of the form \(P_1 \lor \dots \lor P_n\), where each \(P_i\) is \((p_1 \land \dots \land p_j)\) for statement variables \(p_i, \dots, p_j\) is said to be in \textit{disjunctive normal form}.
+
+A statement form of the form \(P_1 \land \dots \land P_n\), where each \(P_i\) is \((p_1 \lor \dots \lor p_j)\) for statement variables \(p_i, \dots, p_j\) is said to be in \textit{conjunctive normal form}.
+
+\note{} These definitions are slightly more general than the ones in the textbook. Here, every \(P_i\) need not be of a fixed length.
+
+\setcounter{definition}{19}
+\begin{corollary}
+  Every statement form which is not a contradiction is equivalent to a statement form in disjunctive normal form.
+
+  \begin{proof}
+    Let \(\cua\) be a statement form. The constructed statement form in Proposition 1.18 is in disjunctive normal form and logically equivalent to \(\cua\). Therefore, \(\cua\) is equivalent to a statement form in disjunctive normal form.
+  \end{proof}
+
+  \note{} By the definition used in this manual, we need not restrict the statement form to not be a contradiction.
+\end{corollary}
+
+\begin{corollary}
+  Every statement form which is not a tautology is equivalent to a statement form in conjunctive normal form.
+  
+  \begin{proof}
+    Let \(\cua\) be a statement form which is not a tautology in which the statement variables \(p_1, \dots, p_n\) appear. Then \((\sim\cua)\) is not a contradiction, so it is equivalent to a statement form \(Q\) which has the form \((Q_1 \lor \dots \lor Q_k)\), where each \(Q_i\) is of the form \(q_1 \land \dots \land q_n\), where each \(q_j\) is either \(p_j\) or \((\sim p_j)\). By Proposition 1.17, \((\sim Q)\) must be
+    \[((\sim q_1) \land \dots \land (\sim q_n))\]
+    which is logically equivalent to \((\sim(\sim \cua))\), which is logically equivalent to \(\cua\). Now replacing each \((\sim(\sim p_i))\) occurring in \((\sim Q)\) with \(p_i\) using Proposition 1.14 yields a statement form in conjunctive normal form which is equivalent to \(\cua\), as desired.
+  \end{proof}
+
+  \note{} By the definition used in this manual, we need not restrict the statement form to not be a tautology.
+\end{corollary}
+
 \solutions{}
+
+\begin{enumerate}
+  \setcounter{enumi}{11}
+  \item % 12
+    \begin{enumerate}[label = (\alph*), align = left]
+      \item First we find all assignments of truth values such that \((p \lra q)\) is true. The only assignments are when \(p\) and \(q\) are both assigned the value \(T\) or both assigned the value \(F\). So continuing in the way described in Proposition 1.18, we see that the statement form
+          \[(p \land q) \lor ((\sim p) \land (\sim q))\]
+        is in disjunctive normal form and logically equivalent to \((p \lra q)\).
+
+        The remaining sub-exercises are done in the same way.
+
+      \item The statement form
+        \begin{center}
+          \begin{tabular}{cccc}
+            \((p \land q \land r)\)&
+            &
+            &
+            \(\lor\)\\
+            %
+            \((p \land (\sim q) \land r)\)&
+            \(\lor\)&
+            \((p \land (\sim q) \land (\sim r))\)&
+            \(\lor\)\\
+            %
+            \(((\sim p) \land q \land r)\)&
+            \(\lor\)&
+            \(((\sim p) \land q \land (\sim r))\)&
+            \(\lor\)\\
+            %
+            \(((\sim p) \land (\sim q) \land r)\)&
+            \(\lor\)&
+            \(((\sim p) \land (\sim q) \land (\sim r))\)&
+          \end{tabular}
+        \end{center}
+        in disjunctive normal form is logically equivalent to \((p \ra ((\sim q) \lor r))\).
+
+      \item The statement form \(((p \land q) \lor ((\sim q) \lra r))\) is logically equivalent to
+        \[((\sim p) \land (\sim q) \land r) \lor ((\sim p) \land q \land (\sim r)) \lor (p \land (\sim q) \land r) \lor (p \land q \land (\sim r) \lor (p \land q \land r)),\]
+        which is in disjunctive normal form.
+
+      \item The statement form \(\sim ((p \ra (\sim q)) \ra r)\) is logically equivalent to
+        \[(((\sim p) \land (\sim q) \land (\sim r)) \lor (p \land (\sim q) \land r) \lor (p \land (\sim q) \land (\sim r))),\]
+        which is in disjunctive normal form.
+
+      \item The statement form \((((p \ra q) \ra r) \ra s)\) is logically equivalent to
+        \[
+          \begin{array}{cc}
+            ((\sim p) \land (\sim q) \land (\sim r) \land (\sim s))&
+            \lor\\
+            %
+            ((\sim p) \land (\sim q) \land (\sim r) \land s)&
+            \lor\\
+            %
+            (p \land q \land (\sim r) \land (\sim s))&
+            \lor\\
+            %
+            (p \land q \land (\sim r) \land s)&
+            \lor\\
+            %
+            ((\sim p) \land q \land (\sim r) \land s)&
+            \lor\\
+            %
+            ((\sim p) \land q \land r \land s)&
+            \lor\\
+            %
+            ((\sim p) \land q \land r \land (\sim s))&
+            \lor\\
+            %
+            (p \land (\sim q) \land r \land s)&
+            \lor\\
+            %
+            (p \land q \land (\sim r) \land (\sim s))&
+            \lor\\
+            %
+            (p \land q \land (\sim r) \land s)&
+            \lor\\
+            %
+            (p \land q \land r \land s)&
+          \end{array}
+        \]
+        which is in disjunctive normal form.
+
+    \end{enumerate}
+
+  \item % 13
+    \begin{enumerate}[label = (\alph*), align = left]
+      \item We first negate the statement form to obtain \(\sim(((\sim p) \lor q) \ra r)\), and by using the method used in the previous exercise, we find that the statement form
+        \[(((\sim p) \land (\sim q) \land (\sim r)) \lor ((\sim p) \land q \land (\sim r)) \lor (p \land q \land (\sim r)))\]
+        is in disjunctive normal form and is logically equivalent. By Proposition 1.17, we negate the above statement form to obtain
+        \[((p \lor q \lor r) \land (p \lor (\sim q) \lor r) \land ((\sim p) \lor (\sim q) \lor r)),\]
+        which is logically equivalent to \((((\sim p) \lor q) \ra r)\) and is in conjunctive normal form, as desired.
+
+        The remaining sub-exercises are done similarly.
+
+      \item The statement form \(((p \lor (\sim q)) \land ((\sim p) \lor q))\) is in conjunctive normal form and is logically equivalent to \((p \lra q)\).
+
+      \item The statement form \((\sim((p \land q \land r) \lor ((\sim p) \land (\sim q) \land r)))\) is logically equivalent to the statement form
+        \[
+          \begin{array}{cc}
+            ((\sim p) \land (\sim q) \land (\sim r))&
+            \lor\\
+            %
+            ((\sim p) \land q \land (\sim r))&
+            \lor\\
+            %
+            ((\sim p) \land q \land r)&
+            \lor\\
+            %
+            (p \land (\sim q) \land (\sim r))&
+            \lor\\
+            %
+            (p \land (\sim q) \land r)&
+            \lor\\
+            %
+            (p \land q \land (\sim r)),&
+          \end{array}
+        \]
+        which is in disjunctive normal form. Therefore, \((p \land q \land r) \lor ((\sim p) \land (\sim q) \land r)\) is logically equivalent, by Proposition 1.17, to
+        \[
+          \begin{array}{cc}
+            (p \lor q \lor r)&
+            \land\\
+            %
+            (p \lor (\sim q) \lor r)&
+            \land\\
+            %
+            (p \lor (\sim q) \lor (\sim r))&
+            \land\\
+            %
+            ((\sim p) \lor q \lor r)&
+            \land\\
+            %
+            ((\sim p) \lor q \lor (\sim r))&
+            \land\\
+            %
+            ((\sim p) \lor (\sim q) \lor r),&
+          \end{array}
+        \]
+        which is a statement form in conjunctive normal form, as desired.
+
+      \item The statement form \((((p \ra q) \ra r) \ra s)\) is logically equivalent to
+        \[
+          \begin{array}{cc}
+            ((\sim p) \lor (\sim q) \lor r \lor (\sim s))&
+            \land\\
+            %
+            ((\sim p) \lor q \lor r \lor (\sim s))&
+            \land\\
+            %
+            (p \lor (\sim q) \lor (\sim r) \lor (\sim s))&
+            \land\\
+            %
+            (p \lor (\sim q) \lor r \lor (\sim s))&
+            \land\\
+            %
+            (p \lor q \lor r \lor (\sim s)),&
+          \end{array}
+        \]
+        which is a statement form in conjunctive normal form, as desired.
+    \end{enumerate}
+\end{enumerate}

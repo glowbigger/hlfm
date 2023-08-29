@@ -1,3 +1,53 @@
 \section{Arguments and validity}
 
+An \textit{argument form} is a finite sequence of statement forms. The last statement form is the called the \textit{conclusion} and the other statement forms are called the \textit{premises}.
+
+\setcounter{definition}{27}
+\begin{definition}
+  The argument form \(\cua_1, \dots, \cua_n \therefore \cua\) is \textit{invalid} if it is possible to assign truth values to the statement variables occurring in such a way as to make each of the premises take value \(T\) while making the conclusion take value \(F\). Otherwise, the argument form is \textit{valid}.
+\end{definition}
+
+\setcounter{definition}{31}
+\begin{proposition}
+  The argument form \(\cua_1, \dots, \cua_n \therefore \cua\) is valid if and only if the statement form \(((\cua_1 \land \dots \land \cua_n) \ra \cua)\) is a tautology.
+
+  \begin{proof}
+    \Ra{} Suppose that the argument form \(\cua_1, \dots, \cua_n \therefore \cua\) is valid. For a contradiction, suppose that \(((\cua_1 \land \dots \land \cua_n) \ra \cua)\) is not a tautology. This will only occur when there exists some assignment of truth values to the statement variables occurring such that \((\cua_1 \land \dots \land \cua_n)\) takes value \(T\) and \(\cua\) takes value \(F\). This is to say that each \(\cua_i\) takes value \(T\), while \(\cua\) takes value \(F\), contradicting the validity of the argument form \(\cua_1, \dots, \cua_n \therefore \cua\).
+
+    \La{} Suppose that the statement form \(((\cua_1 \land \dots \land \cua_n) \ra \cua)\) is a tautology. For a contradiction, suppose that the argument form \(\cua_1, \dots, \cua_n \therefore \cua\) is invalid. This will only occur when there exists some assignment of truth values to the statement variables occurring such that each \(\cua_i\) takes value \(T\), while \(\cua\) takes value \(F\), which is to say that \(((\cua_1 \land \dots \land \cua_n)\) is true while \(\cua\) is false. Then, under this assignment, the statement form \(((\cua_1 \land \dots \land \cua_n) \ra \cua)\) must be false, contradicting the fact that it is a tautology.
+  \end{proof}
+\end{proposition}
+
 \solutions{}
+
+\begin{enumerate}
+  \setcounter{enumi}{19}
+  \item % 20
+    \begin{enumerate}[label = (\alph*), align = left]
+      \item The corresponding argument form,
+          \[((\sim F) \ra (\sim G)), G \therefore F,\]
+        is valid.
+
+      \item The corresponding argument form,
+          \[(C \ra (S \lor B)), (\sim B) \therefore ((\sim S) \ra (\sim C)),\]
+        is valid.
+
+      \item The corresponding argument form,
+          \[(D \ra (E \lor (\sim G))), ((\sim O) \lor (\sim E)) \therefore G,\]
+        is invalid.
+
+      \item The corresponding argument form,
+          \[(P \ra (Q \land R \land S)), Q, (S \ra R) \therefore (S \ra P)\]
+        is invalid.
+    \end{enumerate}
+
+  \item % 21
+    Suppose that \(\cua_1, \cua_2, \dots, \cua_n \therefore \cua\) is a valid argument form. Then whenever \(\cua_1, \cua_2, \dots, \cua_n\) are all true, \(\cua\) is true as well.
+
+    Now suppose that \(\cua_1, \cua_2, \dots, \cua_{n-1}\) are all true. It may be that \(\cua_n\) is true, in which case, by the above, \(\cua\) is true, so \((\cua_n \ra \cua)\) is true. Otherwise, \(\cua_n\) is false, so \((\cua_n \ra \cua)\) is vacuously true. 
+
+    Therefore, \((\cua_n \ra \cua)\) is always true when \(\cua_1, \cua_2, \dots, \cua_{n-1}\) are all true, and so \(\cua_1, \cua_2, \dots, \cua_{n-1} \therefore (\cua_n \ra \cua)\) is a valid argument form.
+
+  \item % 22
+    Suppose that the premises \(p\) and \((p \ua (q \ua r))\) are true. Then \(p\) must be true. For \((p \ua (q \ua r))\) to be true, \((q \ua r)\) must be false, and this only occurs when \(q\) and \(r\) are both true. Since the conclusion \(r\) must be true, the argument form is valid.
+\end{enumerate}

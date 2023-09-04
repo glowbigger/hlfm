@@ -1,7 +1,474 @@
-\section{Predicates and sequences}
+\section{The formal system \texorpdfstring{\(K_{\cul}\)}{KL}}
+
+In the previous chapter, we discussed various \wfs{} which were valid in all first-order languages. Depending on the interpretations of the language, the \wfs{} could be true or false. Some \wfs{} were seen to be true regardless of the interpretation, and these \wfs{} were said to be logically valid. In this chapter, we will construct a formal system which will allow deduction of other \wfs{} from certain \wfs{}. The fundamental property of this system that will be proved is that its theorems are precisely the \wfs{} which are logically valid.
+  
+Let \(\cul\) be a first order language. The formal system \(K_{\cul}\) has, as its alphabet of symbols, the same alphabet of symbols as \(\cul\).
+
+Let \(\cua\) and \(\cub\) be \wfs{} of \(\cul\). The axioms of \(K_{\cul}\) are given by the following schemes.
+\begin{itemize}
+  \item (K1) \((\cua \ra (\cub \ra \cua))\).
+
+  \item (K2) \(((\cua \ra (\cub \ra \cuc)) \ra ((\cua \ra \cub) \ra (\cua \ra \cuc)))\).
+
+  \item (K3) \((((\sim \cua) \ra (\sim \cub)) \ra (\cub \ra \cua))\).
+
+  \item (K4) \(((\forall x_i) \cua \ra \cua)\), if \(x_i\) does not occur free in \(\cua\).
+
+  \item (K5) \(((\forall x_i) \cua(x_i) \ra \cua(t))\), if \(t\) is free for \(x_i\) in \(\cua(x_i)\).
+
+  \item (K6) \(((\forall x_i)(\cua \ra \cub) \ra (\cua \ra (\forall x_i)\cub))\), if \(\cua\) contains no free occurrences of \(x_i\).
+\end{itemize}
+
+\note{} (K1) - (K3) are analogous to the axioms of \(L\).
+
+\note{} In (K4) and (K6), it may aid understanding to note that a variable does not occur free in a \wf{} if it occurs bound, in which case it can either not occur at all in a \wf{}, or it occurs bound already. In both cases, the quantifier is redundant or meaningless. Therefore, (K4) allows the removal of an unnecessary quantifier while (K6) allows the quantifier in an implication to moved to only the consequent of the implication if the quantifier is unnecessary in the hypothesis.
+
+\note{} We may immediately deduce that \(((\forall x_i) \cua \ra \cua)\) for any \wf{} \(\cua\), regardless of whether \(x_i\) occurs free in \(\cua\) or not. For if \(x_i\) does not occur free in \(\cua\), then \(((\forall x_i) \cua \ra \cua)\) is true by (K4). If \(x_i\) occurs free in \(\cua\), then we may write \(\cua(x_i)\), and since \(x_i\) is free for \(x_i\) in \(\cua(x_i)\), by (K6), we may deduce \(((\forall x_i) \cua(x_i) \ra \cua(x_i))\).
+
+The rules of deduction of \(K_{\cul}\) are:
+\begin{enumerate}
+  \item \textit{Modus ponens}, from \(\cua\) and \((\cua \ra \cub)\), deduce \(\cub\).
+  \item \textit{Generalization}, from \(\cua\), deduce \((\forall x_i)\cua\), where \(x_i\) is any variable.
+\end{enumerate}
+
+The second rule may be curious. It states that a quantifier may be added to a \wf{} with no consequences in terms of logical deduction. Indeed, if the quantified variable is bound already in \(\cua\), then the addition of the quantifier will be redundant. But if the variable is free in \(\cua\), then \(\cua\) may be neither true nor false in some interpretation, so there may be a valuation in which \(\cua\) is true but \((\forall x_i) \cua\) is false (a concrete example of this will be provided shortly). The consequence of this is that the Deduction Theorem for \(\cul\) must be restricted slightly, as we will see. However, the theorems of \(K_{\cul}\) will be shown to be the logically valid \wfs{} of \(\cul\), so this issue will not arise as long as generalization is applied to a \wf{} which is theorem of \(K_{\cul}\).
+
+\setcounter{definition}{1}
+\begin{definition}
+  A \textit{proof} in \(K_{\cul}\) is a sequence of \wfs{} such that each \wf{} is an axiom of \(K_{\cul}\) or a deduction from one or more of the previous \wfs{} by one of the rules of deduction. A \textit{theorem} of \(K_{\cul}\) is any \wf{} which is the last member of a sequence of a proof in \(K_{\cul}\).
+
+  Let \(\Gamma\) be a set of \wfs{} of \(K_{\cul}\). A \textit{deduction from \(\Gamma\)} is a proof in \(K_{\cul}\) with any \wf{} of \(\Gamma\) permitted as a \wf{} in the sequence or proof. A \textit{consequence} of \(\Gamma\) in \(K_{\cul}\) is the last member of a deduction from \(\Gamma\). 
+
+  We write \(\Gamma \ded{{K_{\cul}}} \cua\) to denote that \(\cua\) is a consequence of \(\Gamma\), and if \(\Gamma\) is empty, then \(\cua\) is just a theorem of \(K_{\cul}\), in which case we write \(\ded{{K_{\cul}}} \cua\).
+\end{definition}
+
+For the sake of convenience, we will abbreviate \(K_{\cul}\) to \(K\) unless there is reason to specify \(\cul\). Writing that a \wf{} is a \wf{} of \(K\) is to say that it is a \wf{} of the unspecified first-order language associated with \(K\).
+
+\begin{proposition}
+  If \(\cua\) is a tautology (see Definition 3.30), then \(\cua\) is a theorem of \(K\).
+
+  \begin{proof}
+    Recall that \(\cua\) must be a \wf{} of \(\cul\) which is a substitution instance of a tautology in \(L\), which is to say that there must be a \(\cua_L\) in \(L\) which is a tautology such that \(\cua\) is obtained by substituting the statement variables of \(L\) with \wfs{} of \(\cul{}\). By Proposition 2.23, \(\cua_L\) must be a theorem of \(L\). Therefore, there exists a proof in \(L\) of \(\cua_L\). In the proof, substitute each statement variable in \(L\) with the \wf{} which was substituted for that statement variable to obtain \(\cua\) to obtain a sequence of \wfs{} of \(K\).
+
+    Consider a \wf{} after this substitution. It could have been an axiom in \(L\), in which case the substituted \wf{} is an axiom of \(K\) since the axioms of \(L\) are given in (K1), (K2) and (K3). Otherwise, the \wf{} was a result of MP and since MP is a rule of deduction in \(K\), the substituted \wf{} could be obtained from two previous \wfs{} in the sequence after the substitution. Therefore, the sequence is a valid proof in \(K\), and so \(\cua\) is a theorem of \(K\).
+  \end{proof}
+
+  \note{As usual, this proof could be done via induction. In particular, the last paragraph could be verified in this way.}
+\end{proposition}
+
+The converse of this proposition can easily be seen to false. For example, the \wf{} \(((\forall x_i) \cua \ra (\exists x_i) \cua)\) was seen to be logically valid in Example 3.37 for any first-order language \(\cul\). This \wf{} in \(K_{\cul}\) is a substitution instance of the \wf{} \((p_1 \ra p_2)\) in \(L\), which is not a tautology of \(L\), and therefore the \wf{} in \(\cul\) is not a tautology in \(\cul\). Later, we shall see that the theorems of \(K_{\cul}\) are the logically valid \wfs{} of \(\cul\), and so the given \wf{} disproves the converse of the proposition.
+
+We will know prove that \(K\) has the basic property of being sound. That is, every theorem is logically valid. We start by proving the property for the axioms.
+
+\begin{proposition}
+  All axioms of \(K_{\cul}\) are logically valid.
+
+  \begin{proof}
+    Let \(\cuc\) be an axiom of \(K_{\cul}\). It may be the case that it is an instance of axioms (K1), (K2), or (K3). In this case, \(\cuc\) must be a tautology, as it is a substitution instance of a tautology in \(L\), and by Proposition 4.3, \(\cuc\) must be logically valid. The other possibility is that \(\cuc\) is an instance of the axiom schemes (K4), (K5), or (K6).
+
+    We implicitly use the lemma in exercise 19 of Section 3.4 to prove implications. Let \(v\) be a valuation in any interpretation of \(\cul\).
+
+    \begin{itemize}
+      \item For (K4), \(((\forall x_i) \cua \ra \cua)\), suppose that \(v\) satisfies \((\forall x_i) \cua\). Then any \(i\)-equivalent valuation to \(v\) satisfies \(\cua\), so, in particular, \(v\) satisfies \(\cua\). Therefore, (K4), \(((\forall x_i) \cua \ra \cua)\) is logically valid.
+
+      \item For (K5), \(((\forall x_i) \cua(x_i) \ra \cua(t))\) if \(t\) is free for \(x_i\), suppose that \(v\) satisfies \((\forall x_i) \cua(x_i)\) and that \(t\) is a term free for \(x_i\). Then any \(i\)-equivalent valuation to \(v\) satisfies \(\cua(x_i)\). In particular, the \(i\)-equivalent valuation \(v'\) with \(v'(x_i) = v(t)\) satisfies \(\cua(x_i)\), so by Proposition 3.23, \(v\) satisfies \(\cua(t)\). Therefore, (K5), \(((\forall x_i) \cua(x_i) \ra \cua(t))\), is logically valid.
+
+      \item For (K6), \(((\forall x_i)(\cua \ra \cub) \ra (\cua \ra (\forall x_i)\cub))\) if \(\cua\) contains no free occurrence of the variable \(x_i\), suppose that \(v\) satisfies \((\forall x_i)(\cua \ra \cub)\) and that \(x_i\) does not occur free in \(\cua\). Then every \(i\)-equivalent valuation to \(v\) satisfies \((\cua \ra \cub)\), which is to say that it must either not satisfy \(\cua\) or satisfy \(\cub\), by Definition 3.20, and we label this statement as \(\star\).
+
+        The goal is to show that \(v\) satisfies \((\cua \ra (\forall x_i) \cub)\), as doing this will demonstrate the logical validity of (K6), so suppose that \(v\) satisfies \(\cua\). Now, let \(w\) be an \(i\)-equivalent valuation to \(v\). Notice that \(v\) satisfies \(\cua\) by assumption, so by Proposition 3.33 and the fact that \(x_i\) does not occur free in \(\cua\), \(w\) must also satisfy \(\cua\), and so by \(\star\), \(w\) must satisfy \(\cub\), which allows us to say that \(v\) satisfies \((\forall x_i) \cub\). We may conclude that \(v\) satisfies \((\cua \ra (\forall x_i) \cub)\), as desired.
+    \end{itemize}
+
+    We have shown that any instance of the axiom schemes of \(K_{\cul}\) are logically valid, i.e., any axiom of \(K_{\cul}\) is logically valid.
+  \end{proof}
+\end{proposition}
+
+\begin{proposition}[The Soundness Theorem for \(K\)]
+  If \(\cua\) is a theorem of \(K\), then \(\cua\) is logically valid.
+
+  \begin{proof}
+    The proof is by strong induction on \(n\), the number of \wfs{} in the sequence consisting of the proof of \(\cua\). As a hypothesis of strong induction, suppose that any theorem of \(K\) with fewer than \(n\) \wfs{} in its proof is logically valid.
+
+    (base case) It may be the case that \(n = 1\), which is to say that \(\cua\) is an axiom of \(K\), and so by the previous proposition, \(\cua\) is logically valid. 
+
+    (induction step) Alternatively, \(n > 1\). It may still be the case that \(\cua\) is an axiom of \(K\), in which case it is logically valid. If it is not an axiom, then it follows from one of the two rules of deduction.
+    \begin{enumerate}
+      \item In the case that \(\cua\) follows from MP and two \wfs{}, one \wf{} must necessarily be of the form \(\cub\) and the other of the form \((\cub \ra \cua)\). By the induction hypothesis, both of these \wfs{} are logically valid, and so by Remark 3.36(a) (which, in turn, is a consequence of Proposition 3.26), \(\cua\) must be logically valid.
+
+      \item In the case that \(\cua\) follows from Generalization from a previous \wf{} \(\cub\), \(\cua\) must necessarily be of the form \((\forall x_i) \cub\). Since, by the induction hypothesis, \(\cub\) is logically valid, \(\cua\) must be logically valid by Remark 3.36(b) (which, in turn, is a consequence of Proposition 3.26).
+    \end{enumerate}
+
+    We have shown that in both cases when \(\cua\) follows from a rule of deduction, \(\cua\) is logically valid, as desired.
+  \end{proof}
+\end{proposition}
+
+\begin{corollary}
+  \(K\) is consistent (for no \wf{} \(\cua\) are both \(\cua\) and \((\sim\cua)\)) both theorems of \(K\)).
+
+  \begin{proof}
+    For a contradiction, suppose that both \(\cua\) and \((\sim\cua)\) are both theorems of \(K\) for some \wf{} \(\cua\) of \(K\). Then \(\cua\) and \((\sim\cua)\) are both logically valid, by the above proposition. Hence, in any interpretation, both \(\cua\) and \((\sim\cua)\) are true, which contradictions Remark 3.25(c).
+  \end{proof}
+\end{corollary}
+
+In \(L\), we saw that if we could prove \(\cua \dedL \cub\), then \(\dedL (\cua \ra \cub)\). This is almost true in \(\cul\) in the sense that we must restrict the relationship between \(\cua\) and \(\cub\) to apply a similar theorem for \(K\). In particular, in the deduction of \(\cub\) from \(\cua\) must not involve the deduction rule of Generalization. The reason for this is best seen with an example.
+
+Consider \(x = 0\) in the integers. It is neither true nor false, since its truth value is dependent on what a valuation assigns to \(x\). Now consider \((\forall x) x = 0\). It is certainly false, since any valuation that does not assign \(x\) to \(0\) will not satisfy \(x = 0\). So the implication \(x = 0 \ra (\forall x) x = 0\) must be false in the interpretation.
+
+Now, notice that \(x = 0\) is an interpretation of \(A^1_1(x)\), where \(x\) is just any variable of some appropriate first order language, and likewise \((\forall x) x = 0\) is an interpretation of \((\forall x) A^1_1(x)\). We know that by Generalization, \(A^1_1(x) \ded{K_{\cul}} (\forall x) A^1_1(x)\), but we have just seen an interpretation where \(A^1_1(x) \ra (\forall x) A^1_1(x)\) is false, and hence the \wf{} is not logically valid, and so it cannot be a theorem of \(K\), by Proposition 4.5.
+
+This example shows the issue that can arise when generalizing a statement that is neither true nor false in an interpretation\footnote{If the statement is not indeterminate in this sense, then generalization is fine (see the additional exercises section in the appendix of the manual)}. However, with careful restriction on the \wfs{}, we may still use the Deduction Theorem of \(L\) in an analogous way in \(K\).
+
+\setcounter{definition}{7}
+\begin{proposition}[The Deduction Theorem for \(K\)]
+  Let \(\cua\) and \(\cub\) be \wfs{} of \(K\) and let \(\Gamma\) be a set of \wfs{} of \(\cul\). If \(\Gamma \cup \{\cua\} \ded{K} \cub\), and this deduction contains no application of Generalization involving a variable free in \(\cua\), then \(\Gamma \ded{K} (\cub \ra \cua)\).
+
+  \begin{proof}
+    The proof is by induction on the number of \wfs{}, \(n\), in the deduction of \(\cub\). Let \(\cua'\) and \(\cub'\) be \wfs{} and let \(\Gamma'\) be a set of \wfs{}. Suppose, as an induction hypothesis, that whenever \(\Gamma' \cup \{\cua'\} \ded{K} \cub'\), and this deduction has fewer than \(n\) \wfs{} and has no occurrence of Generalization involving a variables free in \(\cua'\), it follows that \(\Gamma' \ded{K} (\cua' \ra \cub')\).
+
+    (base case) The verification of the base case proceeds in an identical manner as that of the proof of the Deduction Theorem for \(L\). It may be that \(n = 1\), in which \(\cub\) is either an axiom of \(K\), a member of \(\Gamma\), or \(\cua\) itself. If \(\cub\) is an axiom of \(K\), then:
+    \begin{align*}
+      \text{1}&&
+      \cub&&
+      \text{axiom of \(K\)}\\
+      %
+      \text{2}&&
+      (\cub \ra (\cua \ra \cub))&&
+      \text{(K1)}\\
+      %
+      \text{3}&&
+      (\cua \ra \cub)&&
+      \text{1, 2, MP}
+    \end{align*}
+
+    If \(\cub\) is a member of \(\Gamma\):
+    \begin{align*}
+      \text{1}&&
+      \cub&&
+      \text{member of \(\Gamma\)}\\
+      %
+      \text{2}&&
+      (\cub \ra (\cua \ra \cub))&&
+      \text{(K1)}\\
+      %
+      \text{3}&&
+      (\cua \ra \cub)&&
+      \text{1, 2, MP}
+    \end{align*}
+
+      If \(\cub\) is \(\cua\), then \((\cua \ra \cub)\) is \((\cua \ra \cua)\).
+        \begin{align*}
+          \text{1}&&
+          ((\cua \ra ((\cua \ra \cua) \ra \cua)) \ra ((\cua \ra (\cua \ra \cua)) \ra (\cua \ra \cua)))&&
+          \text{(L2)}\\
+          %
+          \text{2}&&
+          (\cua \ra ((\cua \ra \cua) \ra \cua))&&
+          \text{(L1)}\\
+          %
+          \text{3}&&
+          ((\cua \ra (\cua \ra \cua)) \ra (\cua \ra \cua))&&
+          \text{1, 2, MP}\\
+          %
+          \text{4}&&
+          (\cua \ra (\cua \ra \cua))&&
+          \text{(L1)}\\
+          %
+          \text{5}&&
+          (\cua \ra \cua)&&
+          \text{3, 4, MP}
+        \end{align*}
+        The above is a deduction of \((\cua \ra \cub)\) (which is \((\cua \ra \cua)\)) from \(\Gamma\). Note that it is also a general theorem of \(K\).
+
+    And so in all three cases, we have formed a deduction of \((\cua \ra \cub)\) from \(\Gamma\), as desired.
+
+    (inductive step) Now it may be that \(n > 1\). There are a number of cases to verify.
+    \begin{enumerate}
+      \item It may be that \(\cub\) is an axiom of \(K\) or a member of \(\Gamma \cup \{\cua\}\), in which case the deductions in the base case serve as the desired deductions.
+
+      \item It may be that \(\cub\) proceeds from MP and two prior \wfs{} in the deduction. The two \wfs{} must necessarily be of the form \(\cuc\) and \((\cuc \ra \cub)\), and the subsequences of the deduction of \(\cub\) that are deductions of \(\cuc\) and \((\cuc \ra \cub)\) must necessarily have fewer than \(n\) \wfs{}, in which case, by the induction hypothesis, there exist deductions from \(\Gamma\) of \((\cua \ra \cuc)\) and \((\cua \ra (\cuc \ra \cub))\).
+        \begin{align*}
+          \text{1}&&
+          (\cua \ra \cuc)&&
+          \text{Induction hypothesis}\\
+          %
+          \text{2}&&
+          (\cua \ra (\cuc \ra \cub))&&
+          \text{Induction hypothesis}\\
+          %
+          \text{3}&&
+          ((\cua \ra (\cuc \ra \cub)) \ra ((\cua \ra \cuc) \ra (\cua \ra \cub)))&&
+          \text{(K2)}\\
+          %
+          \text{4}&&
+          ((\cua \ra \cuc) \ra (\cua \ra \cub))&&
+          \text{2, 3, MP}\\
+          %
+          \text{5}&&
+          (\cua \ra \cub)&&
+          \text{1, 4, MP}
+        \end{align*}
+        The above is deduction of \((\cua \ra \cub)\) from \(\Gamma\), as desired. The first two lines were shortened ways of expressing that deductions from \(\Gamma\) of \((\cua \ra \cuc)\) and \((\cua \ra (\cuc \ra \cub))\) exist.
+
+      \item The only possible remaining is that \(\cub\) follows from generalization from some \wf{}, \(\cuc\), and so \(\cub\) is \((\forall x_i) \cuc\), where \(x_i\) is a variable that must necessarily not be free in \(\cua\). The induction hypothesis may be applied to the deduction of \(\cuc\), so there exists a deduction from \(\Gamma\) of \((\cua \ra \cuc)\).
+        \begin{align*}
+          \text{1}&&
+          (\cua \ra \cuc)&&
+          \text{Induction hypothesis}\\
+          %
+          \text{2}&&
+          (\forall x_i)(\cua \ra \cuc)&&
+          \text{1, Generalization}\\
+          %
+          \text{3}&&
+          ((\forall x_i)(\cua \ra \cuc) \ra (\cua \ra (\forall x_i)\cuc))&&
+          \text{(K6)}\\
+          %
+          \text{4}&&
+          (\cua \ra (\forall x_i)\cuc)&&
+          \text{1, 3, MP}
+        \end{align*}
+        Just as in the previous case, the first line is an abbreviation of the deduction of \((\cua \ra \cuc)\) from Gamma. We have constructed a deduction of \(\cua \ra \cub\) from \(\Gamma\), since \((\cua \ra (\forall x_i)\cuc)\) is \((\cua \ra \cub)\).
+    \end{enumerate}
+
+    In all possible cases, we have constructed a deduction of \((\cua \ra \cub)\) from \(\Gamma\), as desired.
+  \end{proof}
+\end{proposition}
+
+\begin{corollary}
+  If \(\Gamma \cup \{\cua\} \ded{K} \cub\) and \(\cua\) is a closed \wf{}, then \(\Gamma \ded{K} (\cua \ra \cub)\).
+
+  \begin{proof}
+    Since \(\cua\) is closed, it contains no free variables, so by the previous proposition, \(\Gamma \ded{K} (\cua \ra \cub)\).
+  \end{proof}
+\end{corollary}
+
+\begin{corollary}
+  For any \wfs{} \(\cua, \cub, \cuc\) of \(K\),
+  \[\{(\cua \ra \cub), (\cub \ra \cuc)\} \ded{K} (\cua \ra \cuc)\]
+
+  \begin{proof}
+    The proof relies only on the Deduction Theorem above and is identical to that of Corollary 2.10.
+  \end{proof}
+\end{corollary}
+
+Just as in \(L\), the corollary of the Deduction Theorem holds in \(K\).
+
+\begin{proposition}
+  Let \(\cua\) and \(\cub\) are \wfs{} of \(K\), and let \(\Gamma\) be a set of \wfs{} of \(K\). Then if \(\Gamma \ded{K} (\cua \ra \cub)\), then \(\Gamma \cup \{\cua\} \ded{K} \cub\).
+
+  \begin{proof}
+    The proof is identical to the proof of Proposition 2.9.
+  \end{proof}
+\end{proposition}
 
 \section*{Solutions}
 
 \begin{enumerate}
-  \item
+  \item % 1
+    The following is a proof of \((\forall x_1) (A^1_1(x_1) \ra A^1_1(x_1))\).
+    \begin{align*}
+      \text{1}&&
+      (A^1_1(x_1) \ra A^1_1(x_1))&&
+      \text{tautology}\\
+      %
+      \text{2}&&
+      (\forall x_i)(A^1_1(x_1) \ra A^1_1(x_1))&&
+      \text{Generalization}
+    \end{align*}
+
+  \item % 2
+    In (a) of the exercise, \(x_i\) must not occur free in \(\cub\). This is ambiguous in the presentation of the exercise, since the condition is only stated in (b) and the assumption is that the \wf{} \(\cub\) is the same one in \(\cua\).
+
+    \begin{enumerate}
+      \item We will first prove a simple lemma.
+        \begin{lemma*}
+          Let \(\cua, \cub, \cuc\) be \wfs{} of some first order language \(\cul\). If \(\cua \ded{\kl} ((\sim\cuc) \ra (\sim\cub))\), then \(\cua \ded{\kl} (\cub \ra \cuc)\).
+
+          \begin{proof}
+            Suppose that \(\cua \ded{\kl} ((\sim\cuc) \ra (\sim\cub))\). The deduction can be extended in the following way.
+            \begin{align*}
+              &&
+              \vdots&&
+              \\
+              %
+              \text{k}&&
+              ((\sim\cuc) \ra (\sim\cub))&&
+              \text{deduction from \(\cua\)}\\
+              %
+              \text{k+1}&&
+              (((\sim\cuc) \ra (\sim\cub)) \ra (\cub \ra \cuc))&&
+              \text{(K3)}\\
+              %
+              \text{k+2}&&
+              (\cub \ra \cuc)&&
+              \text{k, k+1, MP}
+            \end{align*}
+            The above is a deduction of \((\cub \ra \cuc)\) from \(\cua\).
+          \end{proof}
+        \end{lemma*}
+
+          Now we begin the proof. First we show that \(\{(\sim\cub), (\forall x_i)\cua\} \ded{\kl} (\forall x_i)(\sim(\cua \ra \cub))\).
+          \begin{align*}
+            \text{1}&&
+            (\sim\cub)&&
+            \text{assumption}\\
+            %
+            \text{2}&&
+            (\forall x_i)\cua&&
+            \text{assumption}\\
+            %
+            \text{3}&&
+            \cua&&
+            \text{Remark 4.1(b)}\\
+            %
+            \text{4}&&
+            ((\sim\cub) \ra (\cua \ra (\sim(\cua \ra \cub))))&&
+            \text{tautology}\\
+            %
+            \text{5}&&
+            (\cua \ra (\sim(\cua \ra \cub)))&&
+            \text{1, 4, MP}\\
+            %
+            \text{6}&&
+            (\sim(\cua \ra \cub))&&
+            \text{2, 5, MP}\\
+            %
+            \text{7}&&
+            (\forall x_i)(\sim(\cua \ra \cub))&&
+            \text{Generalization}
+          \end{align*}
+          
+          By the deduction theorem and the fact that the only instance of generalization in the above deduction involved \(x_i\), a variable not free in \((\forall x_i)\cua\), we have
+          \[(\sim\cub) \ded{\kl} ((\forall x_i) \cua \ra (\forall x_i)(\sim(\cua \ra \cub))),\]
+          and by the lemma,
+          \[(\sim\cub) \ded{\kl} ((\sim(\forall x_i)(\sim(\cua \ra \cub))) \ra (\sim(\forall x_i) \cua)),\]
+          which is, by the definition of the \(\exists\) quantifier,
+          \[(\sim\cub) \ded{\kl} ((\exists x_i)(\cua \ra \cub) \ra (\sim(\forall x_i) \cua)),\]
+          and by the converse of the Deduction Theorem, Proposition 4.11,
+          \[\{(\exists x_i)(\cua \ra \cub), (\sim\cub)\} \ded{\kl} (\sim(\forall x_i) \cua),\]
+          and by the Deduction theorem once again,
+          \[\{(\exists x_i)(\cua \ra \cub)\} \ded{\kl} ((\sim\cub) \ra (\sim(\forall x_i) \cua)),\]
+          which is possible since the proof of the Deduction Theorem does not involve Generalization involving a variable free in \(\cub\) and \(x_i\) does not occur free in \(\cub\). By the lemma,
+          \[\{(\exists x_i)(\cua \ra \cub)\} \ded{\kl} ((\forall x_i) \cua \ra \cub),\]
+          Finally, by the deduction theorem once again and by the above reasoning,
+          \[\ded{\kl} ((\exists x_i)(\cua \ra \cub) \ra ((\forall x_i) \cua \ra \cub)).\]
+
+      \item Observe the following deduction.
+        \begin{align*}
+          \text{1}&&
+          (\sim(\forall x_i)\sim\cua \ra \cub)&&
+          \text{assumption}\\
+          %
+          \text{2}&&
+          \sim\cub&&
+          \text{assumption}\\
+          %
+          \text{3}&&
+          (\sim(\forall x_i)\sim\cua \ra \cub) \ra (\sim\cub \ra \sim\sim(\forall x_i)\sim\cua)&&
+          \text{tautology}\\
+          %
+          \text{4}&&
+          (\sim\cub \ra \sim\sim(\forall x_i)\sim\cua)&&
+          \text{1, 2, MP}\\
+          %
+          \text{5}&&
+          \sim\sim(\forall x_i)\sim\cua&&
+          \text{2, 4, MP}\\
+          %
+          \text{6}&&
+          \sim\sim(\forall x_i)\sim\cua \ra (\forall x_i)\sim\cua&&
+          \text{tautology}\\
+          %
+          \text{7}&&
+          (\forall x_i)\sim\cua&&
+          \text{5, 6, MP}\\
+          %
+          \text{8}&&
+          \sim\cua&&
+          \text{Remark 4.1(b)}
+        \end{align*}
+        The above deduction did not invoke Generalization. Therefore, by the Deduction Theorem,
+        \[((\exists x_i)\cua \ra \cub) \ded{\kl} (\sim\cub \ra \sim\cua).\]
+        Note that we used the existential quantifier abbreviation above. Therefore, there exists a deduction from \(((\exists x_i)\cua \ra \cub)\) of \((\sim\cub \ra \sim\cua)\) that may be extended in the following way.
+        \begin{align*}
+          &&
+          \vdots&&
+          \\
+          %
+          \text{k}&&
+          (\sim\cub \ra \sim\cua)&&
+          \text{deduction from \(((\exists x_i)\cua \ra \cub)\)}\\
+          %
+          \text{k+1}&&
+          (\sim\cub \ra \sim\cua) \ra (\cua \ra \cub)&&
+          \text{(K3)}\\
+          %
+          \text{k+2}&&
+          (\cua \ra \cub)&&
+          \text{k, k+1, MP}\\
+          %
+          \text{k+3}&&
+          (\forall x_i)(\cua \ra \cub)&&
+          \text{Generalization}
+        \end{align*}
+        The above deduction does not involve Generalization involving a variable occurring free in \(((\exists x_i)\cua \ra \cub)\), since \(x_i\) does not occur free in \(\cub\). Therefore, by the Deduction Theorem,
+        \[((\exists x_i)\cua \ra \cub) \ra (\forall x_i)(\cua \ra \cub)\]
+        is a theorem of \(\kl\).
+
+      \item Observe the following deduction.
+        \begin{align*}
+          \text{1}&&
+          (\forall x_i) \sim\sim\cua&&
+          \text{assumption}\\
+          %
+          \text{2}&&
+          \sim\sim\cua&&
+          \text{Remark 4.1(b)}\\
+          %
+          \text{3}&&
+          (\sim\sim\cua \ra \cua)&&
+          \text{tautology}\\
+          %
+          \text{4}&&
+          \cua&&
+          \text{2, 3, MP}\\
+          %
+          \text{5}&&
+          (\forall x_i)\cua&&
+          \text{Generalization}
+        \end{align*}
+        The only instance of Generalization in the above deduction involves \(x_i\), which is free in \((\forall x_i) \sim\sim\cua\). Therefore, by the Deduction Theorem,
+        \[((\forall x_i) \sim\sim\cua \ra (\forall x_i)\cua)\]
+        is a theorem of \(K_{\cul}\), so the proof of the above can be extended in the following way.
+        \begin{align*}
+          \text{}&&
+          \vdots&&
+          \text{}\\
+          %
+          \text{k}&&
+          ((\forall x_i) \sim\sim\cua \ra (\forall x_i)\cua)&&
+          \text{theorem of \(K_{\cul}\)}\\
+          %
+          \text{k+1}&&
+          (((\forall x_i) \sim\sim\cua \ra (\forall x_i)\cua) \ra&&
+          \text{}\\
+          %
+          \text{}&&
+          (\sim(\forall x_i)\cua \ra \sim(\forall x_i) \sim\sim\cua))&&
+          \text{tautology}\\
+          %
+          \text{k+2}&&
+          (\sim(\forall x_i)\cua \ra \sim(\forall x_i) \sim\sim\cua)&&
+          \text{k, k+1, MP}
+        \end{align*}
+        and therefore, the last line is a theorem of \(\kl\), and it is, by definition of \(\exists\),
+          \[(\sim(\forall x_i)\cua \ra (\exists x_i)\sim\cua),\]
+        as desired.
+    \end{enumerate}
+
+  \item % 3
+    \begin{enumerate}
+      \item In line 2, Generalization involving \(x_1\) appears, but the variable \(x_1\) occurs free in \((\exists x_2)A^2_1(x_1, x_2)\), so the application of the Deduction Theorem later is invalid. Additionally, in line 3, \(x_2\) is not free for \(x_1\) in \((\exists x_2)A^2_1(x_1, x_2)\), so the instance of axiom scheme (K5) is invalid.
+
+      \item Consider an interpretation with the domain being the integers and \(A^2_1(x_i, x_j)\) indicating that \(x_i \neq x_j\). Then the interpretation of the formula given in the exercise is \(((\exists x_2)x_1 \neq x_2 \ra (\exists x_2)x_2 \neq x_2)\). Let \(v\) be any valuation such that \(v(x_1) \neq v(x_2)\). This valuation will not satisfy the \wf{}, and hence the given formula is not logically valid.
+    \end{enumerate}
 \end{enumerate}

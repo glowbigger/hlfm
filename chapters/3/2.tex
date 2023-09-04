@@ -1,5 +1,7 @@
 \section{First order languages}
 
+Here we will define a mathematical structure which is not a formal system as it has no rules or deductions or axioms. It does have an alphabet, which is specified below. In fact, it may be thought of, structurally speaking, as only an alphabet, a set of symbols.
+
 A \textit{first order language} \(\cul\) will have as its alphabet of symbols:
 \begin{itemize}
   \item the countably infinite list of \textit{variables} \(x_1, x_2, \dots\)
@@ -18,6 +20,10 @@ A \textit{first order language} \(\cul\) will have as its alphabet of symbols:
       \item the existential quantifier \(\exists\) can be expressed in terms of the universal quantifier along with the \(\sim\) connective, so it is not included
     \end{itemize}
 \end{itemize}
+
+\note{} Two first order languages differ only in the symbols which are in the alphabet, particularly which constants, predicate letters and function letters are included. For example, one first order language might only include \(a_1\) and \(f^1_1\), and another might only include \(A^1_1\).
+
+The alphabet will be part of a formal system described in the next chapter which will make clear the logical rules in a first-order system. Since no rules of deduction or axioms have been specified, studying first order languages, which is the subject of this chapter, will be limited to studying not the valid rules of transformations of strings of symbols that correspond to valid deductions, but rather what the valid strings are and how they are to be interpreted.
 
 \setcounter{definition}{5}
 \begin{definition}
@@ -49,7 +55,7 @@ The symbols \(\exists, \land\) and \(\lor\) are treated as shorthand.
   \item \((\cua \lor \cub)\) is an abbreviation for \(((\sim\cua) \ra \cub)\)
 \end{itemize}
 
-\note{} Unlike in chapter 2, this manual will follow the book's style for omitting parentheses. That is, a \(\sim\) will be presumed to apply to the shortest possible subsequent \wf{}. Also notice that this is how the \(\forall\) quantifier is treated by definition with any omission of parentheses.
+\note{} Unlike in chapter 2, this manual will follow the book's style for omitting parentheses. That is, a \(\sim\) will be presumed to apply to the shortest possible subsequent \wf{}. Also notice that this is how the \(\forall\) quantifier is treated, by definition.
 
 \setcounter{definition}{7}
 \begin{definition}
@@ -60,7 +66,7 @@ The symbols \(\exists, \land\) and \(\lor\) are treated as shorthand.
   \note{} One point of confusion is that the meaning of a formula \((\forall x_i) \cua\) is reliant on its \textit{free} variables, not its bound ones, which might be contrary to one's intuitions about the words \textit{free} and \textit{bound}.
 \end{definition}
 
-From here on out, if \(\cua(x_i)\) is a \wf{} in which \(x_i\) occurs free, then \(\cua(t)\) will refer to \(\cua(x_i)\) with all \textit{free} occurrences of \(x_i\) replaced with \(t\). So if \(\cua(x_i)\) is \((\forall x_2) A^1_1(x_i) \ra (\forall x_i) A^1_1(x_i))\), then \(\cua(t)\) is \((\forall x_2) A^1_1(t) \ra (\forall x_i) A^1_1(x_i))\). We will want to only substitute \(t\) for \(x_i\) if it does not interact with quantifiers in \(\cua(x_i)\). In the previous example, \(x_2\) would be a different substitution that any other variable. For this reason, we need the next definition, which is as important as its confusing. A few equivalent definitions will be provided.
+From here on out, if \(\cua(x_i)\) is a \wf{} in which \(x_i\) occurs free, then \(\cua(t)\) will refer to \(\cua(x_i)\) with all \textit{free} occurrences of \(x_i\) replaced with \(t\). So if \(\cua(x_i)\) is \((\forall x_2) A^1_1(x_i) \ra (\forall x_i) A^1_1(x_i))\), then \(\cua(t)\) is \((\forall x_2) A^1_1(t) \ra (\forall x_i) A^1_1(x_i))\). We will want to only substitute \(t\) for \(x_i\) if it does not interact with quantifiers in \(\cua(x_i)\). In the previous example, \(x_2\) would be a different substitution that any other variable. For this reason, we need the next definition, which is as important as it is confusing. A few equivalent definitions will be provided.
 
 \setcounter{definition}{10}
 \begin{definition}

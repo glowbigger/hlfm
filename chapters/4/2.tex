@@ -1,0 +1,370 @@
+\section{Equivalence, substitution}
+
+Let \(\cua, \cub\) be \wfs{} of \(\cul\). The connective is defined such that \((\cua \lra \cub)\) is to stand for
+  \[\sim((\cua \ra \cub) \ra \sim(\cub \ra \cua)).\]
+
+\setcounter{definition}{14}
+\begin{proposition}
+  For any \wfs{} \(\cua, \cub\) of \(\cul\), \(\ded{K} (\cua \lra \cub)\) if and only if \(\ded{K} (\cua \ra \cub)\) and \(\ded{K} (\cub \ra \cua)\).
+
+  \begin{proof}
+    \Ra{} Suppose that \(\ded{K} (\cua \lra \cub)\), i.e. \(\ded{K} \star.\), where \(\star\) is
+        \[\sim((\cua \ra \cub) \ra \sim(\cub \ra \cua)).\]
+      Then \(\star \ra (\cua \ra \cub)\) and \(\star \ra (\cub \ra \cua)\) are both tautologies (their truth tables will verify this), and so, by MP, both \(\ded{K} (\cua \ra \cub)\) and \(\ded{K} (\cub \ra \cua)\).
+
+    \La{} Suppose that \(\ded{K} (\cua \ra \cub)\) and \(\ded{K} (\cub \ra \cua)\). The \wf{}
+        \[(\cua \ra \cub) \ra ((\cub \ra \cua) \ra \sim((\cua \ra \cub) \ra \sim(\cub \ra \cua)))\]
+      is a tautology (by its truth table), and by MP, \(\ded{K} \sim((\cua \ra \cub) \ra \sim(\cub \ra \cua))\).
+  \end{proof}
+\end{proposition}
+
+\begin{definition}
+  If \((\cua \lra \cub)\) is a theorem of \(K\), then we say that the \wfs{} \(\cua\) and \(\cub\) are \textit{provably equivalent}.
+\end{definition}
+
+\begin{corollary}
+  Let \(\cua, \cub, \cuc\) be \wfs{} of \(\cul\). If \(\ded{K} (\cua \lra \cub)\) and \(\ded{K} (\cub \lra \cuc)\), then \(\ded{K} (\cua \lra \cuc)\).
+
+  \begin{proof}
+    By Proposition 4.15, \(\ded{K} (\cua \lra \cub)\) if and only if \(\ded{K} (\cua \ra \cub)\) and \(\ded{K} (\cub \ra \cua)\). Similarly, \(\ded{K} (\cub \lra \cuc)\) if and only if \(\ded{K} (\cub \ra \cuc)\) and \(\ded{K} (\cuc \ra \cub)\). Since both \(\ded{K} (\cua \ra \cub)\) and \(\ded{K} (\cub \ra \cuc)\), by HP, \(\ded{K} (\cua \ra \cuc)\). Since both \(\ded{K} (\cuc \ra \cub)\) and \(\ded{K} (\cub \ra \cua)\), by HP, \(\ded{K} (\cuc \ra \cua)\). By Proposition 4.15, \(\ded{K} (\cua \lra \cuc)\).
+  \end{proof}
+\end{corollary}
+
+Recall that \(\cua(x_i)\) denotes a \wf{} in which \(x_i\) occurs free, and \(\cua(x_j)\) denotes \(\cua(x_i)\) with every \textit{free} occurrence of \(x_i\) substituted with \(x_j\).
+
+\begin{proposition}
+  If \(x_i\) occurs \textit{only free and never bound}\footnote{We add this additional restriction to handle the ``edge case'' in which \(x_i\) occurs redundantly bound within \(\cua(x_i)\).} in \(\cua(x_i)\) and \(x_j\) is a variable which does not occur, free or bound, in \(\cua(x_i)\), then
+    \[\ded{K}((\forall x_i) \cua(x_i) \lra (\forall x_j) \cua(x_j)).\]
+
+  \begin{proof}
+    First, \(x_j\) is free for \(x_i\) in \(\cua(x_i)\), therefore line 2 in the following deduction is valid.
+    \begin{align*}
+      \text{1}&&
+      (\forall x_i)\cua(x_i)&&
+      \text{assumption}\\
+      %
+      \text{2}&&
+      ((\forall x_i)\cua(x_i) \ra \cua(x_j))&&
+      \text{(K5)}\\
+      %
+      \text{3}&&
+      \cua(x_j)&&
+      \text{1, 2, MP}\\
+      %
+      \text{4}&&
+      (\forall x_j)\cua(x_j)&&
+      \text{Generalization}
+    \end{align*}
+    Hence, since the instance of Generalization in line 4 involved \(x_j\), a variable not free in \((\forall x_i)\cua(x_i)\), we may use the Deduction Theorem to obtain
+    \[\ded{K} ((\forall x_i)\cua(x_i) \ra (\forall x_j)\cua(x_j)).\]
+
+  Now, since \(x_i\) is free for \(x_j\) in \(\cua(x_j)\), we may use an identical deduction as the one above with \(x_j\) and \(x_i\) switched.
+    \begin{align*}
+      \text{1}&&
+      (\forall x_j)\cua(x_j)&&
+      \text{assumption}\\
+      %
+      \text{2}&&
+      ((\forall x_j)\cua(x_j) \ra \cua(x_i))&&
+      \text{(K5)}\\
+      %
+      \text{3}&&
+      \cua(x_i)&&
+      \text{1, 2, MP}\\
+      %
+      \text{4}&&
+      (\forall x_i)\cua(x_i)&&
+      \text{Generalization}
+    \end{align*}
+    By the Deduction Theorem, we obtain the converse of the implication above,
+      \[\ded{K} ((\forall x_j)\cua(x_j) \ra (\forall x_i)\cua(x_i)),\]
+    so by Proposition 4.15,
+      \[\ded{K} ((\forall x_j)\cua(x_j) \lra (\forall x_i)\cua(x_i)),\]
+    as desired.
+  \end{proof}
+\end{proposition}
+
+  The above proposition makes clear that the name of a bound variable in a \wf{} is of no importance to the meaning of the \wf{}. The meaning of the \wf{} is dependent on its free variables.
+
+  \begin{proposition}
+    Let \(\cua\) be a \wf{} of \(\cul\) whose \(n\) free variables are \(x_1, \dots, x_n\). The \wf{} \(\cua\) is a theorem of \(K\) if and only if \((\forall x_1) \dots (\forall x_n) \cua\) is a theorem of \(K\).
+
+    \begin{proof}
+      \Ra{} Suppose that \(\ded{K}\cua\). We proceed by induction on \(n\). As a hypothesis of induction, suppose that if \(\cub\) is a \wf{} of \(\cul\) with fewer than \(n\) free variables, then if \(\cub\) is a theorem of \(K\), then \((\forall y_1)\dots(\forall y_k)\cub\) is a theorem of \(K\), where \(y_1, \dots, y_k\) are the free variables of \(\cub\).
+
+      (base case) It may be that \(n = 0\), which is to say that \(\cua\) has no free variables. In this case, \(\cua\) itself has all of its free variables vacuously quantified.
+
+      Alternatively, it may be that \(n = 1\), in which case since \(\cua\) is a theorem of \(K\), by Generalization, \((\forall y_1)\cua\) must be a theorem of \(K\) as well, where \(y_1\) is the only free variable occurring in \(\cua\).
+
+      (inductive step) It may be that \(n > 1\). Since \(\cua\) is a theorem of \(K\), by Generalization, \((\forall y_n)\cua\) is a theorem of \(K\). Notice this \wf{} has \(y_1, \dots, y_{n-1}\) as its free variables, so by the induction hypothesis
+        \[(\forall y_1)\dots(\forall y_{n-1})(\forall y_n)\cua\]
+      must be a theorem of \(K\), as desired.
+
+    \La{} By Remark 4.1(b) or repeated applications of (K5), if \((\forall y_1)\dots(\forall y_1)\cua\) is a theorem of \(K\), then \(\cua\) must be a theorem of \(K\)\footnote{A more complete proof would involve induction in the proof of the other direction of the equivalence.}
+  \end{proof}
+\end{proposition}
+
+\begin{definition}
+  Let \(\cua\) be a \wf{} of \(\cul\) with \(y_1, \dots, y_n\) as the only variables occurring free in \(\cua\). The \wf{} \((\forall y_1)\dots(\forall y_n)\cua\) is the \textit{universal closure} of \(\cua\) and is denoted by \(\cua'\).
+\end{definition}
+
+It is true that \(\ded{K} \cua' \ra \cua\), but \(\cua\) and \(\cua'\) are in general not provably equivalent. A counterexample can be found in the example in this manual used to motivate the Deduction Theorem.
+
+\setcounter{definition}{21}
+\begin{proposition}
+  Let \(\cua\) and \(\cub\) be \wfs{} of \(\cul\), and let \(\cua_0\) be a \wf{} of \(\cul\) with occurrences of \(\cua\), and let \(\cub_0\) be the \wf{} \(\cua_0\) in which all occurrences of \(\cua\) are replaced with \(\cub\).
+
+  If \(\ded{K} (\cua \ra \cub)'\), then \(\ded{K} (\cua_0 \lra \cub_0)\).
+
+  \begin{proof}
+    Let \(n\) denote the number of connectives and quantifiers in \(\cua_0\). We proceed by induction on \(n\).
+
+    (hypothesis) Suppose that for any \wf{} containing instances of \(\cua\) and having fewer \(n\) connectives and quantifiers, the property above holds for it.
+
+    (base case) It may be that \(n = 0\), i.e., \(\cua_0\) has no connectives or quantifiers. Then \(\cua_0\) is just \(\cua\), and \(\cub_0\) is just \(\cub\). Therefore, \(\ded{K} (\cua \lra \cub)' \ra (\cua \lra \cub)\), by repeated applications of Remark 4.1(b), i.e. \(\ded{K} (\cua \lra \cub)' \ra (\cua_0 \lra \cub_0)\), as desired.
+
+    (induction step) It may be that \(n > 1\), which is to say that more than one connective or quantifier occurs in \(\cua_0\). There are three cases to consider, each one corresponding to one of the three possible forms that \(\cua_0\) can take.
+    \begin{enumerate}
+      \item The \wf{} \(\cua_0\) is \((\sim\cuc_0)\) and \(\cub_0\) is \((\sim\cud_0)\), where \(\cud_0\) is the \wf{} in which instances of \(\cub\) in \(\cuc_0\) are substituted for \(\cua\). The induction hypothesis may be applied to \(\cuc_0\), so
+          \[\ded{K} ((\cua \lra \cub)' \ra (\cuc_0 \lra \cud_0)).\]
+        Since \((\cuc_0 \lra \cud_0) \ra (\sim\cuc_0 \lra \sim\cud_0)\) is a tautology, it is a theorem of \(K\). By HS,
+          \[\ded{K} ((\cua \lra \cub)' \ra (\sim\cuc_0 \lra \sim\cud_0)) \text{, i.e., } \ded{K} ((\cua \lra \cub)' \ra (\cua_0 \lra \cub_0)),\]
+          as desired.
+
+      \item The \wf{} \(\cua_0\) is \((\sim\cuc_0 \ra \sim\cud_0)\) and \(\cub_0\) is \((\sim\cue_0 \ra \sim\cuf_0)\), where \(\cue_0\) and \(\cuf_0\) are the \wfs{} in which instances of \(\cub\) are substituted for \(\cua\) in \(\cuc_0\) and \(\cud_0\), respectively. The induction hypothesis may be applied to both \(\cuc_0\) and \(\cud_0\), so
+          \[\ded{K} ((\cua \lra \cub)' \ra (\cuc_0 \lra \cue_0)) \text{ and } \ded{K} ((\cua \lra \cub)' \ra (\cud_0 \lra \cuf_0)).\]
+        The statement form
+          \[(a \ra (c \lra e)) \ra ((a \ra (d \lra f)) \ra (a \ra ((c \ra d) \lra (e \ra f)))),\]
+          % (a->(c<->e))->((a->(d<->f))->(a->((c->d)<->(e->f))))
+          % is a tautology (use https://web.stanford.edu/class/cs103/tools/truth-table-tool/)
+        is a tautology. Therefore, (treat \(a\) as \((\cua \lra \cub)'\)) by two applications of MP,
+          \[\ded{K} ((\cua \lra \cub)' \ra ((\cuc_0 \ra \cud_0) \lra (\cue_0 \ra \cuf_0))),\]
+        which is to say that
+          \[\ded{K} ((\cua \lra \cub)' \ra (\cua_0 \lra \cub_0)),\]
+        as desired.
+
+      \item The \wf{} \(\cua_0\) is \((\forall x_i)\cuc_0\), and \(\cub_0\) is \((\forall x_i)\cud_0\), where \(\cud_0\) is the \wf{} obtained by replacing all instances of \(\cua\) in \(\cuc_0\) with \(\cub\). The induction hypothesis may be applied to \(\cuc_0\) to obtain \(\ded{K} ((\cua \lra \cub)' \ra (\cuc_0 \lra \cud_0)).\) We may continue this deduction in the following way.
+          \begin{align*}
+            &&
+            \vdots&&
+            \\
+            %
+            \text{k}&&
+            ((\cua \lra \cub)' \ra (\cuc_0 \lra \cud_0))&&
+            \text{Induction hypothesis}\\
+            %
+            \text{k+1}&&
+            (\forall x_i)((\cua \lra \cub)' \ra (\cuc_0 \lra \cud_0))&&
+            \text{Generalization}\\
+            %
+            \text{k+2}&&
+            (\forall x_i)((\cua \lra \cub)' \ra (\cuc_0 \lra \cud_0))&&
+            \\
+            &&
+            \ra ((\cua \lra \cub)' \ra (\forall x_i)(\cuc_0 \lra \cud_0))&&
+            \text{(K6)}\\
+            %
+            \text{k+3}&&
+            ((\cua \lra \cub)' \ra (\forall x_i)(\cuc_0 \lra \cud_0))&&
+            \text{k+1, k+2, MP}\\
+            %
+            \text{k+4}&&
+            ((\forall x_i)(\cuc_0 \lra \cud_0) \ra ((\forall x_i)\cuc_0 \lra (\forall x_i)\cud_0))&&
+            \text{Lemma}\\
+            %
+            \text{k+5}&&
+            ((\cua \lra \cub)' \ra ((\forall x_i)\cuc_0 \lra (\forall x_i)\cud_0))&&
+            \text{k+3, k+4, HS}
+          \end{align*}
+        Note that line k+2 is possible by since \(x_i\) does not occur free in \((\cua \lra \cub)'\), since it is a universal closure, and this is also the reason that proving \(\cua\) to be provably equivalent to \(\cub\) is not enough for the proposition. Line k+1 is justified by the following lemma.
+        \begin{lemma*}
+          Let \(\cua\) and \(\cub\) be \wfs{} of \(\cul\). Then
+            \[(\forall x_i)(\cua \lra \cub) \ra ((\forall x_i) \cua \lra (\forall x_i)\cub)\]
+            is a theorem of \(K\).
+
+          \begin{proof}
+            We claim that
+              \[\ded{K} (\forall x_i)(\cua \ra \cub) \ra ((\forall x_i)\cua \ra (\forall x_i)\cub),\]
+            and we will prove this in Exercise 4. Additionally, the deduction above contains no instances of generalization involving a variable other than \(x_i\).
+            \begin{align*}
+              \text{1}&&
+              (\forall x_i)(\cua \lra \cub)&&
+              \text{assumption}\\
+              %
+              \text{2}&&
+              (\forall x_i)(\cua \ra \cub)&&
+              \text{1, Proposition 4.15}\\
+              %
+              \text{3}&&
+              (\forall x_i)(\cub \ra \cua)&&
+              \text{1, Proposition 4.15}\\
+              %
+              \text{4}&&
+              (\forall x_i)(\cua \ra \cub) \ra ((\forall x_i)\cua \ra (\forall x_i)\cub)&&
+              \text{above theorem}\\
+              %
+              \text{5}&&
+              (\forall x_i)(\cub \ra \cua) \ra ((\forall x_i)\cub \ra (\forall x_i)\cua)&&
+              \text{above theorem}\\
+              %
+              \text{6}&&
+              ((\forall x_i)\cua \ra (\forall x_i)\cub)&&
+              \text{2, 4, MP}\\
+              %
+              \text{7}&&
+              ((\forall x_i)\cub \ra (\forall x_i)\cua)&&
+              \text{3, 5, MP}\\
+              %
+              \text{8}&&
+              ((\forall x_i)\cua \ra (\forall x_i)\cub) \ra&&
+              \\
+              &&
+              ((\forall x_i)\cub \ra (\forall x_i)\cua) \ra ((\forall x_i)\cua \lra (\forall x_i)\cub)&&
+              \text{tautology}\\
+              %
+              \text{9}&&
+              ((\forall x_i)\cub \ra (\forall x_i)\cua) \ra ((\forall x_i)\cua \lra (\forall x_i)\cub)&&
+              \text{6, 8, MP}\\
+              %
+              \text{10}&&
+              ((\forall x_i)\cua \lra (\forall x_i)\cub)&&
+              \text{7, 9, MP}
+            \end{align*}
+          By the Deduction Theorem,
+            \[(\forall x_i)(\cua \lra \cub) \lra ((\forall x_i)\cua \lra (\forall x_i)\cub),\]
+          as desired.
+          \end{proof}
+        \end{lemma*}
+    \end{enumerate}
+
+    To conclude the induction and the proof, we have shown that for any value of \(n\), \(\ded{K} (\cua \lra \cub)' \ra (\cua_0 \lra \cub_0)\), as desired.
+  \end{proof}
+\end{proposition}
+
+Now, for the \wfs{} \(\cua, \cub\) described above, if \((\cua \lra \cub)\) is logically valid, i.e., it is a theorem of \(K\), then its universal closure is also a theorem, so we may freely use the above Proposition. We will refer to this property in the below corollary.
+
+\begin{corollary}
+  Let \(\cua, \cub, \cua_0, \cub_0\) be as in Proposition 4.22 above. If \(\ded{K} (\cua \lra \cub)\), then \(\ded{K} (\cua_0 \lra \cub_0)\).
+
+  \begin{proof}
+    Suppose that \(\ded{K} (\cua \lra \cub)\). Then, by Proposition 4.19, \(\ded{K} (\cua \lra \cub)'\). By Proposition 4.22, \(\ded{K} ((\cua \lra \cub)' \ra (\cua_0 \lra \cub_0))\). By MP, \(\ded{K} (\cua_0 \lra \cub_0)\).
+  \end{proof}
+\end{corollary}
+
+\begin{corollary}
+  Let \(x_i\) occur free in the \wf{} \(\cua(x_i)\). Let \(\cua_0\) be a \wf{} containing instances of \((\forall x_i)\cua(x_i)\) as a subformula. Let \(\cub_0\) be the \wf{} obtained by replacing in \(\cua_0\) one or more instances of \((\forall x_i)\cua(x_i)\) with \((\forall x_j)\cua(x_j)\).
+
+  If \(x_j\) does not occur, free or bound, in \(\cua(x_i)\), then \(\ded{K} (\cua_0 \lra \cub_0)\).
+
+  \begin{proof}
+    Since \(x_j\) does not occur, free or bound, in \(\cua_(x_i)\), by Proposition 4.18,
+      \[\ded{K} ((\forall x_i)\cua(x_i) \lra (\forall x_i)\cub(x_i))\]
+    Therefore, by Corollary 4.23, \(\ded{K} (\cua_0 \lra \cub_0)\).
+  \end{proof}
+\end{corollary}
+
+\solutions{}
+\begin{enumerate}
+  \setcounter{enumi}{3}
+  \item % 4
+    Observe the following deduction.
+      \begin{align*}
+        \text{1}&&
+        (\forall x_i)(\cua \ra \cub)&&
+        \text{assumption}\\
+        %
+        \text{2}&&
+        (\forall x_i)\cua&&
+        \text{assumption}\\
+        %
+        \text{3}&&
+        \cua \ra \cub&&
+        \text{1, Remark 4.1(b)}\\
+        %
+        \text{4}&&
+        \cua&&
+        \text{2, Remark 4.1(b)}\\
+        %
+        \text{5}&&
+        \cub&&
+        \text{3, 4, MP}\\
+        %
+        \text{6}&&
+        (\forall x_i)\cub&&
+        \text{5, Generalization}
+      \end{align*}
+    Notice that the only instance of Generalization involves \(x_i\), which does not occur free in \((\forall x_i)(\cua \ra \cub)\) and \((\forall x_i)\cua\). By applying the Deduction Theorem twice, we conclude that
+      \[\ded{K} (\forall x_i)(\cua \ra \cub) \ra ((\forall x_i)\cua \ra (\forall x_i)\cub),\]
+    as desired.
+
+  \item % 5
+      The \wf{} \((\sim\sim(\forall x_i)\sim\cua) \lra (\forall x_i)(\sim\cua)\) is a tautology, hence it is a theorem of \(K\). Notice that by the definition of \(\exists\), the left-hand side of the \(\lra\) is \(\sim(\exists x_i)\cua\), so
+        \[\ded{K} (\sim(\exists x_i)\cua) \lra (\forall x_i)(\sim\cua),\]
+        i.e., \((\sim(\exists x_i)\cua)\) and \((\forall x_i)(\sim\cua)\) are provably equivalent.
+
+  \item % 6
+    \begin{enumerate}
+      \item Observe the following deduction.
+        \begin{align*}
+          \text{1}&&
+          (\forall x_1)(\forall x_2)A^2_1(x_1, x_2)&&
+          \text{assumption}\\
+          %
+          \text{2}&&
+          ((\forall x_1)(\forall x_2)A^2_1(x_1, x_2) \lra (\forall x_1)(\forall x_3)A^2_1(x_1, x_3))&&
+          \text{Proposition 4.18}\\
+          %
+          \text{3}&&
+          ((\forall x_1)(\forall x_2)A^2_1(x_1, x_2) \lra (\forall x_1)(\forall x_3)A^2_1(x_1, x_3)) \ra&&
+          \\
+          &&
+          ((\forall x_1)(\forall x_2)A^2_1(x_1, x_2) \ra (\forall x_1)(\forall x_3)A^2_1(x_1, x_3))&&
+          \text{tautology}\\
+          %
+          \text{4}&&
+          ((\forall x_1)(\forall x_2)A^2_1(x_1, x_2) \ra (\forall x_1)(\forall x_3)A^2_1(x_1, x_3))&&
+          \text{2, 3, MP}\\
+          %
+          \text{5}&&
+          (\forall x_1)(\forall x_3)A^2_1(x_1, x_3)&&
+          \text{1, 4, MP}
+        \end{align*}
+        We could continue this deduction in the same way to deduce
+          \[(\forall x_2)(\forall x_3)A^2_1(x_2, x_3),\]
+        as desired.
+
+      \item The following is a satisfactory deduction.
+        \begin{align*}
+          \text{1}&&
+          (\forall x_1)(\forall x_2)A^2_1(x_1, x_2)&&
+          \text{assumption}\\
+          %
+          \text{2}&&
+          ((\forall x_1)(\forall x_2)A^2_1(x_1, x_2) \ra (\forall x_2)A^2_1(x_1, x_2))&&
+          \text{Remark 4.1(b)}\\
+          %
+          \text{3}&&
+          ((\forall x_2)A^2_1(x_1, x_2) \ra A^2_1(x_1, x_1))&&
+          \text{(K5)}\\
+          %
+          \text{4}&&
+          ((\forall x_1)(\forall x_2)A^2_1(x_1, x_2) \ra A^2_1(x_1, x_1))&&
+          \text{2, 3, HS}\\
+          %
+          \text{5}&&
+          A^2_1(x_1, x_1)&&
+          \text{1, 4, MP}\\
+          %
+          \text{6}&&
+          (\forall x_1)A^2_1(x_1, x_1)&&
+          \text{5, Generalization}
+        \end{align*}
+        Note that in line 3, we used the fact that \(x_1\) is free for \(x_2\) in \(A^2_1(x_1, x_2)\).
+    \end{enumerate}
+  \item % 7
+    Since \(x_j\) does not occur, free or bound, in \(\sim\cua(x_i)\), by Proposition 4.18,
+      \[\ded{K} (\forall x_i)(\sim\cua(x_i)) \lra (\forall x_j)(\sim\cua(x_j)),\]
+    and since \((\cuc \lra \cud) \ra ((\sim\cud) \lra (\sim\cuc))\) is a tautology, then by MP and the previously obtained theorem,
+      \[\ded{K} (\sim(\forall x_i)(\sim\cua(x_i))) \lra (\sim(\forall x_j)(\sim\cua(x_j))) \text{, i.e., } \ded{K} (\exists x_i)\cua(x_i) \lra (\exists x_j)\cua(x_j),\]
+      as desired.
+\end{enumerate}

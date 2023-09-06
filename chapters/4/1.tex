@@ -119,7 +119,7 @@ This example shows the issue that can arise when generalizing a statement that i
 
 \setcounter{definition}{7}
 \begin{proposition}[The Deduction Theorem for \(K\)]
-  Let \(\cua\) and \(\cub\) be \wfs{} of \(K\) and let \(\Gamma\) be a set of \wfs{} of \(\cul\). If \(\Gamma \cup \{\cua\} \ded{K} \cub\), and this deduction contains no application of Generalization involving a variable free in \(\cua\), then \(\Gamma \ded{K} (\cub \ra \cua)\).
+  Let \(\cua\) and \(\cub\) be \wfs{} of \(K\) and let \(\Gamma\) be a set of \wfs{} of \(\cul\). If \(\Gamma \cup \{\cua\} \ded{K} \cub\), and this deduction contains no application of Generalization involving a variable free in \(\cua\), then \(\Gamma \ded{K} (\cua \ra \cub)\).
 
   \begin{proof}
     The proof is by induction on the number of \wfs{}, \(n\), in the deduction of \(\cub\). Let \(\cua'\) and \(\cub'\) be \wfs{} and let \(\Gamma'\) be a set of \wfs{}. Suppose, as an induction hypothesis, that whenever \(\Gamma' \cup \{\cua'\} \ded{K} \cub'\), and this deduction has fewer than \(n\) \wfs{} and has no occurrence of Generalization involving a variables free in \(\cua'\), it follows that \(\Gamma' \ded{K} (\cua' \ra \cub')\).
@@ -260,7 +260,31 @@ Just as in \(L\), the corollary of the Deduction Theorem holds in \(K\).
   \end{proof}
 \end{proposition}
 
-\section*{Solutions}
+It will often be the case that we would like to apply the deduction theorem to a deduction obtained from the Deduction Theorem. The following corollary will be useful.
+
+\begin{corollary*}
+  Let \(\cua\) and \(\cub\) be \wfs{} of \(K\) and let \(\Gamma\) be a set of \wfs{} of \(\cul\). Suppose that \(\Gamma \ded{K} (\cua \ra \cub)\) is obtained from the fact that \(\Gamma \cup \{\cua\} \ded{K} \cub\) and the Deduction Theorem. The deduction of \(\cua \ra \cub\) contains no application of Generalization involving a variable free in \(\cua\).
+
+  \begin{proof}
+    Since the Deduction Theorem was applied to \(\Gamma \cup \{\cua\}\), we must assume that the deduction obtained contains no instances of Generalization involving a variable free in \(\cua\). Now consider the deduction \(\Gamma \ded{K} \cua\). The proof of the Deduction Theorem contains a construction of it. All lines in all deductions do not invoke Generalization except for in Case 3 of the proof in the inductive step or possibly lines obtained from the induction hypothesis. If the line was obtained by the induction hypothesis, we may use similarly use induction to demonstrate that those lines only involved instances of Generalization occurring free in \(\cua\), although we will not write this out fully. Now it might be the case that a line of the deduction was obtained by Generalization. In particular, line 2 of case 3 of the inductive step was justified by Generalization involving a variable not assumed to be free in \(\cua\).
+
+    Therefore, the deduction of \(\Gamma \ded{K} (\cua \ra \cub)\) obtained from \(\Gamma \cup \{\cua\} \ded{K} \cub\) contains no instances of Generalization involving a variable free in \(\cua\).
+  \end{proof}
+\end{corollary*}
+
+The next corollary is used implicitly in the textbook. We will state it clearly here.
+
+\begin{corollary*}
+  Let \(\cua, \cub, \cuc\) be \wfs{} of \(K\) and let \(\Gamma\) be a set of \wfs{} of \(\cul\). Suppose that \(\Gamma \cup \{\cua\} \ded{K} (\cub \ra \cuc)\) is obtained from the fact \(\Gamma \cup \{\cua, \cub\} \ded{K} \cuc\) using the Deduction Theorem. If \(\cub\) contains no variables occurring free in \(\cua\), then \(\Gamma \ded{K} \cua \ra (\cub \ra \cuc)\).
+
+  \begin{proof}
+    The deduction of \(\cub \ra \cuc\) obtained from the Deduction Theorem contains no applications of Generalization involving a variable occurring free in \(\cub\), by the above lemma. Therefore, if \(\cub\) contains no variables occurring free in \(\cua\), then the deduction of \(\cub \ra \cuc\) contains no applications of Generalization involving a variable occurring free in \(\cua\). By the Deduction Theorem, we may conclude that \(\Gamma \ded{K} \cua \ra (\cub \ra \cuc)\).
+  \end{proof}
+\end{corollary*}
+
+Just as in the textbook, we will not explicitly reference these corollaries when they are used.
+
+\solutions{}
 
 \begin{enumerate}
   \item % 1
@@ -345,11 +369,11 @@ Just as in \(L\), the corollary of the Deduction Theorem holds in \(K\).
           \[(\sim\cub) \ded{\kl} ((\exists x_i)(\cua \ra \cub) \ra (\sim(\forall x_i) \cua)),\]
           and by the converse of the Deduction Theorem, Proposition 4.11,
           \[\{(\exists x_i)(\cua \ra \cub), (\sim\cub)\} \ded{\kl} (\sim(\forall x_i) \cua),\]
-          and by the Deduction theorem once again,
+          and by the Deduction theorem once again and the fact that \(x_i\) does not occur free in \(\cub\),
           \[\{(\exists x_i)(\cua \ra \cub)\} \ded{\kl} ((\sim\cub) \ra (\sim(\forall x_i) \cua)),\]
-          which is possible since the proof of the Deduction Theorem does not involve Generalization involving a variable free in \(\cub\) and \(x_i\) does not occur free in \(\cub\). By the lemma,
+          By the lemma,
           \[\{(\exists x_i)(\cua \ra \cub)\} \ded{\kl} ((\forall x_i) \cua \ra \cub),\]
-          Finally, by the deduction theorem once again and by the above reasoning,
+          Finally, by the deduction theorem once again,
           \[\ded{\kl} ((\exists x_i)(\cua \ra \cub) \ra ((\forall x_i) \cua \ra \cub)).\]
 
       \item Observe the following deduction.

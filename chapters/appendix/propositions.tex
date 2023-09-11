@@ -5,3 +5,92 @@ This chapter contains proofs of exercises left to the reader in the textbook or 
 \begin{proposition}
   The set of \wfs{} of \(L\) is countable.
 \end{proposition}
+
+\begin{proposition}
+  Let \(\cua\) be a \wf{} of some first-order language. 
+  \begin{enumerate}
+    \item The \wf{} \((\forall x_i)(\forall x_j)\cua \lra (\forall x_i)(\forall x_j)\cua\) is a theorem of \(K_{\cul}\).
+    \item The \wf{} \((\exists x_i)(\exists x_j)\cua \lra (\exists x_i)(\exists x_j)\cua\) is a theorem of \(K_{\cul}\).
+    \item The \wf{} \((\forall x_i)(\exists x_j)\cua \lra (\exists x_i)(\forall x_j)\cua\) is not a theorem of \(K_{\cul}\).
+  \end{enumerate}
+
+  \begin{proof}
+    For 1 and 2, we prove that the \wfs{} are theorems of \(K\) using the Deduction Theorem. For 3, in light of the Adequacy Theorem for \(K\) (Proposition 4.39), we prove that the \wf{} is not a theorem of \(K\) by finding an interpretation in which the \wf{} is not true.
+    \begin{enumerate}
+      \item Observe the following deduction.
+        \begin{align*}
+          \text{1}&&
+          (\forall x_i)(\forall x_j)\cua&&
+          \text{assumption}\\
+          %
+          \text{2}&&
+          (\forall x_j)\cua&&
+          \text{1, Remark 4.1(a)}\\
+          %
+          \text{3}&&
+          \cua&&
+          \text{2, Remark 4.1(a)}\\
+          %
+          \text{4}&&
+          (\forall x_i)\cua&&
+          \text{3, Generalization}\\
+          %
+          \text{5}&&
+          (\forall x_j)(\forall x_i)\cua&&
+          \text{4, Generalization}
+        \end{align*}
+        By the Deduction Theorem, and since \(x_i\) and \(x_j\) do not occur free in \((\forall x_i)(\forall x_j)\cua\), \((\forall x_i)(\forall x_j)\cua \ra (\forall x_j)(\forall x_i)\cua\) must be a theorem of \(K\). The other direction is proved in the same way with the positions of the variables flipped. Therefore, by Proposition 4.15, the \wf{} \((\forall x_i)(\forall x_j)\cua \lra (\forall x_i)(\forall x_j)\cua\) is a theorem of \(K\).
+
+      \item Note that for any \wf{} \(\cub\), we may deduce \(\cub\) from \(\sim\sim\cub\) or vice versa by MP and the fact that \(\sim\sim\cub \lra \cub\) is a tautology. Call this property \(\star\).
+        \begin{align*}
+          \text{1}&&
+          \sim\sim(\forall x_i)\sim\sim(\forall x_j)\sim\cua&&
+          \text{assumption}\\
+          %
+          \text{2}&&
+          (\forall x_i)\sim\sim(\forall x_j)\sim\cua&&
+          \text{\(\star\)}\\
+          %
+          \text{3}&&
+          \sim\sim(\forall x_j)\sim\cua&&
+          \text{Remark 4.1(a)}\\
+          %
+          \text{4}&&
+          (\forall x_j)\sim\cua&&
+          \text{\(\star\)}\\
+          %
+          \text{5}&&
+          \sim\cua&&
+          \text{Remark 4.1(a)}\\
+          %
+          \text{6}&&
+          (\forall x_i)\sim\cua&&
+          \text{5, Generalization}\\
+          %
+          \text{7}&&
+          \sim\sim(\forall x_i)\sim\cua&&
+          \text{\(\star\)}\\
+          %
+          \text{8}&&
+          (\forall x_j)\sim\sim(\forall x_i)\sim\cua&&
+          \text{7, Generalization}\\
+          %
+          \text{9}&&
+          \sim\sim(\forall x_j)\sim\sim(\forall x_i)\sim\cua&&
+          \text{\(\star\)}\\
+          %
+        \end{align*}
+        By the Deduction Theorem, and since \(x_i\) and \(x_j\) do not occur free in the \wf{} on line 1, 
+        \[(\sim\sim(\forall x_i)\sim\sim(\forall x_j)\sim\cua) \ra (\sim\sim(\forall x_j)\sim\sim(\forall x_i)\sim\cua)\]
+        must be a theorem of \(K\). By an obvious application of (K3) and MP,
+        \[(\sim(\forall x_j)\sim\sim(\forall x_i)\sim\cua) \ra (\sim(\forall x_i)\sim\sim(\forall x_j)\sim\cua)\]
+        must be a theorem of \(K\) as well. By the definition of \(\exists\),
+        \[(\exists x_j)(\exists x_i)\cua) \ra (\exists x_i)(\exists x_j)\cua)\]
+        must be a theorem of \(K\). The other direction is proved in the same way with the positions of the variables flipped. Therefore, by Proposition 4.15, the \wf{} 
+        \[(\exists x_i)(\exists x_j)\cua \lra (\exists x_i)(\exists x_j)\cua\]
+        is a theorem of \(K\).
+
+      \item % TODO easy
+    \end{enumerate}
+  \end{proof}
+\end{proposition}

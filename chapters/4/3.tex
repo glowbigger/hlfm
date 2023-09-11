@@ -1,15 +1,414 @@
 \section{Prenex Form}
 
+\begin{proposition}
+  Let \(\cua\) and \(\cub\) be \wfs{} of \(\cul\).
+  \begin{enumerate}
+    \item If \(x_i\) does not occur free in \(\cua\), then
+      \begin{enumerate}
+        \item \(\ded{K} ((\forall x_i)(\cua \ra \cub) \lra (\cua \ra (\forall x_i)\cub)).\)
+        \item \(\ded{K} ((\exists x_i)(\cua \ra \cub) \lra (\cua \ra (\exists x_i)\cub)).\)
+      \end{enumerate}
+
+    \item If \(x_i\) does not occur free in \(\cub\), then
+      \begin{enumerate}
+        \item \(\ded{K} ((\forall x_i)(\cua \ra \cub) \lra ((\exists x_i)\cua \ra \cub)).\)
+        \item \(\ded{K} ((\exists x_i)(\cua \ra \cub) \lra ((\forall x_i)\cua \ra \cub)).\)
+      \end{enumerate}
+  \end{enumerate}
+
+  \begin{proof}
+    A total of eight implications must be proved to be theorems of \(K\).
+    \begin{enumerate}
+      \item 
+        \begin{enumerate}
+          \item If \(x_i\) does not occur free in \(\cua\), then immediately by (K6) we get
+          \[\ded{K} ((\forall x_i)(\cua \ra \cub) \ra (\cua \ra (\forall x_i)\cub)).\]
+          For the other direction, observe the following deduction.
+          \begin{align*}
+            \text{1}&&
+            (\cua \ra (\forall x_i)\cub)&&
+            \text{assumption}\\
+            %
+            \text{2}&&
+            ((\forall x_i)\cub \ra \cub)&&
+            \text{Remark 4.1(b)}\\
+            %
+            \text{3}&&
+            (\cua \ra \cub)&&
+            \text{(1), (2), HS}\\
+            %
+            \text{4}&&
+            (\forall x_i)(\cua \ra \cub)&&
+            \text{3, Generalization}
+          \end{align*}
+          By the deduction theorem, we obtain
+            \[\ded{K} ((\cua \ra (\forall x_i)\cub) \ra (\forall x_i)(\cua \ra \cub)).\]
+            
+          \item Observe the following deduction.
+            \begin{align*}
+              \text{1}&&
+              (\forall x_i)\sim\cub&&
+              \text{assumption}\\
+              %
+              \text{2}&&
+              \cua&&
+              \text{assumption}\\
+              %
+              \text{3}&&
+              \sim\cub&&
+              \text{Remark 4.1(b)}\\
+              %
+              \text{4}&&
+              \cua \ra ((\sim\cub) \ra (\sim(\cua \ra \cub)))&&
+              \text{tautology}\\
+              %
+              \text{5}&&
+              (\sim\cub) \ra (\sim(\cua \ra \cub))&&
+              \text{2, 4, MP}\\
+              %
+              \text{6}&&
+              \sim(\cua \ra \cub)&&
+              \text{3, 5, MP}\\
+              %
+              \text{7}&&
+              (\forall x_i)\sim(\cua \ra \cub)&&
+              \text{6, Generalization}
+            \end{align*}
+            Since the only usage of Generalization involved \(x_i\), which does not occur free in \(\cua\), by the Deduction Theorem,
+            \[(\forall x_i)\sim\cub \ded{K} \cua \ra (\forall x_i)\sim(\cua \ra \cub).\]
+            Now by using a lemma similar to the one found in exercise 2(a),
+            \[(\forall x_i)\sim\cub \ded{K} (\sim(\forall x_i)\sim(\cua \ra \cub)) \ra (\sim\cua).\]
+            By the definition of \(\exists\),
+            \[(\forall x_i)\sim\cub \ded{K} (\exists x_i)(\cua \ra \cub) \ra (\sim\cua).\]
+            By the converse of the Deduction Theorem, Proposition 4.11,
+            \[\{(\exists x_i)(\cua \ra \cub), (\forall x_i)\sim\cub\} \ded{K} (\sim\cua).\]
+            By the Deduction Theorem,
+            \[(\exists x_i)(\cua \ra \cub) \ded{K} (\forall x_i)\sim\cub \ra (\sim\cua).\]
+            By using the same lemma,
+            \[(\exists x_i)(\cua \ra \cub) \ded{K} \sim\sim\cua \ra (\sim(\forall x_i)\sim\cub).\]
+            By the definition of \(\exists\),
+            \[(\exists x_i)(\cua \ra \cub) \ded{K} \sim\sim\cua \ra (\exists x_i)\cub.\]
+            Since \(\cua \ra \sim\sim\cua\) is a tautology, we may extend by the above deduction using HS to obtain
+            \[(\exists x_i)(\cua \ra \cub) \ded{K} \cua \ra (\exists x_i)\cub.\]
+            Finally, by the Deduction Theorem once more,
+            \[\ded{K} (\exists x_i)(\cua \ra \cub) \ra (\cua \ra (\exists x_i)\cub).\]
+
+            For the other direction, observe the following deduction.
+            \begin{align*}
+              \text{1}&&
+              \sim\sim(\forall x_i)\sim(\cua \ra \cub)&&
+              \text{assumption}\\
+              %
+              \text{2}&&
+              (\sim\sim(\forall x_i)\sim(\cua \ra \cub) \ra (\forall x_i)\sim(\cua \ra \cub))&&
+              \text{tautology}\\
+              %
+              \text{3}&&
+              (\forall x_i)\sim(\cua \ra \cub)&&
+              \text{1, 2, MP}\\
+              %
+              \text{4}&&
+              \sim(\cua \ra \cub)&&
+              \text{Remark 4.1(b)}\\
+              %
+              \text{5}&&
+              (\sim(\cua \ra \cub) \ra \cua)&&
+              \text{tautology}\\
+              %
+              \text{6}&&
+              (\sim(\cua \ra \cub) \ra (\sim\cub))&&
+              \text{tautology}\\
+              %
+              \text{7}&&
+              \cua&&
+              \text{4, 5, MP}\\
+              %
+              \text{8}&&
+              \sim\cub&&
+              \text{4, 6, MP}\\
+              %
+              \text{9}&&
+              (\forall x_i)(\sim\cub)&&
+              \text{8, Generalization}\\
+              %
+              \text{10}&&
+              \cua \ra ((\forall x_i)(\sim\cub) \ra (\sim(\cua \ra (\sim(\forall x_i)(\sim\cub)))))&&
+              \text{tautology}\\
+              %
+              \text{11}&&
+              (\forall x_i)(\sim\cub) \ra (\sim(\cua \ra (\sim(\forall x_i)(\sim\cub))))&&
+              \text{7, 10, MP}\\
+              %
+              \text{12}&&
+              (\sim(\cua \ra (\sim(\forall x_i)(\sim\cub))))&&
+              \text{9, 11, MP}
+            \end{align*}
+            Hence, we have shown that,
+            \[\sim\sim(\forall x_i)\sim(\cua \ra \cub) \ded{K} (\sim(\cua \ra (\sim(\forall x_i)(\sim\cub)))),\]
+            so by the Deduction Theorem,
+            \[\ded{K} \sim\sim(\forall x_i)\sim(\cua \ra \cub) \ra (\sim(\cua \ra (\sim(\forall x_i)(\sim\cub)))),\]
+            and this deduction can be extended by (K3) and MP. Therefore,
+            \[\ded{K} (\cua \ra (\sim(\forall x_i)\sim\cub)) \ra (\sim(\forall x_i)\sim(\cua \ra \cub)),\]
+            which, by the definition of \(\exists\), is
+            \[\ded{K} (\cua \ra (\exists x_i)\cub) \ra (\exists x_i)(\cua \ra \cub).\]
+            Note that since we did not use the fact that \(x_i\) does not occur free in \(\cua\), this direction is a general theorem of \(K\).
+        \end{enumerate}
+
+      \item 
+        \begin{enumerate}
+          \item Observe the following deduction.
+            \begin{align*}
+              \text{1}&&
+              (\forall x_i)(\cua \ra \cub)&&
+              \text{assumption}\\
+              %
+              \text{2}&&
+              \sim\cub&&
+              \text{assumption}\\
+              %
+              \text{3}&&
+              (\cua \ra \cub)&&
+              \text{1, Remark 4.1(b)}\\
+              %
+              \text{4}&&
+              (\sim\cub) \ra ((\cua \ra \cub) \ra (\sim\cua))&&
+              \text{tautology}\\
+              %
+              \text{5}&&
+              ((\cua \ra \cub) \ra (\sim\cua))&&
+              \text{2, 4, MP}\\
+              %
+              \text{6}&&
+              \sim\cua&&
+              \text{3, 5, MP}\\
+              %
+              \text{7}&&
+              (\forall x_i)\sim\cua&&
+              \text{6, Generalization}\\
+              %
+              \text{8}&&
+              ((\forall x_i)\sim\cua) \ra (\sim\sim(\forall x_i)\sim\cua)&&
+              \text{tautology}\\
+              %
+              \text{9}&&
+              (\sim\sim(\forall x_i)\sim\cua)&&
+              \text{7, 8 MP}
+            \end{align*}
+            And thus, by the definition of \(\exists\) and by applying the Deduction Theorem (\(x_i\) does not occur free in \((\sim\cub)\)),
+            \[(\forall x_i)(\cua \ra \cub) \ded{K} (\sim\cub) \ra \sim(\exists x_i)\cua,\]
+            and we can easily extend this deduction using the fact that (K3) to obtain
+            \[(\forall x_i)(\cua \ra \cub) \ded{K} ((\exists x_i)\cua \ra \cub),\]
+            and finally by applying the deduction theorem again,
+            \[\ded{K} (\forall x_i)(\cua \ra \cub) \ra ((\exists x_i)\cua \ra \cub).\]
+
+            The other direction is
+            \[\ded{K} ((\exists x_i)\cua \ra \cub) \ra (\forall x_i)(\cua \ra \cub),\]
+            and this was proved in Exercise 2(b).
+
+          \item 
+            The proof of
+            \[\ded{K} (\exists x_i)(\cua \ra \cub) \ra ((\forall x_i)\cua \ra \cub),\]
+            was done in Exercise 2(a). For the other direction, observe the following deduction.
+            \begin{align*}
+              \text{1}&&
+              \sim\sim(\forall x_i)\sim(\cua \ra \cub)&&
+              \text{assumption}\\
+              %
+              \text{2}&&
+              (\sim\sim(\forall x_i)\sim(\cua \ra \cub) \ra (\forall x_i)\sim(\cua \ra \cub))&&
+              \text{tautology}\\
+              %
+              \text{3}&&
+              (\forall x_i)\sim(\cua \ra \cub)&&
+              \text{1, 2, MP}\\
+              %
+              \text{4}&&
+              \sim(\cua \ra \cub)&&
+              \text{Remark 4.1(b)}\\
+              %
+              \text{5}&&
+              (\sim(\cua \ra \cub) \ra \cua)&&
+              \text{tautology}\\
+              %
+              \text{6}&&
+              (\sim(\cua \ra \cub) \ra (\sim\cub))&&
+              \text{tautology}\\
+              %
+              \text{7}&&
+              \cua&&
+              \text{4, 5, MP}\\
+              %
+              \text{8}&&
+              \sim\cub&&
+              \text{4, 6, MP}\\
+              %
+              \text{9}&&
+              (\forall x_i)\cua&&
+              \text{7, Generalization}\\
+              %
+              \text{10}&&
+              (\forall x_i)\cua \ra ((\sim\cub) \ra (\sim((\forall x_i)\cua \ra \cub)))&&
+              \text{tautology}\\
+              %
+              \text{11}&&
+              ((\sim\cub) \ra (\sim((\forall x_i)\cua \ra \cub)))&&
+              \text{9, 10, MP}\\
+              %
+              \text{12}&&
+              (\sim((\forall x_i)\cua \ra \cub))&&
+              \text{8, 11, MP}
+            \end{align*}
+            Hence, we have shown that,
+            \[\sim\sim(\forall x_i)\sim(\cua \ra \cub) \ded{K} (\sim((\forall x_i)\cua \ra \cub)),\]
+            so by the Deduction Theorem,
+            \[\ded{K} \sim\sim(\forall x_i)\sim(\cua \ra \cub) \ra (\sim((\forall x_i)\cua \ra \cub)),\]
+            and this deduction can be extended by (K3) and MP. Therefore,
+            \[\ded{K} ((\forall x_i)\cua \ra \cub) \ra \sim(\forall x_i)\sim(\cua \ra \cub),\]
+            which, by the definition of \(\exists\), is
+            \[\ded{K} ((\forall x_i)\cua \ra \cub) \ra (\exists x_i)(\cua \ra \cub).\]
+            Note that proof of this direction never used the fact that \(x_i\) does not occur free in \(\cub\), so the \wf{} is a general theorem of \(K\).
+        \end{enumerate}
+    \end{enumerate}
+    In all cases, we may apply Proposition 4.15 to show that the \wfs{} are provably equivalent.
+  \end{proof}
+\end{proposition}
+
+\setcounter{definition}{26}
+\begin{definition}
+  A \wf{} of \(\cul\) is said to be in \textit{prenex form} if all of its quantifiers appears at the beginning. In other words, it is of the form 
+  \[(Q_1 x_{i_1})(Q_1 x_{i_1}) \dots (Q_n x_{i_n})\cub,\]
+  where each \(Q_i\) is a quantifier, and \(\cub\) is a \wf{} with no quantifiers.
+\end{definition}
+
+The following proposition is not difficult, but requires writing many tedious \wfs{} in proper forms so that previous propositions may be applied. It is easier to understand after a few examples of transforming \wfs{} to prenex form have been done, and some examples are given in the solutions to the exercises below.
+
+\begin{proposition}
+  For any \wf{} of \(\cul\), there is a provably equivalent \wf{} in prenex form.
+
+  \begin{proof}
+    Let \(\cua\) be a \wf{} of \(\cul\). It must be of the form
+    \[\cua_1 \ra \cua_2 \ra \dots \ra \cua_n\]
+    parenthesized in some way. Suppose that a variable occurs bound in some \(\cua_i\) while occurring free or bound in some \(\cua_j\). By Proposition 4.18 and Proposition 4.22, we may obtain a provably equivalent \wf{} such that this condition does not occur. By repeated applications of the above to all bound variables satisfying the same condition, we may obtain a \wf{} \(\cua^*\) in which all bound variables are unique to the \(\cua_i\) in which they occur\footnote{This part of the proof is a bit informal, and a more rigorous proof would be done by constructing an algorithm and demonstrating its correctness. Regardless an example of this process will be shown in the solutions to the exercises.}.
+
+    Now we prove the proposition by induction on \(n\), the numbers of connectives or quantifiers in \(\cua^*\) (or \(\cua\)).
+
+    (hypothesis) Suppose that for any \wf{} which fewer than \(n\) connectives or quantifiers, there is a \wf{} in prenex form which is provably equivalent.
+
+    (base case) It may be that \(n = 0\), i.e., \(\cua\) is an atomic formula. Then it is provably equivalent to itself, a \wf{} which is vacuously in prenex form.
+
+    (inductive step) It may be that \(n > 1\), in which \(\cua^*\) must take one of the following forms.
+
+    \begin{enumerate}
+      \item The \wf{} \(\cua^*\) is of the form \(\sim\cub\). In this case, \(\cub\) contains fewer than \(n\) quantifiers and connectives, so \(\cub\) must be equivalent to \(\cub^\text{pre}\), a \wf{} in prenex form. We may write \(\cub^\text{pre}\) as
+        \[(Q_1 x_{i_1})\dots(Q_n x_{i_n})\cuc\]
+        where \(\cud\) contains no quantifiers and each \(Q\) is a quantifier. By applying the definition of \(\exists\) the tautology \(\sim\sim\cua \lra \cua\) for any \wf{} \(\cua\) and Proposition 4.22, \(\sim\cub^\text{pre}\) can be seen to be
+        \[(Q^*_1 x_{i_1})\dots(Q^*_n x_{i_n})\sim\cuc\]
+        where each \(Q^*_k\) is the quantifier that \(Q_k\) was not. Therefore, \(\sim\cub^\text{pre}\) is also in prenex form. Since \(\cua\) is provably equivalent to \(\cua^*\), and \(\cua^*\) is provably equivalent to \(\sim\cub^\text{pre}\), by Corollary 4.17, we may conclude that \(\cua\) is provably equivalent to \(\sim\cub^\text{pre}\), a \wf{} in prenex form.
+
+      \item The \wf{} \(\cua^*\) is of the form \(\cub \ra \cuc\). Since \(\cub\) and \(\cuc\) both contain fewer than \(n\) connectives and quantifiers, there exists \wfs{} \(\cub^\text{pre}\) and \(\cuc^\text{pre}\) such that
+        \[\ded{K} \cub \lra \cub^\text{pre} \text{ and } \ded{K} \cuc \lra \cuc^\text{pre}.\]
+        By Corollary 4.23,
+        \[\ded{K} (\cub \ra \cuc) \lra (\cub^\text{pre} \ra \cuc) \text{ and } \ded{K} (\cub^\text{pre} \ra \cuc) \lra (\cub^\text{pre} \ra \cuc^\text{pre}).\]
+        By Corollary 4.17,
+        \[\ded{K} (\cub \ra \cuc) \lra (\cub^\text{pre} \ra \cuc^\text{pre}) \text{ i.e., } \cua^* \lra (\cub^\text{pre} \ra \cuc^\text{pre}).\]
+        By Definition 4.27, \(\cub_\text{pre} \ra \cuc_\text{pre}\) is of the form,
+        \[(Q^*_1 x_{i_1})\dots(Q^*_n x_{i_n})\cud \ra (R^*_1 x_{j_1})\dots(R^*_m x_{j_m})\cue,\]
+        where the symbols are to be interpreted in accordance with Definition 4.27. We may use Proposition 4.25 repeatedly to move all the quantifiers to the beginning, changed if necessary, since the variables occurring in the quantifiers are all different and different from any of the free variables occurring in \(\cud\) and \(\cue\). The resulting \wf{} is of the form
+        \[(Q^*_1 x_{i_1})\dots(Q^*_n x_{i_n})(R^*_1 x_{j_1})\dots(R^*_m x_{j_m})(\cud \ra \cue),\]
+        is in prenex form, and is provably equivalent to \(\cua\) by repeated applications of Corollary 4.17.
+
+      \item The \wf{} \(\cua^*\) is of the form \((\forall x_i)\cub\). Since \(\cub\) has fewer connectives and quantifiers, it is provably equivalent to a \wf{} in prenex form, i.e.,
+        \[\ded{K} (\cub \lra (Q_1 x_{i_1})\dots(Q_n x_{i_n})\cuc),\]
+        where the symbols are above are defined according to Definition 4.27. By Generalization,
+        \[\ded{K} (\forall x_i)(\cub \lra (Q_1 x_{i_1})\dots(Q_n x_{i_n})\cuc),\]
+        and by the lemma which appears in Proposition 4.22,
+        \[\ded{K} ((\forall x_i)\cub \lra (\forall x_i)(Q_1 x_{i_1})\dots(Q_n x_{i_n})\cuc),\]
+        and since the left-hand side is \(\cua\) and the right-hand side is a \wf{} in prenex form, we have shown that \(\cua\) is equivalent to a \wf{} in prenex form.
+    \end{enumerate}
+
+    Therefore, for any \(n\), \(\cua\) is equivalent to a \wf{} in prenex form.
+  \end{proof}
+\end{proposition}
+
+\setcounter{definition}{29}
+\begin{definition}
+  Let \(n\) be a nonnegative integer.
+  \begin{enumerate}[(i)]
+    \item A \wf{} in prenex form is a \textit{\(\Pi_n\)-form} if it starts with a universal quantifier and has \(n - 1\) alternations of quantifiers.
+
+    \item A \wf{} in prenex form is a \textit{\(\Sigma_n\)-form} if it starts with an existential quantifier and has \(n - 1\) alternations of quantifiers.
+  \end{enumerate}
+\end{definition}
+
+In general, quantifiers are not commutative in the sense that their order of appearance is of no matter to the meaning of a \wf{}, although quantifiers of the same type are commutative (see Appendix A).
+
+Using Proposition 4.25, we see that we may pull out quantifiers according to the equivalences of Proposition 4.25, but this does not mean that the quantifiers at the beginning of the prenex form can appear in any order. As an example of this, see the additional exercises in Appendix B.
+
 \solutions{}
 \begin{enumerate}
   \setcounter{enumi}{7}
   \item % 8
     \begin{enumerate}
-      \item 
-      \item 
-      \item 
-      \item 
+      \item The original \wf{} is
+        \[(\forall x_1)A^1_1(x_1) \ra (\forall x_2)A^2_1(x_1, x_2).\]
+        First, we change the bound variables so that they do not occur bound in one subformula and free or bound in another. By Proposition 4.22 and 4.18, We obtain the provably equivalent \wf{}
+        \[(\forall x_3)A^1_1(x_3) \ra (\forall x_2)A^2_1(x_1, x_2).\]
+        We apply Proposition 4.25 1(a) to get the provably equivalent \wf{}
+        \[(\forall x_2)((\forall x_3)A^1_1(x_3) \ra A^2_1(x_1, x_2)).\]
+        We apply Proposition 4.25 2(b) to get the provably equivalent \wf{}
+        \[(\forall x_2)(\exists x_3)(A^1_1(x_3) \ra A^2_1(x_1, x_2)),\]
+        which is prenex form.
+
+      \item The original \wf{} is
+        \[(\forall x_1)(A^2_1(x_1, x_2) \ra (\forall x_2)A^2_1(x_1, x_2)).\]
+        First, we change the bound variables so that they do not occur bound in one subformula and free or bound in another. By Proposition 4.22 and 4.18, We obtain the provably equivalent \wf{}
+        \[(\forall x_1)(A^2_1(x_1, x_2) \ra (\forall x_3)A^2_1(x_1, x_3)).\]
+        We apply Proposition 4.25 1(a) to get the provably equivalent \wf{}
+        \[(\forall x_1)(\forall x_3)(A^2_1(x_1, x_2) \ra A^2_1(x_1, x_3)),\]
+        which is in prenex form.
+
+      \item The original \wf{} is
+        \[(\forall x_1)(A^1_1(x_1) \ra A^2_1(x_1, x_2)) \ra ((\exists x_2)A^1_1(x_2) \ra (\exists x_3)A^2_1(x_2, x_3)).\]
+        First, we change the bound variables so that they do not occur bound in one subformula and free or bound in another. By Proposition 4.22 and 4.18, We obtain the provably equivalent \wf{}
+        \[(\forall x_1)(A^1_1(x_1) \ra A^2_1(x_1, x_2)) \ra ((\exists x_3)A^1_1(x_3) \ra (\exists x_4)A^2_1(x_2, x_4)).\]
+        We apply Proposition 4.25 1(b) to get the provably equivalent \wf{}
+        \[(\forall x_1)(A^1_1(x_1) \ra A^2_1(x_1, x_2)) \ra (\exists x_4)((\exists x_3)A^1_1(x_3) \ra A^2_1(x_2, x_4)).\]
+        We apply Proposition 4.25 2(a) to get the provably equivalent \wf{}
+        \[(\forall x_1)(A^1_1(x_1) \ra A^2_1(x_1, x_2)) \ra (\exists x_4)(\forall x_3)(A^1_1(x_3) \ra A^2_1(x_2, x_4)).\]
+        We apply Proposition 4.25 1(b) to get the provably equivalent \wf{}
+        \[(\exists x_4)((\forall x_1)(A^1_1(x_1) \ra A^2_1(x_1, x_2)) \ra (\forall x_3)(A^1_1(x_3) \ra A^2_1(x_2, x_4))).\]
+        We apply Proposition 4.25 1(a) to get the provably equivalent \wf{}
+        \[(\exists x_4)(\forall x_3)((\forall x_1)(A^1_1(x_1) \ra A^2_1(x_1, x_2)) \ra (A^1_1(x_3) \ra A^2_1(x_2, x_4))).\]
+        We apply Proposition 4.25 2(b) to get the provably equivalent \wf{}
+        \[(\exists x_4)(\forall x_3)(\exists x_1)((A^1_1(x_1) \ra A^2_1(x_1, x_2)) \ra (A^1_1(x_3) \ra A^2_1(x_2, x_4))),\]
+        which is prenex form.
+
+      \item The original \wf{} is
+        \[(\exists x_1)A^2_1(x_1, x_2) \ra (A^1_1(x_1) \ra \sim(\exists x_3)A^2_1(x_1, x_3))\]
+        First, we change the bound variables so that they do not occur bound in one subformula and free or bound in another. By Proposition 4.22 and 4.18, We obtain the provably equivalent \wf{}
+        \[(\exists x_4)A^2_1(x_4, x_2) \ra (A^1_1(x_1) \ra \sim(\exists x_3)A^2_1(x_1, x_3)).\]
+        By the definition of \(\exists\), Proposition 4.22, and the tautology \(\cua \lra \sim\sim\cua\), we obtain the provably equivalent \wf{}
+        \[(\exists x_4)A^2_1(x_4, x_2) \ra (A^1_1(x_1) \ra (\forall x_3)\sim A^2_1(x_1, x_3)).\]
+        We apply Proposition 4.25 1(a) to get the provably equivalent \wf{}
+        \[(\exists x_4)A^2_1(x_4, x_2) \ra (\forall x_3)(A^1_1(x_1) \ra \sim A^2_1(x_1, x_3)).\]
+        We apply Proposition 4.25 1(a) to get the provably equivalent \wf{}
+        \[(\forall x_3)((\exists x_4)A^2_1(x_4, x_2) \ra (A^1_1(x_1) \ra \sim A^2_1(x_1, x_3))).\]
+        We apply Proposition 4.25 2(a) to get the provably equivalent \wf{}
+        \[(\forall x_3)(\forall x_4)(A^2_1(x_4, x_2) \ra (A^1_1(x_1) \ra \sim A^2_1(x_1, x_3))),\]
+        which is in prenex form.
     \end{enumerate}
+
   \item % 9
+    The original \wf{} is
+    \[((\exists x_1)\cua(x_1) \ra (\exists x_2)\cub(x_2)).\]
+    By applying Proposition 1(b) before applying Proposition 2(a), we obtain the provably equivalent \wf{}
+    \[(\exists x_2)(\forall x_1)(\cua(x_1) \ra \cub(x_2)),\]
+    which is in \(\Sigma_2\) form. By applying Proposition 2(a) before applying Proposition 1(b), we obtain the provably equivalent \wf{}
+    \[(\forall x_1)(\exists x_2)(\cua(x_1) \ra \cub(x_2)),\]
+    which is in \(\Pi_2\) form.
+
   \item % 10
+    One solution can be obtained by finding a logically valid formula in \(\Sigma_2\) form such that applying Generalization to it will lead to a provably equivalent formula which is in \(\Pi_3\) form. So
+    \[(\exists x_2)(\forall x_1)(A^1_1(x_1, x_2) \ra A^1_1(x_1, x_2)) \text{ and }(\forall x_3)(\exists x_2)(\forall x_1)(A^1_1(x_1, x_2) \ra A^1_1(x_1, x_2))\]
+    are formulas in the desired forms which are provably equivalent.
 \end{enumerate}

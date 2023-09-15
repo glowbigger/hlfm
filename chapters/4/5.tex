@@ -1,5 +1,122 @@
 \section{Models}
 
+\begin{definition}
+  A \textit{model} can describe a set of \wfs{} of \(\cul\) or a first order system.
+  \begin{enumerate}[(i)]
+    \item Let \(\Gamma\) be a set of \wfs{} of \(\cul\). A \textit{model of \(S\)} is an interpretation of \(\cul\) in which each \wf{} of \(\Gamma\) is true.
+
+    \item Let \(S\) be a first order system. A \textit{model of \(S\)} is an interpretation in which theorem of \(S\) is true.
+  \end{enumerate}
+\end{definition}
+
+Note that by Proposition 4.38, every consistent first order system has a model. Also, any interpretation of \(\kl\) is a model of it for any \(\cul\). This is because, by the Adequacy Theorem, Proposition 4.39, all theorems of \(\kl\) are logically valid, so they are true in all interpretations.
+
+\begin{proposition}
+  Let \(S\) be a first order system, and let \(I\) be an interpretation. If every axiom of \(S\) is true in \(I\), then \(I\) is a model of \(S\).
+
+  \begin{proof}
+    We must show that any theorem of \(S\), \(\cua\), is true in \(I\). The proof is by induction on \(n\), the number of \wfs{} in the proof of \(\cua\).
+
+    (hypothesis) Suppose that any theorem with fewer than \(n\) \wfs{} in its proof is true in \(I\).
+
+    (base case) It may be that \(n=1\), which is to say that \(\cua\) is an axiom of \(S\), therefore it is true in \(I\).
+
+    (inductive step) It may be that \(n>1\). There are three cases to consider, each one corresponding to one of the three ways in which \(\cua\) could be derived in its proof.
+    \begin{enumerate}
+      \item It may be that \(\cua\) is an axiom, in which it is true in \(I\).
+
+      \item It may be that \(\cua\) is derived from \(\cub\) and \(\cub \ra \cua\) via MP. Since \(\cub\) and \(\cub \ra \cua\) are true in \(I\) by the induction hypothesis, \(\cua\) is true in \(I\) by Proposition 3.26.
+
+      \item It may be that \(\cua\) is derived from \(\cub\) by Generalization. Since \(\cub\) is true in \(I\) by the induction hypothesis, \((\forall x_i)\cub\), which is \(\cua\), is true in \(I\) by Proposition 3.27.
+    \end{enumerate}
+
+  Therefore, for any \(n\), \(\cua\) is true in \(I\).
+  \end{proof}
+\end{proposition}
+
+A result of this proposition is that if an interpretation is true for the set of axioms of a first order system, it is true for the first order system.
+
+\begin{proposition}
+  A first order system is consistent if and only if it has a model.
+
+  \begin{proof}
+    Let \(S\) be a first order system.
+
+    \Ra{} Suppose that \(S\) is consistent. By Proposition 4.38, \(S\) has a model.
+
+    \La{} Suppose that there exists a model of \(S\). For a contradiction, suppose that \(S\) is not consistent. Then there exists a theorem \(\cua\) in \(S\) such that \(\cua\) and \(\sim\cua\) are both theorems of \(S\). Then they must be true in \(I\), which is impossible by Remark 3.25(b). Therefore, \(S\) must be consistent.
+  \end{proof}
+\end{proposition}
+
+It is important to note that just because a \wf{} is true in a model of some system \(S\) does not mean that the \wf{} is a theorem of \(S\). This becomes obvious when considering that every interpretation is a model of \(S\), but some interpretations may contain true \wfs{} which are logically valid.
+
+In the book, the following basic but unproved proposition is used.
+\begin{proposition*}
+  Any model of an extension of a first order system is a model of the first order system itself.
+
+  \begin{proof}
+    Let \(S\) be a consistent first order system with an extension \(S^+\). Let \(\cua\) be a theorem of \(S\). Since \(S^+\) is an extension of \(S\), \(\cua\) must be a theorem of \(S^+\), so it must be true in any model of \(S^+\).
+  \end{proof}
+\end{proposition*}
+
+\setcounter{definition}{43}
+\begin{proposition}
+  Let \(S\) be a consistent first order system. If \(\cua\) is a closed \wf{} which is true in every model of \(S\), then \(\cua\) is a theorem of \(S\).
+
+  \begin{proof}
+    For a contradiction, suppose that \(\cua\) is not a theorem of \(S\). By Proposition 4.35, the extension with \(\sim\cua\) as an additional axiom is consistent. By Proposition 4.42, this extension necessarily has a model. This model must necessarily be a model of \(S\). Since \(\sim\cua\) is a theorem of the extension of \(S\), it must be true in the model, by Definition 4.40. By Corollary 3.34, since \(\sim\cua\) is true (and closed) in the model, \(\cua\) must not be true in the model. This contradicts the assumption that \(\cua\) is true in every model of \(S\), so we may conclude that \(\cua\) is a theorem of \(S\).
+  \end{proof}
+\end{proposition}
+
+This next theorem has many paradoxical implications. For now, it will be only stated and proved.
+
+\begin{proposition}[L\"owenheim-Skolem Theorem]
+  If a first order system has a model, then it has a model whose domain is countable.
+
+  \begin{proof}
+    Let \(S\) be a consistent first order system. As shown in the proof of Proposition 4.38, there exists a model of \(S\) whose domain is the set of closed terms of the language of \(S\)\footnote{The book states that the domain is the set of closed terms of the enlarged language. This does not seem to be necessary.}. The set of \wfs{} of \(S\) is countable, so for each term, associate the term \(x\) uniquely with the \wf{} \(A^1_1(x)\). This yields a subset of the \wfs{} of \(\cul\) (or possibly \(\cul\) with the addition of \(A^1_1\)), which is countable since the set of \wfs{} of \(\cul\) is countable (see the appendix).
+  \end{proof}
+\end{proposition}
+
+\begin{proposition}[The Compactness Theorem]
+  If each finite subset of the set of axioms of a first order system \(S\) has a model, then \(S\) has a model.
+
+  \begin{proof}
+    Suppose that each finite subset of the axioms of \(S\) has a model. For a contradiction, suppose that \(S\) does not have a model. By Proposition 4.42, \(S\) does is not consistent. So there exists some \wf{} \(\cua\) such that \(\cua\) and \(\sim\cua\) are both theorems of \(S\). These proofs contain \(\Gamma\), a finite subset of the axioms in their proofs. Therefore, \(\Gamma\) has a model \(M\). 
+
+    We will now prove that a theorem \(\cuc\) whose proof has only the axioms in \(\Gamma\) is true in \(M\) by induction on \(n\), the number of connectives and quantifiers in \(\cuc\)\footnote{This proof is nearly identical to that of Proposition 4.41.}.
+
+    (hypothesis) Any theorem using the axioms in \(\Gamma\) with fewer than \(n\) connectives is true in \(M\).
+
+    (base case) It may be that \(n=1\). That is, \(\cuc\) is an axiom of \(\Gamma\). Therefore, it is true in \(M\), by Definition 4.40.
+
+    (inductive step) It may be that \(n>1\). Then there are three cases to consider.
+    \begin{enumerate}
+      \item It may be that \(\cuc\) is an axiom of \(\Gamma\). Therefore, it is true in \(M\), by Definition 4.40.
+
+      \item It may be that \(\cuc\) is derived via MP and \(\cub\) and \(\cub \ra \cuc\). Then \(\cub\) and \(\cub \ra \cuc\) are both true in the interpretation \(M\). By Proposition 3.26, \(\cuc\) is true in \(M\).
+
+      \item It may be that \(\cuc\) is derived via Generalization from \(\cub\), which is true in \(M\) by the induction hypothesis. Therefore, since \(\cuc\) is of the form \((\forall x_i)\cub\), by Proposition 3.27, \(\cuc\) is true in \(M\).
+    \end{enumerate}
+
+    With this induction complete, since \(\cua\) and \(\sim\cua\) are theorems whose proofs use only the axioms in \(\Gamma\), we may conclude that \(\cua\) and \(\sim\cua\) are both true in \(M\). This contradicts the fact that both a \wf{} and its negation cannot be true in an interpretation (Remark 3.25(c)). With this contradiction, we may conclude that \(S\) has a model.
+  \end{proof}
+\end{proposition}
+
+IS THE CONVERSE OF THIS TRUE?
+
+\begin{corollary}
+  If any finite subset of an infinite set of \wfs{} of \(K\) has a model, then the infinite set itself has a model.
+
+  \begin{proof}
+  \end{proof}
+\end{corollary}
+
+% TODO
+The above corollary is equivalent to Proposition 4.46. EXPLAIN.
+
+EXPLAIN THE PARAGRAPH ON THE LAST PAGE OF THE CHAPTER.
+
 \solutions{}
 \begin{enumerate}
   \setcounter{enumi}{14}

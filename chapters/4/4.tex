@@ -1,10 +1,232 @@
 \section{The Adequacy Theorem for \texorpdfstring{\(K\)}{K}}
 
+As a reminder, the main goal of this chapter is to prove that \(K\) is adequate in the sense that any logically valid \wf{} of \(\cul\) is a theorem of \(K\).
+
+\setcounter{definition}{31}
+\begin{definition}
+  An \textit{extension of \(K\)} is a formal system obtained by altering or enlargin the set of axioms so that all theorems of \(K\) remain theorems.
+\end{definition}
+
+Additionally, given two extensions of \(K\), if one has more theorems than the other, that extension is considered to be larger. The book does not explicate whether \(K\) is an extension of \(K\) or not, although it seems to imply that \(K\) is an extension of \(K.\) In this manual, \(K\) will be an extension of \(K\).
+
+\begin{definition}
+   Let \(\cul\) be a first order language. A \textit{first order system} is an extension of \(\kl\).
+\end{definition}
+
+In other words, a first order system is another way of saying an extension of \(K\).
+
+\begin{definition}
+  A first order system \(S\) is \textit{consistent} if for no \wf{} are both \(\cua\) and \(\sim\cua\) both theorems of \(S\).
+\end{definition}
+
+\begin{proposition}
+  Let \(S\) be a consistent first order system. If \(\cua\) is a closed \wf{} which is not a theorem of \(S\), then the extension of \(S\) obtained by adding \(\sim\cua\) as an additional axiom is consistent.
+
+  \begin{proof}
+    Let \(S^*\) refer to the extension of \(S\) described above. Suppose, for a contradiction, that it is not consistent. That is, there exists \wf{} \(\cub\) and \(\sim\cub\) that are both theorems of \(S^*\). Hence, \((\sim\cub \ra (\cub \ra \cua))\) is a tautology, so it is a theorem of \(K\), and therefore, it is a theorem of \(S^*\). By two applications of MP, \(\cua\) must be a theorem of \(S^*\).
+
+    There is therefore a proof of \(\cua\) in \(S^*\). By definition, since \(S^*\) is an extension of \(S\) with only \(\sim\cua\) as additional axiom, any proof in \(S^*\) is a deduction from \(\sim\cua\) in \(S\). Hence, \((\sim\cua) \ded{S} \cua\), and since \(\cua\) is closed, no application of Generalization in the proof can involve a variable free in \(\cua\). Therefore, \(\ded{S} (\sim\cua \ra \cua)\), by the Deduction Theorem. Using the fact that \((\sim\cua \ra \cua) \ra \cua\) is a tautology and MP, \(\cua\) must be a theorem of \(S\). But this contradicts the consistency of \(S\).
+
+    We may conclude that \(S^*\) is consistent.
+  \end{proof}
+\end{proposition}
+
+  \begin{definition}
+    A first order system \(S\) is \textit{complete} if for each \textit{closed} \wf{} \(\cua\), either \(\cua\) or \(\sim\cua\) is a theorem of \(S\).
+  \end{definition}
+
+  Note that \(K\) is not complete, since any atomic formula with additional quantifiers applied so that it is a closed formula is not a theorem of \(K\).
+
+
+  \begin{proposition}
+    For any consistent first order system, there exists a complete, consistent extension.
+
+    \begin{proof}
+      Let \(\cua_0, \cua_1, \dots, \dots\) be an enumeration of the \textit{closed} \wfs{} of \(\cul\). Define a sequence of extensions of \(K\) first by \(S_0 = S\). If \(n > 0\), then there are two cases:
+      \begin{enumerate}
+        \item If \(S_{n - 1}\) contains \(\cua_n\) as a theorem, then \(S_n = S_{n - 1}\).
+        \item If \(S_{n - 1}\) does not contain \(\cua_n\) as a theorem, then \(S_n\) is \(S_{n - 1}\) with \(\sim\cua_n\) as an additional axiom. 
+      \end{enumerate}
+
+      By Proposition 4.35 and the fact that \(S\) is consistent, \(S_n\) for any \(n\) is a consistent extension. Now let \(S_\infty\) be the extension whose axioms are the \wfs{} which are in at least one of the members of the sequence constructed earlier. The extension may be proved to be consistent in the same way that \(S^*\) was seen to be consistent in the proof of Proposition 4.35.
+    \end{proof}
+  \end{proposition}
+
+  If anything is unclear about the above proof, see Proposition 2.21.
+
+  This next theorem is the longest in the book. The reward for completing this proposition will be a short proof of the Adequacy Theorem. The theorem, along with its converse, is also important in its own right, as it reveals many things about first order systems.
+
+  \begin{proposition}
+    Let \(S\) be a first order system, i.e., a consistent extension of \(\kl\). If \(S\) is consistent, then there exists an interpretation in which every theorem of \(S\) is true.
+
+    \begin{proof}
+      Considering the significant length of this proof, we will split it into sections.
+
+      \begin{enumerate}
+        \item Let \(S^+\) be the system \(S\) obtained by changing the first order language to \(\cul^+\), which is identical to \(\cul\) except with the addition of the infinite sequence of constants \(a_0^+, a_1^+, a_2^+, \dots\)\footnote{Note that \(S^+\) is not an extension of \(S\) as it was obtained not by extending the axioms of \(S\), but by extending the language of \(S\). It is tempting but invalid to apply previous results in this chapter.}. The system \(S^+\) is consistent.
+
+        Suppose for a contradiction that \(S^+\) is not consistent. Then there exists proofs of some \wfs{} \(\cua\) and \(\sim\cua\). These proofs involve a finite number of the constants \(a_0^+, a_1^+, a_2^+, \dots\). By replacing these constants each with a respective but arbitrary variable which does not appear in the proof, we obtain proofs of \(\cua\) and \(\sim\cua\) in \(S\), which contradicts the consistency of \(S\). Hence, \(S^+\) must be consistent.
+
+        \item In this step, we will construct a sequence of first order systems so that we may produce a consistent and complete system from it. First consider the following \wf{} in any first order language with a constant \(c\) and a \wf{} \(\cua\) with one free variable.
+        \[\cua(c) \ra (\forall x_i)\cua(x_i)\]
+        The meaning of this \wf{} is that \(\cua\) is true for the constant \(c\) only when \(\cua\) is true for any variable. We shall construct the sequence of first order systems in such a way that every member of the sequence (except for the first one) has a corresponding axiom with the same meaning. 
+
+        We begin by enumerating, in the extended first order language described above, the \wfs{} which contain one free variable\footnote{The variables which appear will necessarily not be distinct.}:
+        \[\cuf_0(x_{i_0}), \cuf_1(x_{i_1}), \cuf_2(x_{i_2}), \dots.\]
+        Now, we will want to associate a constant from \(a_0^+, a_1^+, a_2^+, \dots\), the ones used to extend \(\cul\), to each first order system. These constants will altogether form a subsequence \(c_0, c_1, c_2, \dots\) of \(a_0^+, a_1^+, a_2^+, \dots\). We will also restrict the constants so that they appear progressively in the introduced axioms of the first order systems. Therefore, we will restrict each \(c_n\) such that \(c_n\) is not \(c_0, c_1, c_2, \dots, c_{n-1}\) and does not appear in any \(\cuf_0(x_{i_0}), \cuf_1(x_{i_1}), \cuf_2(x_{i_2}), \dots, \cuf_2(x_{i_{n}})\)\footnote{The constant \(c_0\) will vacuously satisfy the first condition and will not appear in \(\cuf_0(x_{i_0}).\)}.
+
+        We are finally capable of described the sequence of first order systems to be constructed. The first member \(S_0\), is \(S^+\). Every other member \(S_{n+1}\) of the sequence is an extension of the previous one with the additional axiom,
+        \[\cug_{n} \text{, which is } (\sim(\forall x_{i_n})\cuf_n(x_{i_n})) \ra (\sim\cuf_n(c_n)).\]
+        Note that \(\cug_n\) has the same meaning as the \wf{} which we previously stated that we would insert a version of as an axiom into each first order system. We choose to insert the contrapositive form only so that later parts of the proof will be slightly shorter.
+
+        \item We will next want to prove the consistency of each system in the sequence, and this will be done by induction. Note that, for the first time, we do not use strong induction here.
+
+          (base case) The first member of the sequence, \(S^+\) is consistent. This was proved in step 1.
+
+          (inductive step) Suppose that \(S_n\) is consistent. For a contradiction, suppose that \(S_{n+1}\) is not consistent. Then there must be a \wf{} \(\cua\) such that both \(\cua\) and \(\sim\cua\) are theorems of \(S_{n+1}\). 
+
+          Let \(\cub\) be any \wf{}. Since \(\cua \ra (\sim\cua \ra (\sim\cub))\) is a tautology, it is a theorem of \(S_{n+1}\), so by two applications of MP, its proof can be extended to yield a proof of \(\sim\cub\). In particular, \(\sim\cug_n\) must be a theorem of \(S_{n+1}\). A proof in \(S_{n+1}\) is a deduction from \(\cug_n\) in \(S_n\). Therefore,
+          \[\cug_n \ded{S_n} (\sim\cug_n).\]
+          Since this proof involves no instance of Generalization, by the Deduction Theorem\footnote{The textbook mentions that \(\cug_n\) is closed here, which is either irrelevant or there is a mistake in this step of the proof.},
+          \[\ded{S_n} \cug_n \ra (\sim\cug_n).\]
+          This proof may be extended by MP to yield a proof of \(\sim\cug_n\), i.e.,
+          \[\ded{S_n} (\sim(\forall x_{i_n})\cuf_n(x_{i_n})) \ra (\sim\cuf_n(c_n)),\]
+          In turn, the proofs of the tautologies
+          \[\ded{S_n} ((\sim(\forall x_{i_n})\cuf_n(x_{i_n}) \ra (\sim\cuf_n(c_n))) \ra \cuf_n(c_n),\]
+          \[\ded{S_n} ((\sim(\forall x_{i_n})\cuf_n(x_{i_n})) \ra (\sim\cuf_n(c_n))) \ra (\sim(\forall x_{i_n})\cuf_n(x_{i_n})),\]
+          may be extended by MP to yield proofs of \(\cuf_n(c_n)\) and \((\sim(\forall x_{i_n})\cuf_n(x_{i_n}))\). In the proof of \(\cuf_n(c_n)\), each occurrence of \(c_n\) may be replaced by \(x\), a variable not occurring in the proof, to yield a proof of \((\forall x)\cuf_n(x)\), since \(c_n\) does not occur in any of the axioms of \(S_n\). and by Generalization, we obtain a proof of \((\forall x)\cuf_n(x)\), a \wf{} in which \(x_{i_n}\) does not occur whatsoever in. Finally, by Proposition 4.18, we obtain a proof of \((\forall x_{i_n})\cuf_n(x_{i_n})\). But since its negation \((\forall x_{i_n})\cuf_n(x_{i_n})\) is also a theorem, we have found a contradiction. Therefore, \(S_{n+1}\) must be consistent when \(S_n\) is consistent, completing the inductive step.
+
+          We may conclude that every system in the sequence is consistent. 
+
+        \item As we have been constructing in the proofs of Proposition 2.21 and 4.37, let \(S_\infty\) be the system whose set of axioms is the infinite union of all axioms of the members of the sequence of first order systems we constructed earlier. Suppose that the system \(S_\infty\) is not consistent. Then a contradiction could be derived using finitely many of its axioms. There exists an \(n\) large enough such that \(S_n\) has all of these axioms, and so the contradiction would exist in \(S_n\), contradicting its consistency. Therefore, \(S_\infty\) must be consistent. Therefore, by Proposition 4.37, there exists some system \(T\) which is a complete and consistent extension of \(S_\infty\).
+
+        \item Here, we construct a particular interpretation of \(\cul^+\), the first order language defined in 1., whose fundamental property will be proved in the next step. The interpretation, which we will call \(I\), is defined by the following.
+          \begin{enumerate}
+            \item The domain of interpretation is the terms (not \wfs{}) of \(\cul^+\) which have no variables, i.e., the terms in which only constants appear. These terms are also known as \textit{closed terms}\footnote{We refer to the terms without variables as closed because no quantifiers can occur in a term, so all appearances of variables can be thought of as being ``free'', so a closed term contains only constants.}.
+
+            \item The interpretation of any given predicate letter \(A^n_i\) is given by the relation \(\bar{A}^n_i\) defined by the following statements in which \(d_1, \dots, d_n\) stand for elements in the domain of interpretation.
+              \begin{enumerate}
+                \item \(\bar{A}^n_i(d_1, \dots, d_n)\) is true whenever \(\ded{T} A^n_i(d_1, \dots, d_n)\).
+                \item \(\bar{A}^n_i(d_1, \dots, d_n)\) is false whenever \(\ded{T} \sim A^n_i(d_1, \dots, d_n)\).
+              \end{enumerate}
+              For the interpretation \(I\) to be valid, each statement letter must have an associated relation. Since each statement letter is a closed \wf{}, then since \(T\) is consistent, the relation defined above is suitable. This relation is well-defined since \(T\) is complete, so indeed each statement letter has an associated relation, as desired.
+          \end{enumerate}
+
+          We must define the interpretations of the constants and the function letters. These interpretations must necessarily be members of the domain, so they must be terms with no variables.
+          \begin{enumerate}
+            \setcounter{enumii}{2}
+            \item The interpretation of any constant is the constant itself.
+
+            \item The function letter \(f^i_n\) is interpreted as the function \({\bar{f}}^i_n\), which is itself defined by \(\bar{f}^i_n(d_1, \dots, d_n) = f^i_n(d_1, \dots, d_n)\).
+
+              This may be confusing. Recall that, by Definition 3.14 of an interpretation, \(f^i_n\) must have a corresponding \(\bar{f}^i_n\) which is defined as a function over the domain of interpretation. Therefore, in the particular interpretation that we are constructing, the function \(\bar{f}^i_n\) must map some elements \(d_1, \dots, d_n\) in the domain of interpretation to a particular element in the domain of interpretation. Since \(d_1, \dots, d_n\) are closed terms, the term \(f^i_n(d_1, \dots, d_n)\), for any \(i\), is a closed term as well. We choose to use this term as the value that \(\bar{f}^i_n\) maps \(d_1, \dots, d_n\) to.
+          \end{enumerate}
+          We have now defined an interpretation, \(I\), of \(\cul^+\).
+
+        \item Now, we must prove the following property of \(I\): For any \textit{closed} \wf{} \(\cua\) of \(T\), \(\cua\) is a theorem of \(T\) is a theorem of \(T\) if and only if \(\cua\) is true in the interpretation \(I\)\footnote{We will only later use the one direction of this biconditional, but in this case the biconditional is easier to prove than either one of the directions individually.}. In symbols,
+          \[\ded{T} \cua \text{ if and only if } I \models \cua.\]
+
+          The proof is done by strong induction on \(n\), the number of connectives and quantifiers in \(\cua\).
+
+          (hypothesis) Suppose that whenever a \wf{} has fewer than \(n\) connectives and quantifiers, the \wf{} is a theorem of \(T\) if and only if it is true in \(I\).
+
+          (base case) It may be that \(n = 0\), in which case \(\cua\) has no connectives or quantifiers, i.e., \(\cua\) is an atomic formula. 
+
+          \Ra{} Suppose that \(\cua\) is a theorem of \(T\). It is an atomic formula, so since it is a theorem of \(T\), by the construction of interpretations of atomic formulas in \(I\) (see (b) of step 5), \(\cua\) is true in \(I\).
+
+          \La{} The proof of this direction is the proof of the forward direction reversed. Suppose that \(\cua\) is true in \(I\). Again, by construction of interpretations of atomic formulas in \(I\), Since \(\cua\) is an atomic formula, it must be that \(\cua\) is a theorem of \(T\).
+          
+          (inductive step) It may be that \(n > 0\). The \wf{} \(\cua\) may appear in one of three forms.
+
+          \begin{enumerate}
+            \item It may be that \(\cua\) is of the form \(\sim\cub\).
+
+              \Ra{} Suppose that \(\cua\) is a theorem of \(T\). Then \(\sim\cub\) is a theorem of \(T\), and since \(T\) is consistent, \(\cub\) must not be a theorem of \(T\). By the induction hypothesis, since \(\cub\) has fewer than \(n\) quantifiers and connectives, \(\cub\) is not true in \(I\). Since \(\cub\) is closed, by Corollary 3.34, \(\sim\cub\) must be true in \(I\), i.e. \(\cua\) is true in \(I\).
+
+              \La{} The proof of this direction is the proof of the forward direction reversed. Suppose that \(\cua\), which is \(\sim\cub\), is true in \(I\). Then since \(\cub\) is closed, \(\cub\) must not be true in \(I\). By the induction hypothesis, \(\cub\) is not a theorem of \(T\). Since \(T\) is consistent, \(\sim\cub\) must be a theorem of \(T\), i.e., \(\cua\) is a theorem of \(T\).
+
+            \item It may be that \(\cua\) is of the form \(\cub \ra \cuc\). Note that \(\cub\) and \(\cuc\) must necessarily both be closed, since \(\cua\) is closed.
+
+              \Ra{} Suppose that \(\cua\) is a theorem of \(T\). For a contradiction, suppose that \(\cua\), which is \(\cub \ra \cuc\), is not true in \(I\). Then there exists a valuation which satisfies \(\cub\) and \(\sim\cuc\). Since \(\cub\) and \(\sim\cuc\) are both closed \wfs{}, then, by Proposition 3.33, any other valuation must satisfy \(\cub\) and \(\sim\cuc\). Therefore, \(\cub\) is true in \(I\) and \(\cuc\) is not true in \(I\)\footnote{Here, \(\cuc\) was already known to be not truth in \(I\) by the fact that some valuation was shown to not satisfy it.}. By the induction hypothesis, \(\cub\) is a theorem of \(T\) and \(\cuc\) is not a theorem of \(T\). Since \(T\) is consistent, \(\sim\cub\) must be a theorem of \(T\). Note that \(\cub \ra (\sim\cuc \ra (\sim(\cub \ra \cuc)))\) is a tautology, so it must be a theorem of \(T\), and its proof can be easily extended by two instances of MP, yielding a proof of \(\sim(\cub \ra \cuc)\) in \(T\), i.e. \(\cua\) is not a theorem of \(T\). With this contradiction, we may conclude that if \(\cua\) is a theorem of \(T\), then \(\cua\) is true in \(I\).
+
+              \La{} Suppose that \(\cua\), which is \(\cub \ra \cuc\), is true in \(I\). For a contradiction, suppose that \(\cua\) is not a theorem of \(T\). Then, since \(T\) is complete, \(\sim(\cub \ra \cuc)\) is a theorem of \(T\). The \wfs{} \(\sim(\cub \ra \cuc) \ra \cub\) and \(\sim(\cub \ra \cuc) \ra \sim\cuc\) are both tautologies, and extending these proofs using MP yields proofs of \(\cub\) and \(\sim\cuc\) in \(T\). Since \(T\) is consistent, \(\cuc\) is not a theorem of \(T\). By the induction hypothesis, \(\cub\) is true in \(I\) and \(\cuc\) is not true in \(I\). Since \(\cuc\) is closed, \(\cuc\) must be false in \(I\) by Corollary 3.34 and Remark 3.25(c), and therefore, by Remark 3.25(d), \((\cub \ra \cuc)\) is false in \(I\), and therefore not true in \(I\). With this contradiction, we may conclude that if \(\cub \ra \cuc\) is true in \(I\), then \(\cua\) is a theorem of \(T\).
+
+            \item It may be that \(\cua\) is of the form \((\forall x_i)\cub(x_i)\). Note that \(\cua\) is closed and \(\cub(x_i)\) differs from \(\cua\) only in the appearance of the quantifier \((\forall x_i)\), so all variables other than \(x_i\) must not occur free. The variable \(x_i\) may be either free or not free in \(\cua(x_i)\)\footnote{Even though \(x_i\) must appear in \(\cub(x_i)\), \(x_i\) can still occur not free in \(\cub(x_i)\) if it occurs free in one sub-formula but bound in another.}, and we will prove the biconditional for these two cases.
+              \begin{enumerate}
+                \item It may be that \(x_i\) occurs free in \(\cub(x_i)\). Since all variables other than \(x_i\) in \(\cub(x_i)\) are not free, \(\cub(x_i)\) must have only one free variable. Therefore, it must be one of the \wfs{} in the sequence constructed in 2., say \(\cuf_m(x_{i_m})\).
+
+                  \Ra{} Suppose that \(\cua\), which is 
+                  \[(\forall x_{i_m})\cuf_m(x_{i_m}),\]
+                  is true in \(I\). Since (K5) is logically valid,
+                  \[(\forall x_{i_m})\cuf_m(x_{i_m}) \ra \cuf(c_m)\]
+                  is logically valid, and therefore it is true in every interpretation, namely \(I\), i.e.,
+                  \[(\forall x_{i_m})\cuf_m(x_{i_m}) \ra \cuf_m(c_m)\]
+                  is true in \(I\). Since \(\cuf_m(c_m)\) not being true would make
+                  \[(\forall x_{i_m})\cuf_m(x_{i_m}) \ra \cuf_m(c_m)\]
+                  false, considering that
+                  \[(\forall x_{i_m})\cuf_m(x_{i_m})\]
+                  is true, it must be that \(\cuf_m(c_m)\) is true.
+
+                  For a contradiction, suppose that \(\cua\) is not a theorem of \(T\). Since \(T\) is consistent, \(\sim\cua\) must be a theorem instead, which is to say that
+                  \[\sim(\forall x_{i_m})\cuf_m(x_{i_m})\]
+                  is a theorem of \(T\). Recall that \(T\) was constructed as an extension of \(S_\infty\), a system which has \(\cug_m\), which is
+                  \[(\sim(\forall x_{i_m})\cuf_m(x_{i_m})) \ra (\sim\cuf(c_m)),\]
+                  as an axiom. We may use MP to obtain a proof of \(\sim\cuf(c_m)\), but this contradicts the consistency of \(T\), in light of the fact that \(\cuf(c_m)\) is a theorem of \(T\). With this contradiction, we may conclude that \(\cua\) is a theorem of \(T\).
+
+                  \La{} Suppose that \(\cua\) is a theorem of \(T\), i.e.
+                  \[(\forall x_{i_m})\cuf_m(x_{i_m})\]
+                  is a theorem of \(T\). For a contradiction, suppose that \(\cua\) is not true in \(I\). Therefore, there exists a valuation which does not satisfy the above \wf{}. By Definition 3.20, there exists a valuation \(v\) which does not satisfy \(\cuf_m(x_{i_m})\). By Definition 3.17, the value \(d = v(x_{i_m}\) is necessarily a member of the domain of \(I\), and \(v(d) = d\), since \(d\) is a closed term. Clearly, \(v\) is \(i_m\)-equivalent to itself and has \(v(d) = d = v(x_{i_m})\). Proposition 3.23 states that \(v\) satisfies \(\cuf_m(d)\) if and only if \(v\) satisfies \(\cuf_m(x_i)\), which it does not, so \(v\) does not satisfy \(\cuf_m(d)\). Therefore, \(\cuf_m(d)\) is not true in \(I\). Notice that \(\cuf_m(d)\) is closed since \(d\) is a closed term and \(x_i\) was assumed to be the only free variable in \(\cuf_m\). Therefore, by Corollary 3.34, \(\sim\cuf_m(d)\) is true in \(I\). But since 
+                  \[(\forall x_{i_m})\cuf_m(x_{i_m})\]
+                  is a theorem of \(T\), by axiom (K5) and MP and the fact that the closed term \(d\) is free for \(x_{i_m}\), \(\cuf_m(d)\) is a theorem of \(T\). By the induction hypothesis, \(\cuf_m(d)\) is true in \(I\), contradicting that \(\sim\cuf_m(d)\) is true in \(I\).
+
+                  With this contradiction, we may conclude that \(\cua\) is true in \(I\).
+
+                \item It may be that \(x_i\) does not occur free in \(\cub(x_i)\). Since all variables other than \(x_i\) do not occur free in it, \(\cub(x_i)\) must be closed.
+
+                  \Ra{} Suppose that \(\cua\), which is \((\forall x_i)\cub(x_i)\), is a theorem of \(T\). By (K4) and MP, \(\cub(x_i)\) must be a theorem of \(T\), and since it is a closed \wf{} with fewer than \(n\) connectives and quantifiers, by the induction hypothesis, it is true in \(I\). By Corollary 3.28, \((\forall x_i)\cub(x_i)\), which is \(\cua\), must be true in \(I\).
+
+                  \La{} Suppose that \((\forall x_i)\cub(x_i)\) is true in \(I\). By Corollary 3.28, \(\cub(x_i)\) is true in \(I\). It is a closed \wf{} with fewer than \(n\) connectives and quantifiers, so by the induction hypothesis, \(\cub(x_i)\) is a theorem of \(T\). Its proof can be extended via Generalization to yield a proof of \((\forall x_i)\cub(x_i)\), which is \(\cua\), in \(T\), i.e. \(\cua\) is a theorem of \(T\).
+              \end{enumerate}
+          \end{enumerate}
+
+        \item Finally, we conclude that there exists some interpretation in which every theorem of \(S\) is true. Recall that \(T\) was obtained from \(S\) by enlarging the language and adding new axioms. Therefore, every proof in \(S\) is a proof in \(T\), so every theorem of \(S\) is a theorem of \(T\). By the previous step, we may further infer that every theorem of \(S\) is true in the interpretation \(I\)\footnote{Note again that we only used one direction of the biconditional in the previous step, as we said we would. We can now see that the biconditional was easier to prove than either of the directions because, informally speaking, proving both directions in the inductive steps relied on the other directions in the inductive hypotheses.}.
+
+          Now we obtain the interpretation that we desire by restricting or ``shrinking'' \(I\) so that it is an interpretation of \(S\). We do this by removing the interpretations of the terms containing the constants added to \(\cul\) to construct \(\cul^+\). Similarly, the domain becomes the closed terms of \(\cul\) instead of \(\cul^+\). As desired, every theorem of \(S\) is true in this interpretation\footnote{We could have also constructed this interpretation early on. Then \(I\) would have been built by expanding the interpretation.}.
+      \end{enumerate}
+
+      The seven steps above demonstrate that every consistent formal system has an interpretation in which all the theorems of the system are true.
+    \end{proof}
+  \end{proposition}
+
+  With this result, the proof of the Adequacy Theorem is brief.
+
+  \begin{proposition}[The Adequacy Theorem for \(K_{\cul}\)]
+    If \(\cua\) is a logically valid \wf{} of \(\cul\), then \(\cua\) is a theorem of \(K_{\cul}\).
+
+    \begin{proof}
+      Let \(\cua\) be a logically valid \wf{} of \(\cul\). The universal closure \(\cua'\) of \(\cua\) is necessarily closed. By Corollary 3.28, \(\cua'\) must be logically valid. For a contradiction, suppose that \(\cua\) is not a theorem of \(K_{\cul}\). Then by Proposition 4.19, \(\cua'\) must not be a theorem also. By Proposition 4.35, including \(\sim\cua'\) as an axiom of \(K_{\cul}\) yields a new system \(K_{\cul}'\), which is consistent. By Proposition 4.38, there is an interpretation in which every theorem of \(K_{\cul}'\) is true. In particular, \(\sim\cua'\) is true in this interpretation. Since \(\sim\cua'\) is true, by Corollary 3.34, \(\cua'\) is not true. But this contradicts \(\cua'\) being logically valid, since \(\cua'\) must be true in any interpretation. We may conclude that \(\cua\) is a theorem of \(K_{\cul}\).
+    \end{proof}
+    
+  \end{proposition}
+
 \solutions{}
 \begin{enumerate}
   \setcounter{enumi}{10}
   \item % 11
+    Let \(S\) be an extension of \(K_{\cul}\). Suppose that \(\cul\) is not empty (there exists \wfs{} of \(\cul\))\footnote{As per the definition given in the beginning of Section 3.2, we may not assume that \(\cul\) actually has an \wfs{}. To be pedantic, when \(\cul\) is empty, the biconditional we are to prove is not true.}.
+
+    \Ra{} Suppose that \(S\) is inconsistent. Then there exists a \wf{} \(\cua\) such that \(\cua\) and \(\sim\cua\) are both theorems of \(S\). Since, \(\cua \ra (\sim\cua \ra \cub)\) is a tautology for any \wf{} \(\cub\), extending this proof by two applications of MP will prove \(\cub\). Therefore, any \wf{} is a theorem of \(S\).
+
+    \La{} Suppose that every \wf{} of \(\cul\) is a theorem of \(S\). Then any \wf{} and its negation are both theorems of \(S\), so it is not consistent.
+
   \item % 12
+    Let \(S\) be a consistent first order system such that, for every closed \wf{} of \(S\), if the system obtained by including \(\cua\) as an additional axiom is consistent then \(\cua\) is a theorem of \(S\). For a contradiction, suppose that \(S\) is not complete. Then there is a closed \wf{} \(\cua\) such that \(\cua\) and \(\sim\cua\) are not theorems of \(S\). 
+
+    Since \(\cua\) is not a theorem, by Proposition 4.35, the extension of \(S\) with \(\sim\cua\) as an additional axiom is consistent. Therefore, \(\sim\cua\) must be a theorem of \(S\), which is a contradiction\footnote{The hints in the back of the textbook say to apply Proposition 4.35 twice, but it is only applied once here. There may be a mistake in the textbook or in this text.}.
+    
   \item % 13
+    Let \(\cub\) be \(\sim\cua\). Then \(\cua \lor \cub\) is logically valid, so it is a theorem of \(\kl\). But \(\cua\) and \(\cub\) cannot both be theorems of \(\kl\) or else it would not be consistent. Therefore, the answer to the exercise is negative.
+
   \item % 14
+    No predicate letter is logically valid, since each predicate letter in some interpretation can be interpreted by a relation that assigns false to all of its values. Therefore, by Proposition 4.35, the extension of \(S\) obtained by including the negation of any predicate letter is consistent. Since there are infinitely many predicate letters, there are infinitely many consistent extensions of \(S\).
 \end{enumerate}

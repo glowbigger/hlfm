@@ -1,3 +1,5 @@
+% TODO unsure about exercises 17 - 19, especially 19
+
 \section{Models}
 
 \begin{definition}
@@ -103,26 +105,67 @@ This next theorem has many paradoxical implications. For now, it will be only st
   \end{proof}
 \end{proposition}
 
-IS THE CONVERSE OF THIS TRUE?
+Note that the converse of this is true. If a first order system has a model, then every theorem is true in the model. Since any axiom is a theorem, it will be true in the model. So the model will also be a model for any finite subset of the axioms.
 
 \begin{corollary}
-  If any finite subset of an infinite set of \wfs{} of \(K\) has a model, then the infinite set itself has a model.
+  Let \(\Gamma\) be an infinite set of \wfs{} of \(K\). If each finite subset of \(\Gamma\) has a model, then \(\Gamma\) has a model.
 
   \begin{proof}
+    Suppose that each finite subset of \(\Gamma\) has a model. Consider the first order system which extends \(K\) by having \(\Gamma\) as its axioms. By Proposition 4.46, \(\Gamma\) has a model.
   \end{proof}
 \end{corollary}
 
-% TODO
-The above corollary is equivalent to Proposition 4.46. EXPLAIN.
+The above corollary is equivalent to Proposition 4.46, although proving the other direction would require relaxing the restriction that \(\Gamma\) is an infinite set. We could prove the relaxed version corollary explicitly, and this would be like the proof of Proposition 4.46. Then we would be able to see that Proposition 4.46 follows.
 
-EXPLAIN THE PARAGRAPH ON THE LAST PAGE OF THE CHAPTER.
+Finally, with models, we can now show that there is another way, other than Proposition 4.37, to construct a complete and consistent first order system from a given consistent first order system.
+
+\begin{proposition*}
+  Let \(S\) be a first order system. If \(S\) has a model, then a complete extension of \(S\) shares the same model.
+
+  \begin{proof}
+    Since \(S\) has a model \(M\), it is consistent by Proposition 4.42. If \(S\) is complete, then we can add some theorem of \(S\) as an axiom to obtain a complete extension of \(S\) which shares the same model. So assume that \(S\) is not complete. Then there must exist some closed \wf{} \(\cua\) such that neither \(\cua\) nor \(\cua\) is a theorem of \(S\). By Proposition 3.33, in \(M\), this \wf{}, since it closed, is either true or false.
+
+    Now we define \(S(M)\) to be the first order system which is the extension of \(S\) obtained by adding all \wfs{} of \(M\) as axioms. Of course, every axiom of \(S(M)\) will be true in \(M\), so \(M\) is a model of \(S(M)\). Additionally, we can show that the theorems of \(S(M)\) are precisely the axioms of \(S(M)\). This is because all \wfs{} in a proof in \(S(M)\) will be true in \(M\) because the rules of deduction of \(S(M)\) conserve truth\footnote{A formal proof of this would be via induction, but we have done this already in Proposition 4.41 and 4.46.}.
+
+    Now \(S(M)\) is consistent, since if a \wf{} and its negation are both theorems, then they are both true in the model, which is impossible, by Definition 3.20. Also, \(S(M)\) is complete, since if \(\cua\) is a closed \wf{}, either \(\cua\) or \(\sim\cua\) is true in \(M\), by Corollary 3.34.
+
+    Therefore, we have constructed for any first order system \(S\), the system \(S(M)\), which is a complete extension of \(S\) that shares the same model.
+  \end{proof}
+\end{proposition*}
 
 \solutions{}
 \begin{enumerate}
   \setcounter{enumi}{14}
   \item % 15
+    Suppose that \(\cua\) can be deduced from \(\Gamma\) with \(n\) \wfs{} in its deduction. We proceed by induction on \(n\) to show that \(\cua\) is true in \(M\).
+
+    (hypothesis) Suppose that any \wf{} with fewer than \(n\) \wfs{} in its proof is true in \(M\).
+
+    (base case) It may be that \(n=0\), \(\cua\) is an axiom or a member of \(\Gamma\). If it is an axiom, then it is logically valid, so it is true in \(M\). If it is a member of \(\Gamma\), then since \(M\) is a model of \(\Gamma\), \(\cua\) is true in \(M\).
+
+    (inductive step) It may be that \(n>1\).
+    \begin{enumerate}
+      \item It may be that \(\cua\) is an axiom or a member of \(\Gamma\). See the base case.
+      \item It may be that \(\cua\) is deduced by MP. By Proposition 3.26 and the induction hypothesis, \(\cua\) is true in \(M\).
+      \item It may be that \(\cua\) is deduced by Generalization. By Proposition 3.26 and the induction hypothesis \(\cua\) is true in \(M\).
+    \end{enumerate}
+    Note that this proof has been treated tersely because it is so essentially no different from the proofs of Proposition 4.41 and 4.46.
+
+    The converse is not true. Let \(\Gamma\) be the logically valid \wfs{} of \(\cul\). Trivially, any interpretation is a model of \(\Gamma\). Consider any interpretation with a true \wf{} which is not logically valid to disprove the other direction of the exercise.
+
   \item % 16
+    Let \(\cua\) be a closed \wf{} true in a model of \(S\). If \(\cua\) is not a theorem in \(S\), then \(\sim\cua\) must be a theorem of \(S\), since \(S\) is consistent and complete. Therefore, \(\sim\cua\) must be true in any model of \(S\). But both \(\cua\) and \(\sim\cua\) cannot be both true in a model, as this would contradict Remark 3.25(b). So it must be that \(\cua\) is a theorem of \(S\). Therefore, \(\cua\) is true in any another model, as desired.
+
   \item % 17
+    It is easy to see that \(M\) is also a model for the axioms added to \(S\) to obtain \(S^+\). Any theorem of \(S^+\) will be deduction from this set of axioms in \(S\). Hence, by exercise 15, every theorem of \(S^+\) will be true in \(M\), so \(M\) is a model for \(S^+\). By Proposition 4.46, \(S^+\) is consistent.
+
+    To see that \(S^+\) need not be complete, let \(S^+\) be \(S\). That is, no atomic formulas of \(\cul\) are true in \(M\), so no atomic formulas are added as axioms of \(S\). But \(S\) is not complete since both \((\forall x_1)A^1_1(x_1)\) and \(\sim(\forall x_1)A^1_1(x_1)\) are not logically valid, therefore they are not theorems of \(S\).
+
   \item % 18
+    We will use \(S^+\) to indicate the extension of \(S\). 
+
+    By the same reasoning as in the previous exercise, \(S^+\) is consistent. Just as in the previous exercise, to see that \(S^+\) need not be complete, let \(S^+\) be \(S\). That is, no closed atomic formulas of \(\cul\) or their negations are true in \(M\), so no atomic formulas are added as axioms of \(S\). But \(S\) is not complete since both \((\forall x_1)A^1_1(x_1)\) and \(\sim(\forall x_1)A^1_1(x_1)\) are not logically valid, therefore they are not theorems of \(S\).
+
   \item % 19
+    An interpretation \(I\) of \(\cul\) is a model if \(A_I\) contains all \(\bar{a}_i\) such that \(A^1_1(a_i)\) is a theorem of \(S\). Therefore, any \(\{A^1_1(a_i), \dots, A^1_1(a_n)\}\) has \(M_n\) as a model. Now consider any finite subset of all \(A^1_1(a_i)\). Since it is finite, it has a highest indexed \(a_i\), and so the subset has \(M_n\) as a model. By Corollary 4.47, \(S\) must have a model \(M\) in which all \(\bar{a}_i \in A_M\) for every \(i\).
 \end{enumerate}

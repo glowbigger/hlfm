@@ -14,7 +14,7 @@ The list below will be updated as chapters are finished.
 1. :white_check_mark: Informal statement calculus
 2. :white_check_mark: Formal statement calculus
 3. :white_check_mark: Informal predicate calculus
-4. :x: Formal predicate calculus
+4. :white_check_mark: Formal predicate calculus
 5. :x: Mathematical systems
 6. :x: The Gödel Incompleteness Theorem
 7. :x: Computability, unsolvability, undecidability

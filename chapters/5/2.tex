@@ -1,0 +1,347 @@
+\section{First order systems with equality}
+In all languages that we study in this chapter, \(=\) will be the intended interpretation of \(A^2_1\). In a system with \(A^2_1\) interpreted as \(=\), we will include the following as proper axioms.
+
+\begin{itemize}
+  \item (E7) \(A^2_1(x_1, x_1)\).
+  \item (E8) \(A^2_1(u, v) \ra A^2_1(f^n_i(\dots, u, \dots), f^n_1(\dots, v, \dots))\)
+  \item (E9) \(A^2_1(u, v) \ra (A^n_i(\dots, u, \dots) \ra A^n_i(\dots, v, \dots))\)
+\end{itemize}
+The axiom (E7) is a single \wf{}. The rules (E8) and (E9) are axiom schemes, where \(u\) and \(v\) are any terms. The function letter \(f^n_i\) and the predicate letter \(A^n_i\) are to stand for arbitrary functions and statements. The position in which \(u\) and \(v\) appear in the sequences of terms \(\dots, u, \dots\) and \(\dots, v, \dots\) must be the same.
+
+All of these axioms are written with no quantifiers. Whoever, it is easy to prove that they are equivalent to their universal closures, the \wfs{} in which all the variables occur bound. Proposition 4.18 can be used to change (E7) to be true for any variable, not just \(x_1\).
+
+The informal intended meaning of (E7) is ``anything is equal to itself.'' The axiom schemes (E8) and (E9) are intended to mean ``if two things are equal, then any predicate involving the things are evaluated in the same way\footnote{This is sometimes called the Identity of Indiscernibles.}'', or ``equal things may be substituted for each other.''
+
+\setcounter{definition}{3}
+\begin{definition}
+  The axioms (E7), (E8), and (E9) are called \textit{axioms for equality}. A system which includes the axioms given be these schemes is known as a \textit{first order system with equality}.
+\end{definition}
+
+\begin{proposition}
+  A first order system with equality has the following \wfs{} as theorems.
+  \begin{enumerate}[(i)]
+    \item \((\forall x_1)A^2_1(x_i, x_i)\).
+    \item \((\forall x_1)(\forall x_2)(A^2_1(x_1, x_2) \ra A^2_1(x_2, x_1))\).
+    \item \((\forall x_1)(\forall x_2)(\forall x_3)(A^2_1(x_1, x_2) \ra (A^2_1(x_2, x_3) \ra A^2_1(x_1, x_3)))\).
+  \end{enumerate}
+
+  \begin{proof}
+    Let \(S\) be a first order system with equality. We will prove each assertion in \(S\).
+    \begin{enumerate}[(i)]
+      \item Apply Generalization to (E7).
+      \item The following is a proof of the \wf{} in \(S\).
+        \begin{align*}
+          \text{1}&&
+          A^2_1(x_1, x_2) \ra (A^2_1(x_1, x_1) \ra A^2_1(x_2, x_1))&&
+          \text{(E9)}\\
+          \text{2}&&
+          (A^2_1(x_1, x_2) \ra (A^2_1(x_1, x_1) \ra A^2_1(x_2, x_1))) \ra&&
+          \\
+          &&
+          ((A^2_1(x_1, x_2) \ra (A^2_1(x_1, x_1))) \ra (A^2_1(x_1, x_2) \ra A^2_1(x_2, x_1)))&&
+          \text{(K2)}\\
+          \text{3}&&
+          ((A^2_1(x_1, x_2) \ra (A^2_1(x_1, x_1))) \ra (A^2_1(x_1, x_2) \ra A^2_1(x_2, x_1)))&&
+          \text{1, 2, MP}\\
+          \text{4}&&
+          (A^2_1(x_1, x_1) \ra (A^2_1(x_1, x_2) \ra A^2_1(x_1, x_1)))&&
+          \text{(K1)}\\
+          \text{5}&&
+          A^2_1(x_1, x_1)&&
+          \text{(E6)}\\
+          \text{6}&&
+          A^2_1(x_1, x_2) \ra A^2_1(x_1, x_1)&&
+          \text{5, 6, MP}\\
+          \text{7}&&
+          A^2_1(x_1, x_2) \ra A^2_1(x_2, x_1)&&
+          \text{3, 6, MP}\\
+          \text{8}&&
+          (\forall x_1)(\forall x_2) A^2_1(x_1, x_2) \ra A^2_1(x_2, x_1)&&
+          \text{7, Generalization}
+        \end{align*}
+
+      \item The following is a proof of the \wf{} in \(S\).
+        \begin{align*}
+          \text{1}&&
+          A^2_1(x_2, x_1) \ra (A^2_1(x_2, x_3) \ra A^2_1(x_1, x_3))&&
+          \text{(E9)}\\
+          \text{2}&&
+          A^2_1(x_1, x_2) \ra A^2_1(x_2, x_1)&&
+          \text{(ii) above}\\
+          \text{3}&&
+          A^2_1(x_1, x_2) \ra (A^2_1(x_2, x_3) \ra A^2_1(x_1, x_3))&&
+          \text{1, 2, HS}\\
+          \text{4}&&
+          (\forall x_1)(\forall x_2) A^2_1(x_1, x_2) \ra (A^2_1(x_2, x_3) \ra A^2_1(x_1, x_3))&&
+          \text{Generalization}
+        \end{align*}
+    \end{enumerate}
+    Thus (i), (ii), (iii) are theorems of any first order system.
+  \end{proof}
+\end{proposition}
+
+From this proposition, we can see that any interpretation of \(A^2_1\) in a model must be an equivalence relation, for the three properties verified above correspond to reflexivity, symmetry, and transitivity.
+
+The axioms for equality do not necessarily have to be interpreted by \(=\) in a model of equality. As an example, consider addition in the integers modulo 2. Let \(\cul\) be a language with equality with \(f^2_1\) interpreted as addition modulus 2 and with its domain being the integers. However, let \(A^2_1(x_i, x_j)\) be interpreted as \(x \equiv y \pmod{2}\), where \(x\) and \(y\) are the interpretations of \(x_i\) and \(x_j\). We will verify that this interpretation is a model by verifying the axioms for equality.
+\begin{enumerate}
+  \item For (E7), its interpretation is \(x \equiv x \pmod{2}\), which is true.
+  \item For (E8), the verification is done in exercise 1.
+  \item For (E9), their are only two instances of the scheme. The first one is
+    \[A^2_1(t, u) \ra (A^2_1(t, v) \ra A^2_1(u, v)),\]
+    and its interpretation is
+    \[\text{if } x \equiv y \pmod{2}, \text{ then } x \equiv z \pmod{2} \text{ implies } y \equiv z.\]
+    The second one is
+    \[A^2_1(t, u) \ra (A^2_1(t, v) \ra A^2_1(u, v)),\]
+    and its interpretation is
+    \[\text{if } x \equiv y \pmod{2}, \text{ then } z \equiv x \pmod{2} \text{ implies } y \equiv y.\]
+    These statements in \(I\) are both true. 
+\end{enumerate}
+
+Seeing as though we have verified the axioms for equality, we have found a model of a first order system with equality in which \(A^2_1\) is not interpreted as \(=\). However, every first order system with equality \textit{can} have a model with this desired property.
+
+\setcounter{definition}{5}
+\begin{proposition}
+  If \(S\) is a consistent first order system with equality, then \(S\) has a model in which the interpretation of \(A^2_1\) is \(=\).
+
+  \begin{proof}
+    By Proposition 4.42, since \(S\) is consistent, it has a model \(M\). The interpretation \(\bar{A}^2_1\) must be an equivalence relation by Proposition 5.4. Denote the equivalence containing \(x\) by \([x]\), as usual, where \(x\) is some member of the domain of \(M\).
+
+    Now we construct an interpretation \(M^*\) whose domain is the equivalence classes of the interpretation of \(A^2_1\) in \(M\). Let any constant \(a_i\) in the language of \(S\) be interpreted in \(M^*\) by \([a_i]\). 
+
+    Now we must define how the function letters of the language \(S\) are to be interpreted. Let any function \(f^n_i\) be interpreted by \(\bar{\bar{f}}^n_i\), which is defined by
+    \[\bar{\bar{f}}^n_i([\bar{x}_1], \dots, [\bar{x}_n]) = [\bar{f}^n_i(\bar{x}_1, \dots, \bar{x}_n)],\]
+    Let any predicate letter be interpreted by
+    \[\bar{\bar{A}}^n_i([\bar{x}_1], \dots, [\bar{x}_n]) \text{ iff } [\bar{\bar{A}}^n_i(\bar{x}_1, \dots, \bar{x}_n)],\]
+    where \(\bar{x}_j\), for any \(j\), stands for any member of the domain of \(M\). Of course, we want \(\bar{\bar{A}}^2_1\) to be interpreted by \(=\).
+
+    As usual, since the function \(\bar{\bar{f}}^n_i\) takes equivalence classes as its arguments, we must verify that we indeed have defined a function. As a reminder, this means that we must verify that if \(x = y\), then \(f(x) = f(y)\), for any function \(f\) and members of its domain \(x, y\). 
+
+    So let that \(\bar{\bar{f}}^n\) is some function of \(n\)-places in \(M^*\). Let \(\bar{x}_1, \dots, \bar{x}_n\) and \(\bar{y}_1, \dots, \bar{y}_n\) be elements in the domain of \(M\). Suppose that
+    \[[\bar{x}_1, \dots, \bar{x}_n] = [\bar{y}_1, \dots, \bar{y}_n], \text{ i.e., } [\bar{x}_1] = [\bar{y}_1], \dots, [\bar{x}_n] = [\bar{y}_n].\]
+    By \((E8)\) we know that
+    \[A^2_1(x_1, x_2) \ra A^2_1(\bar{f}^n(\dots, x_1, \dots), \bar{f}^n(\dots, x_2, \dots))\]
+    is a theorem in \(S\), where \(f^n\) is any \(n\)-valued function letter in the language of \(S\). Because \(M\) is a model of \(S\), the \wf{} is true in \(M\). Therefore, in \(M\) this is interpreted as
+    \[\text{if }\bar{A}^2_1(\bar{x}_i, \bar{y}_i) \text{ then, } \bar{A}^2_1(\bar{f}^n(\dots, \bar{x}_i, \dots), \bar{f}^n(\dots, \bar{y}_i, \dots)).\]
+    In \(M^*\), this is interpreted as
+    \[\text{if }\bar{\bar{A}}^2_1([\bar{x}_i], [\bar{y}_i]) \text{ then, } \bar{\bar{A}}^2_1([\bar{f}^n(\dots, \bar{x}_i, \dots)], [\bar{f}^n(\dots, \bar{y}_i, \dots)]),\]
+    which is to say that, 
+    \[\text{if }[\bar{x}_i] = [\bar{y}_i] \text{ then, } [\bar{f}^n(\dots, \bar{x}_i, \dots)] = [\bar{f}^n(\dots, \bar{y}_i, \dots)],\]
+    since \(\bar{\bar{A}}^2_1\) is interpreted as \(=\). Therefore the following implications are all true.
+    \begin{align*}
+      \text{If } [\bar{x}_1] = [\bar{y}_1],&&
+      \text{then}&&
+      [\bar{f}^n(\bar{x}_1, \bar{x}_2, \dots, \bar{x}_n)] = [\bar{f}^n(\bar{y}_1, \bar{x}_2, \dots, \bar{x}_n)].\\
+      %
+      \text{If } [\bar{x}_2] = [\bar{y}_2],&&
+      \text{then}&&
+      [\bar{f}^n(\bar{y}_1, \bar{x}_2, \dots, \bar{x}_n)] = [\bar{f}^n(\bar{y}_1, \bar{y}_2, \dots, \bar{x}_n)].\\
+      %
+      &&
+      \vdots&&
+      \\
+      %
+      \text{If } [\bar{x}_n] = [\bar{y}_n],&&
+      \text{then}&&
+      [\bar{f}^n(\bar{y}_1, \bar{y}_2, \dots, \bar{x}_n)] = [\bar{f}^n(\bar{y}_1, \bar{y}_2, \dots, \bar{y}_n)].
+    \end{align*}
+    All the equalities on the left-hand side are satisfied, so the equalities on the right are true. Using transitivity of equality,
+    \[[\bar{f}^n(\bar{x}_1, \bar{x}_2, \dots, \bar{x}_n)] = [\bar{f}^n(\bar{y}_1, \bar{y}_2, \dots, \bar{y}_n)],\]
+    and by definition of \(\bar{\bar{f}}^n\),
+    \[\bar{\bar{f}}^n([\bar{x}_1], [\bar{x}_2], \dots, [\bar{x}_n)]]) = \bar{\bar{f}}^n([\bar{y}_1], [\bar{y}_2], \dots, [\bar{y}_n)]).\]
+    Therefore, \(\bar{\bar{f}}^n\) is well-defined. Using a similar process, we can deduce that any interpretation in \(M^*\) of a statement letter in the language of \(S\) is well-defined (see Exercise 4). We may conclude that \(M^*\) is a model of \(S\) in which \(A^2_1\) is interpreted as \(=\).
+  \end{proof}
+\end{proposition}
+
+\begin{definition}
+  Let \(S\) be a first order system with equality. A \textit{normal model} of \(S\) is a model in which \(A^2_1\) is interpreted as =.
+\end{definition}
+
+For convenience's sake, in any normal model, we will now write \(x_i = x_j\) to mean \(A^2_1(x_i, x_j)\).
+
+\solutions
+\begin{enumerate}
+  \item % 1
+    Since there is only one 2-placed predicate letter in \(\cul\), two possible instances of (E8) are
+    \[A^2_1(x_1, x_2) \ra A^2_1(f^2_1(x_1, x_3), f^2_1(x_2, x_3))\]
+    and
+    \[A^2_1(x_1, x_2) \ra A^2_1(f^2_1(x_3, x_1), f^2_1(x_3, x_2)).\]
+    Seeing as any three terms \(t, u, v\) are free for \(x_1, x_2, x_3\), we may say that use (K5) to say
+    \[A^2_1(t, u) \ra A^2_1(f^2_1(t, u), f^2_1(v, u))\]
+    and
+    \[A^2_1(t, u) \ra A^2_1(f^2_1(t, u), f^2_1(t, v)),\]
+    and these are interpreted as
+    \[\text{ if } x_1 \equiv x_3 \pmod{2}, \text{ then } x_1 + x_2 \equiv x_3 + x_2 \pmod{2}\]
+    and
+    \[\text{ if } x_2 \equiv x_3 \pmod{2}, \text{ then } x_1 + x_2 \equiv x_1 + x_3 \pmod{2},\]
+    which are both true statements in the interpretation\footnote{This exercise is ambiguous in its requirement. In the example, a shorter procedure was used to prove that (E9) was correct in the interpretation, but the suggestions in the back of the textbook suggest something different.}.
+
+  \item % 2
+    Suppose that there exists some model of \(S\) in which \(\cua\) is not true. Then \(\cua\) must not be a theorem of \(S\), so by Proposition 4.35, there exists a consistent extension \(S^*\) of \(S\) in which \(\sim\cua\) is a theorem. By Proposition 5.6, there exists a normal model \(M^*\) of \(S^*\). But a normal model of \(S^*\) must also be a normal model of \(S\), since all the theorems of \(S\) are theorems of \(S^*\). So \(\cua\) must be true in \(M^*\). But \(\sim\cua\) is a theorem of \(S^*\), so it too is true in \(M^*\), which contradicts Definition 3.20. Therefore, \(\cua\) must be true in all models of \(S\).
+
+  \item % 3
+    Let \(E\) be the first order system with equality. This exercise is made easier by either proving the statement for \(x_i\) or \(x_j\) or by proving the \wf{}
+    \[(x_1 = x_2 \ra (\cua(x_1) \lra \cua(x_2))\]
+    instead. We will do this second option. The proof is by induction on \(n\), the number of connectives and quantifiers of \(\cua(x_1)\).
+
+    (hypothesis) Suppose that for any \wf{} with fewer than \(n\) connectives and quantifiers, if \(x_i = x_j\), then the original \wf{} is provably equivalent to any identical \wf{} with a single free instance of \(x_1\) substituted with \(x_2\).
+
+    (base case) It may be that \(n=0\), i.e., \(\cua(x_1)\) is an atomic formula, \(A^n_i(\dots, x_1, \dots))\), say. Since there are no quantifiers in the expression, \(x_2\) is free for \(x_1\), and we know by (E7) that
+    \[\ded{E} x_1 = x_2 \ra (A^n_i(\dots, x_1, \dots) \ra A^n_i(\dots, x_2, \dots)).\]
+    Notice that \(A^n_i(\dots, x_2, \dots)\) has \(x_2\) substituted for one of the free occurrences of \(x_1\), as desired. We also have
+    \[\ded{E} x_2 = x_1 \ra (A^n_i(\dots, x_2, \dots) \ra A^n_i(\dots, x_1, \dots)).\]
+    Since \(=\) is symmetric (Proposition 5.4), \(x_1 = x_2 \ra x_2 = x_1\), so by HS,
+    \[\ded{E} x_1 = x_2 \ra (A^n_i(\dots, x_2, \dots) \ra A^n_i(\dots, x_1, \dots)).\]
+    Therefore,
+    \[\ded{E} x_1 = x_2 \ra (A^n_i(\dots, x_2, \dots) \lra A^n_i(\dots, x_1, \dots)).\]
+    by MP and the tautology
+    \[\cua \ra (\cub \ra \cuc) \ra ((\cua \ra (\cuc \ra \cub)) \ra (\cua \ra (\cua \lra \cuc))),\]
+    where \(\cua, \cub, \cuc\) are any \wfs{} of the language of \(E\).
+
+    (inductive step) It may be that \(n>1\). There are three cases to consider.
+    \begin{enumerate}
+      \item It may be that \(\cua(x_1)\) is of the form \(\sim\cub(x_1)\). By the induction hypothesis
+        \[\ded{E} (x_1 = x_2 \ra (\cub(x_1) \lra \cub(x_2))),\]
+        and since \(\cub(x_1) \lra \cua(x_2)\) is provably equivalent to \(\sim\cub(x_1) \lra \sim\cub(x_2)\), we can easily deduce that
+        \[\ded{E} (x_1 = x_2 \ra (\sim\cub(x_1) \lra \sim\cub(x_2))),\]
+        by Proposition 4.22, i.e.,
+        \[\ded{E} (x_1 = x_2 \ra (\cua(x_1) \lra \cua(x_2))).\]
+
+      \item It may be that \(\cua(x_1)\) is an implication. Therefore, \(\cua(x_2)\) may appear in one of four forms. 
+        \begin{enumerate}
+          \item It may be that \(\cua(x_2)\) is \(\cub(x_2) \ra \cuc(x_1)\), i.e., both subformulas contain a free instance of \(x_1\), but \(\cub(x_2)\) contains the substitution. By the induction hypothesis,
+            \[\ded{E} x_1 = x_2 \ra (\cub(x_1) \lra \cub(x_2)),\]
+            where \(\cub(x_2)\) is defined just as \(\cua(x_2)\) was (only one free occurrence of \(x_1\) is replaced). It is easily seen that
+            \[\ded{E} x_1 = x_2 \ra ((\cub(x_1) \ra \cuc(x_1)) \lra (\cub(x_1) \ra \cuc(x_1))),\]
+            since the right-hand side is a tautology. Therefore, by substitution of provable equivalences,
+            \[\ded{E} x_1 = x_2 \ra ((\cub(x_1) \ra \cuc(x_1)) \lra (\cub(x_2) \ra \cuc(x_1))),\]
+            i.e.,
+            \[\ded{E} x_1 = x_2 \ra (\cua(x_1) \lra \cua(x_2)).\]
+
+          \item It may be that \(\cua(x_2)\) is \(\cub(x_2) \ra \cuc(x_1)\). This is proved similarly way as the above case. By the inductive hypothesis,
+            \[\ded{E} x_1 = x_2 \ra (\cuc(x_1) \lra \cuc(x_2)).\]
+            It is easily seen that
+            \[\ded{E} x_1 = x_2 \ra ((\cub(x_1) \ra \cuc(x_1)) \lra (\cub(x_1) \ra \cuc(x_1))).\]
+            By substitution of provable equivalences,
+            \[\ded{E} x_1 = x_2 \ra ((\cub(x_1) \ra \cuc(x_1)) \lra (\cub(x_1) \ra \cuc(x_2))),\]
+            i.e.,
+            \[\ded{E} x_1 = x_2 \ra (\cua(x_1) \lra \cua(x_2)).\]
+
+          \item The third is \(\cub(x_2) \ra \cuc\). That is, \(\cuc\) does not contain an instance of \(x_1\) (or \(x_2\), for that matter). By the inductive hypothesis
+            \[\ded{E} x_1 = x_2 \ra (\cub(x_1) \lra \cub(x_2)).\]
+            It is easily seen that
+            \[\ded{E} x_1 = x_2 \ra ((\cub(x_1) \ra \cuc) \lra (\cub(x_1) \ra \cuc)).\]
+            By substitution of provable equivalences,
+            \[\ded{E} x_1 = x_2 \ra ((\cub(x_1) \ra \cuc) \lra (\cub(x_2) \ra \cuc)),\]
+            i.e.,
+            \[\ded{E} x_1 = x_2 \ra (\cua(x_1) \lra \cua(x_2)).\]
+
+          \item The third is \(\cub \ra \cuc(x_2)\). The proof for this case should be obvious at this point.
+      \end{enumerate}
+
+      \item It may be that \(\cua(x_1)\) is of the form \((\forall x_i)\cub(x_1)\), where \(x_i\) is not \(x_1\), since \(x_1\) occurs free in \(\cua(x_1)\). Likewise, \(x_i\) cannot be \(x_2\), or else \(x_2\) would not be free for \(x_1\) in \(\cua(x_1)\). We want to prove that
+        \[\ded{E} x_1 = x_2 \ra ((\forall x_i)\cub(x_1) \lra (\forall x_i)\cub(x_2)).\]
+        By the induction hypothesis,
+        \[\ded{E} x_1 = x_2 \ra (\cub(x_1) \lra \cub(x_2)).\]
+        By Generalization,
+        \[\ded{E} (\forall x_i)(x_1 = x_2 \ra (\cub(x_1) \lra \cub(x_2))).\]
+        By Exercise 4 from Chapter 4 and MP,
+        \[\ded{E} (\forall x_i)(x_1 = x_2) \ra (\forall x_i)((\cub(x_1) \lra \cub(x_2))).\]
+        By the lemma used in the proof of Proposition 4.22,
+        \[\ded{E} (\forall x_i)((\cub(x_1) \lra \cub(x_2))) \ra ((\forall x_i)\cub(x_1) \lra (\forall x_i)\cub(x_2)).\]
+        Recall that \(x_i\) cannot be \(x_1\) or \(x_1\). So, by Generalization and the Deduction Theorem,
+        \[\ded{E} x_1 = x_2 \ra (\forall x_i)(x_1 = x_2).\]
+        By HS,
+        \[\ded{E} x_1 = x_2 \ra ((\forall x_i)\cub(x_1) \lra (\forall x_i)\cub(x_2)),\]
+        as desired.
+    \end{enumerate}
+    Therefore, for any number of connectives and quantifiers in \(\cua(x_1)\),
+    \[x_1 = x_2 \ra (\cua(x_1) \lra \cua(x_2))\]
+    is a theorem of \(E\), so, by definition of \(\lra\),
+    \[x_1 = x_2 \ra (\cua(x_1) \ra \cua(x_2))\]
+    is a theorem of \(E\).
+    % TODO do the last part: generalize to more than one substitution of \(x_1\)
+
+  \item % 4
+    Let \(y_1, \dots, y_n, z_1, \dots, z_n\) be elements in the domain of \(M\). Suppose that
+    \[[y_1] = [z_1], \dots, [y_n] = [z_n].\]
+    To show that \(\bar{\bar{A}}^n_i\) is well-defined, we must show that
+    \[\bar{\bar{A}}^n_i([y_1], \dots, [y_n]) \text{ if and only if } \bar{\bar{A}}^n_i([z_1], \dots, [z_n]),\]
+    which, by definition of \(\bar{\bar{A}}^n_i\), is equivalent to showing that
+    \[\bar{A}^n_i(y_1, \dots, y_n) \text{ if and only if } \bar{A}^n_i(z_1, \dots, z_n).\]
+    Since \(M\) is a model for \(S\), by (E8), the axiom
+    \[A^2_1(t_1, u_1) \ra (A^n_i(t_1, \dots, t_n) \ra A^n_i(u_1, \dots, t_n))\]
+    is a theorem of \(S\), so
+    \[\text{if } \bar{A}^2_1(y_1, z_1) \text{, then } A^n_i(y_1, \dots, y_n) \text{ implies } A^n_i(z_1, \dots, y_n).\]
+    In \(M^*\), this is interpreted as
+    \[\text{if } y_1 = z_1 \text{, then } \bar{\bar{A}}^n_i([y_1], \dots, [y_n]) \text{ implies } \bar{\bar{A}}^n_i([z_1], \dots, [y_n]).\]
+    Similarly, we can obtain
+    \[\text{if } y_2 = z_2 \text{, then } \bar{\bar{A}}^n_i([z_1], [y_2], \dots, [y_n]) \text{ implies } \bar{\bar{A}}^n_i([z_1], [z_2], \dots, [y_n]),\]
+    \[\dots,\]
+    \[\text{if } y_n = z_n \text{, then } \bar{\bar{A}}^n_i([z_1], [z_2], \dots, [y_n]) \text{ implies } \bar{\bar{A}}^n_i([z_1], [z_2], \dots, [z_n]).\]
+    Since the hypothesis of all these statements are satisfied, using the transitive property of implication,
+    \[\bar{\bar{A}}^n_i([y_1], \dots, [y_n]) \text{ implies } \bar{\bar{A}}^n_i([z_1], \dots, [z_n]).\]
+    The other direction can be proved in the same way by using the fact that \(A^2_1\) and equality are symmetric. Therefore,
+    \[\bar{\bar{A}}^n_i([y_1], \dots, [y_n]) \text{ if and only if } \bar{\bar{A}}^n_i([z_1], \dots, [z_n]).\]
+    as desired.
+
+  \item % 5
+    We may express this as
+    \[(\exists x_i)(\exists x_j)(\cua(x_i) \land \cua(x_j) \land (\sim(x_i = x_j)) \land (\forall x_k)(\cua(x_k) \ra (x_k = x_i \lor x_k = x_j))).\]
+
+  \item % 6
+    Let \(E\) be a first order system with equality. The proof is by induction on \(n\), the number of connectives and quantifiers in \(\cua(t_1, \dots, t_k, \dots, t_n)\).
+
+    (base case) It may be that \(n = 0\), in which \(\cua\) is an atomic formula. Then (E9) provides the desired result.
+
+    (inductive step) It may be that \(n > 1\), in which case, there are three cases to verify.
+    \begin{enumerate}
+      \item It may be that \(\cua(t_1, \dots, t_k, \dots, t_n)\) is of the form \(\sim\cub(t_1, \dots, t_k, \dots, t_n)\). By reversing the equality and applying the induction hypothesis,
+        \[\ded{E} u = t_k \ra (\cub(t_1, \dots, u, \dots, t_n) \ra \cub(t_1, \dots, t_k, \dots, t_n)).\]
+        The following \wf{} is a tautology:
+        \[\ded{E} (\cub(t_1, \dots, u, \dots, t_n) \ra \cub(t_1, \dots, t_k, \dots, t_n)) \ra\]
+        \[((\sim\cub(t_1, \dots, t_k, \dots, t_n)) \ra (\sim\cub(t_1, \dots, u, \dots, t_n))).\]
+        By Proposition 5.4(ii), \(t_k = u \ra u = t_k\). By HS twice,
+        \[t_k = u \ra ((\sim\cub(t_1, \dots, t_k, \dots, t_n)) \ra (\sim\cub(t_1, \dots, u, \dots, t_n))),\]
+        which is to say that
+        \[\ded{E} t_k = u \ra (\cua(t_1, \dots, t_k, \dots, t_n) \ra \cua(t_1, \dots, u, \dots, t_n)),\]
+        as desired.
+
+      \item It may be that \(\cua(t_1, \dots, t_k, \dots, t_n)\) is an implication of the form \[\cub(b_1, \dots, b_{m_1}) \ra \cuc(c_1, \dots, c_{m_2}),\]
+        where \(b_1, \dots, b_n\) and \(c_1, \dots, c_n\) combined contain all terms \(t_1, \dots, t_k, \dots, t_n\). From here, there are two cases. Either
+        \[\cua(t_1, \dots, u, \dots, t_n)\]
+        is of the form
+        \[\cub(b_1, \dots, u, \dots, b_{m_1}) \ra \cuc(c_1, \dots, c_{m_2}),\]
+        where the substitution of \(u\) for \(t_k\) occurs in \(\cub\), or of the form
+        \[\cub(c_1, \dots, c_{m_2}) \ra \cuc(b_1, \dots, u, \dots, b_{m_1}),\]
+        where the substitution of \(u\) for \(t_k\) occurs in \(\cuc\). Consider the first case. By the induction hypothesis,
+        \[\ded{E} t_k = u \ra (\cub(b_1, \dots, t_k, \dots, b_{m_1}) \ra \cub(b_1, \dots, u, \dots, b_{m_1})),\]
+        and
+        \[\ded{E} u = t_k \ra (\cub(b_1, \dots, u, \dots, b_{m_1}) \ra \cub(b_1, \dots, t_k, \dots, b_{m_1})),\]
+        and since \(t_k = u \ra u = t_k\),
+        \[\ded{E} u = t_k \ra (\cub(b_1, \dots, t_k, \dots, b_{m_1}) \lra \cub(b_1, \dots, u, \dots, b_{m_1})).\]
+        The following \wf{} is easily seen to be true:
+        \[\ded{E} u = t_k \ra ((\cub(b_1, \dots, t_k, \dots, b_{m_1}) \ra \cuc(c_1, \dots, c_{m_2})) \ra\]
+        \[(\cub(b_1, \dots, t_k, \dots, b_{m_1}) \ra \cuc(c_1, \dots, c_{m_2}))),\]
+        by the fact that the right-hand side is a tautology, (K1), and MP. It is easy to construct (but tedious to write out fully) the tautology that allows us to substitute \(\cub(b_1, \dots, u, \dots, b_{m_1})\) for the second instance of \(\cub(b_1, \dots, t_k, \dots, b_{m_1})\) in the \wf{} above to obtain
+        \[\ded{E} u = t_k \ra ((\cub(b_1, \dots, t_k, \dots, b_{m_1}) \ra \cuc(c_1, \dots, c_{m_2})) \ra\]
+        \[(\cub(b_1, \dots, u, \dots, b_{m_1}) \ra \cuc(c_1, \dots, c_{m_2}))),\]
+        i.e.,
+        \[\ded{E} u = t_k \ra (\cua(t_1, \dots, t_k, \dots, t_{n}) \ra \cua(t_1, \dots, u, \dots, t_{n})),\]
+        as desired. The case where the substitution of \(u\) for \(t_k\) occurs in \(\cuc\) is proved in the same way.
+
+      \item It may be that \(\cua(t_1, \dots, t_k, \dots, t_n)\) is of the form
+        \[(\forall x_i)\cub(t_1, \dots, t_k, \dots, t_n).\]
+        We know that, by the induction hypothesis,
+        \[\ded{E} t_k = u \ra (\cub(t_1, \dots, t_k, \dots, t_n) \ra \cub(t_1, \dots, u, \dots, t_n)).\]
+        Note that \(x_i\) cannot be any variables appearing free in any of terms \(t_1, \dots, t_n\), or else variables in these terms would not be free in \(\cua\). Similarly, \(x_i\) cannot be \(u\), or else \(u\) would not be free for any of the terms \(t_1, \dots, t_n\). Therefore, by Generalization and the Deduction Theorem,
+        \[\ded{E} \cub(t_1, \dots, t_k, \dots, t_n) \lra (\forall x_i)\cub(t_1, \dots, t_k, \dots, t_n)\]
+        and
+        \[\ded{E} \cub(t_1, \dots, u, \dots, t_n) \lra (\forall x_i)\cub(t_1, \dots, u, \dots, t_n).\]
+        By substituting these provable equivalences into the \wf{} obtained from the induction hypothesis above (made possible by Proposition 4.22),
+        \[\ded{E} t_k = u \ra ((\forall x_i)\cub(t_1, \dots, t_k, \dots, t_n) \ra (\forall x_i)\cub(t_1, \dots, u, \dots, t_n)),\]
+        i.e.,
+        \[\ded{E} t_k = u \ra (\cua(t_1, \dots, t_k, \dots, t_n) \ra \cua(t_1, \dots, u, \dots, t_n)).\]
+    \end{enumerate}
+    By completing the induction, we may conclude that,
+    \[\ded{E} ((t_k = u) \ra (\cua(t_1, \dots, t_k, \dots, t_n) \ra \cua(t_1, \dots, u, \dots, t_n))).\]
+\end{enumerate}

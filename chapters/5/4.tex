@@ -1,0 +1,16 @@
+\section{First order arithmetic}
+
+The notation we use will be slightly different from that in the textbook. We will use \(\mn\) to denote the natural numbers as an interpretation of the system we will construct.
+
+Let \(\cul_{N}\) refer to the language with the function letters \(f^1_1, f^2_1, f^2_2\) to be interpreted as the successor, sum, product, the constant \(a_1\) to be interpreted as 0, and the predicate symbol \(A^2_1\) for equality. We will use \(=\) to stand for \(A^2_1\) just as we did in Chapter 5.2
+
+We will denote by \(\can\) the extension of \(K_{\cul_N}\) obtained by including the axioms of equality introduced in Section 5.2 and the following axioms.
+\begin{itemize}
+  \item (N1) \((\forall x_1)(\sim f^1_1(x_1) = a_1)\)
+  \item (N2) \((\forall x_1)(\forall x_2)(f^1_1(x_1) = f^1_1(x_2 \ra x_1 = x_2)\)
+  \item (N3) \((\forall x_1)f^2_1(x_1, a_1) = x_1\)
+  \item (N4) \((\forall x_1)(\forall x_2)f^2_1(x_1, f^1_1(x_2)) = f^1_1(f^2_1(x_1, x_2))\)
+  \item (N5) \((\forall x_1)f^2_2(x_1, a_1) = a_1\)
+  \item (N6) \((\forall x_1)(\forall x_2)f^2_2(x_1, f^1_1(x_2)) = f^2_1(f^2_2(x_1, x_2), x_1)\)
+  \item (N7) \(\cua(a_1) \ra ((\forall x_1)(\cua(x_1) \ra \cua(f^1_1(x_2))) \ra (\forall x_1)\cua(x_1))\), for each \wf{} \(\cua(x_1)\) of \(\cul_N\) in which \(x_1\) occurs free
+\end{itemize}

@@ -1,0 +1,122 @@
+\section{The theory of groups}
+Group theory is based on a set of axioms, and these axioms are expressed\footnote{There are other languages which can be used, see the first exercise of this section.} in a language that we will denote by \(\cul_G\), which has the following alphabet:
+\begin{itemize}
+  \item variables \(x_1, x_2, \dots\)
+  \item a single constant \(a_1\), which is to be interpreted as the group identity
+  \item two function symbols, \(f^1_1\), which is to be interpreted as the inverse function, and \(f^2_1\), which is to be interpreted as the group product
+  \item one predicate symbol \(A^2_1\), which is to be interpreted as \(=\)
+  \item punctuation marks (, ), and ,
+  \item logical symbols \(\forall, \sim, \cua\)
+\end{itemize}
+
+Now define \(\cug\) to be a first order system with equality whose additional proper axioms are the following.
+\begin{itemize}
+  \item (G1) \(f^2_1(f^2_1(x_1, x_2), x_3) = f^2_1(x_1, f^2_1(x_2, x_3))\)
+  \item (G2) \(f^2_1(a_1, x_1) = x_1\)
+  \item (G3) \(f^2_1(f^1_1(x_1), x_1) = a_1\)
+\end{itemize}
+These axioms are to be interpreted respectively as the following.
+\begin{itemize}
+  \item the group product is associative
+  \item the constant \(a_1\) is a left identity
+  \item every element in the group has a left inverse
+\end{itemize}
+Note that there is no need to assert the existence of \(a_1\), the left identity constant, and \(f^1_1(x_1)\), left inverse for any \(x_1\). This is because in any model of \(\cug\), there must exist interpretations of \(a_1\) and \(f^1_1\) which satisfy the properties given by the axioms. Similarly, there is no need to include an axiom for closure of the functions, as these will be interpreted, in some model, as closed functions over the domain of the model.
+
+Any group is a model of \(\cug\), provided that the zero element, the inverse function, and the product function of the group interpret their respective analogues \(a_1, f^1_1\), and \(f^2_1\) in \(\cug\). However, there are models of \(\cug\) which are not groups.
+
+Consider, as an example, the interpretation \(I\) of \(\cug\) in which the following are defined.
+\begin{itemize}
+  \item The domain is the set of integers
+  \item \(\bar{a}_1\) is 0
+  \item \(\bar{f}^1_1(x)\) is \(-x\)
+  \item \(\bar{f}^2_1(x, y)\) is \(x + y\)
+  \item \(\bar{A}^2_1\), or the interpretation of \(=\), is congruence mod \(m\), where \(m\) is some fixed positive integer
+\end{itemize}
+In the last item, recall that \(=\) is shorthand for \(A^2_1\). However, as we see here, \(=\) is not interpreted here by \(=\) in the interpretation, or equality of integers. In other words, our interpretation cannot be a normal model of \(\cug\). However, this interpretation is a model of \(\cug\). The logical axioms (K1) - (K6) are logically valid, and hence true in any interpretation. The axioms for equality (E7), (E8), and (E9) are true, and this is verified just as in Example 5.5. The group axioms remain to be verified.
+\begin{itemize}
+  \item (G1) is interpreted as \((x + y) + z \equiv x + (y + z) \pmod{m}\).
+  \item (G2) is interpreted as \(0 + x \equiv x \pmod{m}\).
+  \item (G3) is interpreted as \(-x + x \equiv 0 \pmod{m}\).
+\end{itemize}
+In the interpretation, all of these are true statements, hence the interpretation is a model of \(G\). However, the interpretation is not a group, since it involves congruence instead of equality. However, just as in the proof of Proposition 5.6, we can construct a normal model from the interpretation where the domain consists of the equivalence, or congruence, classes brought about by congruence mod \(m\). Note that this is not some contrived example, for this is the construction of the group \(\mz_m\).
+
+\solutions{}
+\begin{enumerate}
+  \setcounter{enumi}{6}
+  \item % 7
+    In a language with no individual constants, (G2) and (G3) may be replaced by
+    \[(\exists x_1)(\forall x_2)(f^2_1(x_1, x_2) = x_2 \land f^2_1(f^1_1(x_2), x_2) = x_1),\]
+    where the \(x_1\) above is to be interpreted as the group identity.
+
+    In a language with no function letters, let \(A^3_1(x_1, x_2, x_3)\) be interpreted as \(x_1x_2 = x_3\) so that
+    \[(\forall x_1)(\forall x_2)(\exists x_3)A^3_1(x_1, x_2, x_3),\]
+    in other words, a group product always exists for two elements of the group.
+
+    (G1) may be replaced by
+    \[(A^3_1(x_1, x_2, x_4) \land A^3_1(x_4, x_3, x_5) \land A^3_1(x_2, x_3, x_6) \land A^3_1(x_1, x_6, x_7)) \ra x_5 = x_7,\]
+    where \(x_4\) is meant to be \(f^2_1(x_1, x_2)\) in (G1), \(x_5\) is meant to \(f^2_1(f^2_1(x_1, x_2), x_3)\), etc.
+
+    (G2) may be replaced by
+    \[(\forall x_1)A^3_1(a_1, x_1, x_1),\]
+    (G3) may be replaced by
+    \[(\forall x_1)(\exists x_2)A^3_1(x_1, x_2, a_1).\]
+
+  \item % 8
+    A first order system of semigroup theory may be described by simply having (G1) as a sole axiom.
+
+  \item % 9
+    Because the axioms (G1), (G2), and (G3) do not include the constant symbols, the interpretations of constants may (and must) be included without altering the theorems which may be proved in the formal system.
+
+  \item % 10
+    A language for ring theory is the same as the language for group theory, with the addition of \(f^2_2\) to describe multiplication. The axioms for ring theory are given as follows. The first four describe addition.
+    \begin{enumerate}
+      \item \(f^2_1(f^2_1(x_1, x_2), x_3) = f^2_1(x_1, f^2_1(x_2, x_3))\)
+      \item \(f^2(x_1, x_2) = f^2(x_2, x_1)\)
+      \item \(f^2_1(a_1, x_1) = x_1\)
+      \item \(f^2_1(f^1_1(x_1), x_1) = a_1\)
+    \end{enumerate}
+    The next four describe multiplication.
+    \begin{enumerate}
+      \item \(f^2_2(f^2_2(x_1, x_2), x_3) = f^2_2(x_1, f^2_2(x_2, x_3))\)
+      \item \(f^2_2(a_1, x_1) = x_1\)
+    \end{enumerate}
+    The next two describe the distributive properties.
+    \begin{enumerate}
+      \item \(f^2_2(x_1, f^2_1(x_2, x_3)) = f^2_1(f^2_2(x_1, x_2), f^2_2(x_1, x_3))\)
+      \item \(f^2_2(f^2_1(x_1, x_2), x_3) = f^2_1(f^2_2(x_2, x_1), f^2_2(x_3, x_1))\)
+    \end{enumerate}
+    Constructing an interpretation of this system which is not a ring may be done in the same way as the examples shown in the textbook. That is, by constructing an interpretation in which equality is congruence modulo \(n\), where \(n\) is some positive integer. So let the domain of interpretation be the integers. Interpret the symbols in the usual way (\(f^2_1\) corresponds to addition, \(f^1_1\) is the additive inverse, etc.), except let \(A^2_1\) or \(=\) in the system be interpreted by congruence modulo \(n\). It is easy to see that all the axioms are satisfied, but the model is not a ring.
+
+    However, just as in the previous examples, a ring may easily be constructed by considering equivalence classes mod \(n\).
+
+  \item % 11
+    There are two parts to this question. 
+    \begin{enumerate}
+      \item To construct a first order system whose models are infinite groups, include as an additional axiom schema
+        \[\underbrace{x_1 + x_1 + \dots + x_1}_{k \text{ times}} = a_1 \ra x_1 = a_1\]
+        for all \(k\). That is, include infinitely many axioms of the above instance for each positive integer \(k\). This will guarantee that only 0, the interpretation of \(a_1\), in the model of the group, will have an order. Therefore, each model must have infinitely many elements, except for the trivial group, the group with a singular element, which is a group. To exclude this group, we also include the following axiom.
+        \[(\exists x_1)(\exists x_2) \sim(x_1 = x_2).\]
+        This axiom states that there exist at least two distinct elements. Finally, note that the models of this system are certainly not all infinite groups, since there exists groups with infinitely many elements but with some elements having finite order. However, the models of this system will all have infinite order, since the included axioms restrict the possibility of the group having finite order.
+
+      \item The second part of the exercise asks whether it is ``possible for a first order system to have as its normal models all \textit{finite groups}?'' This may be interpreted as asking to construct a system whose normal models are finite groups, or, alternatively, according to the other interpretation, the set of all possible finite groups. Regarding the first interpretation, it is simple to construct a system whose normal models are only finite groups. Include the additional axiom
+        \[x_1 = a_1,\]
+        so that the only normal model up to isomorphism is the trivial group. Regarding the second interpretation, the answer is no, there exists no system whose normal models are the set of all finite groups. Suppose that such a system exists. Then it must have the axioms of the above scheme
+        \[\underbrace{x_1 + x_1 + \dots + x_1}_{k \text{ times}} = a_1 \ra x_1 = a_1\]
+        as theorems for all \(k\). By Corollary 4.47, the set of all such \wf{} should have a model. By nature of the axiom scheme and the same reasoning as in part (a), the set of all \wfs{} must have a normal model which is an infinite group.
+    \end{enumerate}
+
+  \item % 12
+    Recall that a field with characteristic \(k\) is a field in which the smallest number that the fields additive identity may be added to itself to reach the multiplicative identity is \(k\). If any sum of the additive identity with itself is never equal to the multiplicative identity, the field has characteristic zero.
+
+    Just as in exercise 10, consider an extension of the system of field theory whose axioms are given by the scheme
+    \[\underbrace{x_1 + x_1 + \dots + x_1}_{k \text{ times}} = a_1 \ra x_1 = a_1\]
+    for all \(k\), where \(a_1\) is interpreted as the unique additive identity, or zero, in the field. The normal models of this system must necessarily be all fields of characteristic zero. So the \wf{} \(\cua\) described in the exercise must be a theorem of this system, hence its proof uses finitely many of these axioms. The axioms of the scheme differ only in their value for \(k\), so let \(n + 1\) denote the lowest number in the axioms used in the proof of \(\cua\). By construction, \(n\) will necessarily be a positive integer\footnote{It is well-known that the characteristic of a field must be a prime number if not zero. In fact, we could have specified this in the axiom scheme.} such that \(\cua\) will be true in all fields of characteristic \(p\), with \(p > n\), since systems which have these fields as models will have these axioms in the proof as axioms in the system.
+
+  \item % 13
+    Construct an extension of \(\cuf\) called \(\cuf'\) which includes \(\cua\) as an axiom along with
+    \[\underbrace{a_2 + a_2 + \dots + a_2}_{k \text{ times}} = a_1 \ra x_1 = a_1\]
+    for all \(k\), where \(a_2\) and \(a_1\) are respectively interpreted as the additive and multiplicative identity in any normal model of the system. Consider a system with any finite subset of the axioms of \(\cuf'\). It contains finitely many instances of the above axiom schema. Denote the highest \(k\) occurring in these axioms by \(n\). It must be that there exists a field of characteristic \(p\), with \(p>n\), in which \(\cua\) is true, by assumption. Since, in a field, the minimum number of times that any element can be added to itself until it reaches \(0\) will be the characteristic of the field, the field of characteristic \(p\) will be a model for the system with the chosen axioms. 
+
+    Therefore, by Corollary 4.47, since every finite subset of the axioms of \(\cuf\) has a model, \(\cuf\) has a model, and since \(\cua\) is a theorem of \(\cuf\), it is true in the model. This model may not be a field itself, but a field may be constructed from the model by an argument similar to the one in Proposition 5.6.
+\end{enumerate}

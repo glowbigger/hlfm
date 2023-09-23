@@ -1,6 +1,6 @@
 # Notes and solutions for "Logic For Mathematicians"
 
-Notes and solutions for the book "Logic for Mathematicians" by A. G. Hamilton., written for the purpose of comprehending the subject at a deeper level and as a reference for later. The text contain:
+Notes and solutions for the book "Logic for Mathematicians" by A. G. Hamilton., written for the purpose of comprehending the subject at a deeper level and as a reference for later. The notes contain:
 
 * solutions to all exercises 
 * rewritten proofs of all propositions

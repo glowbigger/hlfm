@@ -1,0 +1,69 @@
+\section{Formal set theory}
+
+Let \(\cul_{ZF}\) be a language with \(A^2_1\) and \(A^2_2\). For any terms \(u, v\), we will write \(u = v\) to mean \(A^2_1(u, v)\) and \(u \in v\) to mean \(A^2_2()\). \textit{There are no individual constants and function letters}. Let \(ZF\) be an extension of \(K_{\cul_{ZF}}\) with the axioms of equality\footnote{There are no instances of (E8).} introduced in Section 5.2 and the following axioms.
+\begin{align*}
+  (ZF1)&&
+  x_1 = x_2 \lra (\forall x_3)(x_3 \in x_1 \lra x_3 \in x_2)
+\end{align*}
+This is the Axiom of Extensionality. It says that two sets are equal if they have the same elements.
+\begin{align*}
+  (ZF2)&&
+  (\exists x_1)(\forall x_2)\sim(x_2 \in x_1)
+\end{align*}
+This is the Null Set Axiom. It says that there is a set which contains no elements. It can be proved that this set is unique. We will denote it by \(\emptyset\).
+\begin{align*}
+  (ZF3)&&
+  (\forall x_1)(\forall x_2)(\exists x_3)(\forall x_4)(x_4 \in x_3 \lra (x_4 = x_1 \lor x_4 = x_2))
+\end{align*}
+This is the Axiom of Pairing. Given any two sets, there is a set whose members are those two sets.
+\begin{align*}
+  (ZF4)&&
+  (\forall x_1)(\exists x_2)(\forall x_3)(x_3 \in x_2 \lra (\exists x_4)(x_4 \in x_1 \land x_3 \in x_4))
+\end{align*}
+This is the Axiom of Unions. Given any set (of sets) \(S\), there exists a set whose members are all members of members of \(S\). For example, if \(S = \{\{1, 2\}, \{3\}\}\), then there exists a set whose members are \(\{1, 2, 3\}\).
+\begin{align*}
+  (ZF5)&&
+  (\forall x_1)(\exists x_2)(\forall x_3)(x_3 \in x_2 \lra x_2 \subseteq x_1)
+\end{align*}
+In the above, the symbol \(\subseteq\) is defined such that, for arbitrary variables \(x_1, x_2\) and \(x_3\), \(x_1 \subseteq x_2\) stands for \((\forall x_3)(x_3 \in x_1 \ra x_3 \in x_2)\). This is the Power Set Axiom. For any set, the power set (the set containing all subsets of a specified set), of that set exists.
+\begin{align*}
+  (ZF6)&&
+  (\forall x_1)(\exists_1 x_2)\cua(x_1, x_2) \ra (\forall x_3)(\exists x_4)(\forall x_5)(x_5 \in x_4 \lra (\exists x_6)(x_6 \in x_3 \land \cua(x_6, x_5)))
+\end{align*}
+This is the Axiom Scheme of Replacement. Its form is an implication with the hypothesis that \(\cua\) is a function, since a particular \(x_2\) is \textit{uniquely} associated with any \(x_1\) (note the \(\exists_1\) quantifier).
+\begin{align*}
+  (ZF7)&&
+  (\forall x_1)(\emptyset \in x_1 \land (\forall x_2)(x_2 \in x_1 \ra x_2 \cup \{x_2\} \in x_1))
+\end{align*}
+This is the Axiom of Infinity. It asserts that there exists a set with a countably infinite number of elements, where, for sets \(x_1\) and \(x_2\), \(x_1 \cup x_2\) denotes their union and \(\{x_1\}\) denotes the set containing only \(x_1\), which exists because \(x_1\) may be paired with itself to yield \(\{x_1, x_1\}\) by the Axiom of Pairing. In particular, the set is
+\[\{\{\}, \{\{\}\}, \{\{\}, \{\{\}\}\}, \{\{\}, \{\{\}\}, \{\{\}, \{\{\}\}\}\}, \dots\},\]
+i.e.,
+\[\{\emptyset, \{\emptyset\}, \{\emptyset, \{\emptyset\}\}, \{\emptyset, \{\emptyset\}, \{\emptyset, \{\emptyset\}\}\}\}.\]
+\begin{align*}
+  (ZF8)&&
+  (\forall x_1)(\sim x_1 = \emptyset \ra (\exists x_2)(x_2 \in x_1 \land \sim(\exists x_3)(x_3 \in x_2 \land x_3 \in x_1)))
+\end{align*}
+This is the Axiom of Foundation. It states that every set has an element which is disjoint, i.e. the element shares no elements.
+
+The above axioms specify the modern foundations of set theory. There are two additional axioms that are worth mentioning.
+
+\medskip
+(AC) For any non-empty set (of sets) \(x\), there is a set which contains precisely one element in common with each member with each member of \(x\).
+\medskip
+
+This is the Axiom of Choice. It is equivalent to \textit{Zorn's Lemma}, if each chain in a partially ordered set has an upper bound, then the set has a maximal element, and \textit{The Well-Ordering Principle}, every set can be well-ordered, i.e., there exists an order on any set such that any non-empty subset has a least element according to the order.
+
+\medskip
+(CH) Each subset of real numbers is either countable\footnote{We use the definition that finite sets are countable.} or has the same cardinality as the set of real numbers.
+\medskip
+
+This is the Continuum Hypothesis. It is equivalent to asserting the nonexistence of a set with cardinality greater than that of the natural numbers but less than that of the real numbers.
+
+Both (AC) and (CH) are optional axioms in ZC. That is, if the system ZC is assumed to be consistent, then the four extensions which individually include (AC), (CH) and their negations are also consistent. Of course, this raises the question of the consistency of ZC, and this is the subject of the following chapter.
+
+\solutions{}
+\begin{enumerate}
+  \setcounter{enumi}{14}
+
+  \item % 15
+\end{enumerate}

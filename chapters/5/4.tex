@@ -14,3 +14,33 @@ We will denote by \(\can\) the extension of \(K_{\cul_N}\) obtained by including
   \item (N6) \((\forall x_1)(\forall x_2)f^2_2(x_1, f^1_1(x_2)) = f^2_1(f^2_2(x_1, x_2), x_1)\)
   \item (N7) \(\cua(a_1) \ra ((\forall x_1)(\cua(x_1) \ra \cua(f^1_1(x_2))) \ra (\forall x_1)\cua(x_1))\), for each \wf{} \(\cua(x_1)\) of \(\cul_N\) in which \(x_1\) occurs free
 \end{itemize}
+
+These are to be interpreted by the following statements.
+\begin{itemize}
+  \item There exists no number whose successor is zero.
+  \item If two numbers have the same successor, those two numbers are equal.
+  \item The sum of any number and zero is the number.
+  \item The successor of the sum of two numbers is the sum of the successor of the first number and the second numbers.
+  \item The product of any number and zero is zero.
+  \item The product of a number and the successor of another number is the sum of the product of the numbers and the first number.
+  \item If a statement holds for zero and if the fact that a statement holds for one number implies that the statement holds for the next one, then that statement is true for all numbers.
+\end{itemize}
+
+It is worth comparing these axioms to the well-known Peano postulates.
+\begin{itemize}
+  \item Zero is a number.
+  \item Every number has a successor which is a natural number.
+  \item The successor of no number is zero.
+  \item If two numbers have the same successor, then those two numbers are the same.
+  \item If any set of numbers contains zero and has the property that if any number is in the set, then the successor of that number is also in the set, then that set contains all numbers.
+\end{itemize}
+
+The essential difference between this set of axioms and the ones for \(\mathcal{N}\) is that these axioms rely on some notion of sets. In particular, the final axiom is a predicate over elements in the set of sets of numbers, and this set it is uncountable. On the other hand, (N7) is a predicate over \wfs{} of \(\cul_{N}\), a set which is countable.
+
+A basic question to ask about \(\mathcal{N}\) is whether it is complete. The next chapter will outline a proof that essentially states that if \(\mathcal{N}\) is consistent, then it is not complete (and if it is inconsistent, then it is trivially complete), in which case the system may be extended to two consistent systems by separately adding an unprovable \wf{} or its negation as axioms, and these two systems will have distinct models\footnote{The propositions used to justify this sentence should be obvious at this point.}. Therefore, \(\mathcal{N}\) has more than one model.
+
+\solutions{}
+\begin{enumerate}
+  \setcounter{enumi}{13}
+  \item % 14
+\end{enumerate}

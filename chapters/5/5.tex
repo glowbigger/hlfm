@@ -66,4 +66,38 @@ Both (AC) and (CH) are optional axioms in ZC. That is, if the system ZC is assum
   \setcounter{enumi}{14}
 
   \item % 15
+    (ZF2) may be replaced by
+    \[(\forall x_1)\sim(x_1 \in a_1).\]
+    An axiom must be added to specify the meaning of \(A^2_3\):
+    \[A^2_3(t_1, t_2) \lra (\forall x_1)(x_1 \in t_1 \ra x_1 \in t_2),\]
+    where \(t_1\) and \(t_2\) are any terms, since \(f^2_1\) is now part of the language. Finally, (ZF3) may be replaced by
+    \[(\forall x_1)(\forall x_2)(\forall x_3)(x_3 \in f^2_1(x_1, x_2) \lra (x_3 = x_1 \lor x_3 = x_2)).\]
+    Optionally, all instances of \(\emptyset\) in the remaining axioms may be replaced by \(a_1\). The \(x_3 \subseteq x_1\) in (ZF5) may be replaced by \(A^2_3(x_3, x_1)\). The \(\{x_2\}\) in (ZF7) may be replaced by \(f^2_1(x_2, x_2)\).
+
+    Regarding the second part of the question, it will suffice to go through each axiom of ZF and assess whether it is true or false in the interpretation. Notice that any element of the domain of interpretation is of the form \(\{0, 1, 2, \dots n\}\), where if \(n = 0\), then this refers to the empty set.
+    \begin{itemize}
+      \item True. All the elements in the interpretation are sets, so clearly (ZF1) holds.
+
+      \item True. The element \(\emptyset\) exists in the interpretation, so (ZF2) is satisfied.
+
+      \item False. Consider \(0 = \{\}\) and \(2 = \{0, 1\}\). Since \(\{0, 2\}\) is not the empty set or of the form \(\{0, \dots, n\}\), (ZF3) is not satisfied in this interpretation.
+
+      \item True. Any set must be of the form, say, \(\{0, \dots, k\}\) (if \(k=0\), then this set refers to the empty set). This can be rewritten as
+        \[\{\{\}, \{0\}, \{0, 1\}, \dots, \{0, \dots, k - 1\}\},\]
+        so the set of all the members of members of the set must be
+        \[\{0, 1, 2, \dots, k - 1\},\]
+        which must also be in the interpretation. Therefore, (ZF4) is satisfied.
+
+      \item False. Consider \(2 = \{0, 1\}\). Its power set is
+        \[\{\emptyset, \{0\}, \{1\}, \{0, 1\}\} \text{, i.e., } \{0, 1, \{1\}, 2\}\]
+        and this set does not belong to the domain of interpretation, so (ZF5) is not satisfied.
+
+      \item False. Let \(\cua(x_1, x_2)\) be \(\{x_1\} = x_2\), so that
+        \[(\forall x_1)(\exists_1 x_2) \cua(x_1, x_2)\]
+        is interpreted as for all sets of the form \(\{x_1\}\), there is a set \(x_2\) which is equal to it, and the existence of this \(x_2\) is validated by (Z3), but note that (Z3) is itself false in the interpretation, so this one will be seen to be false. In particular, take the set \(2 = \{0, 1\}\). The image of this set is \(\{\{0\}, \{1\}\}\), but the proper interpretation of this set does not exist in the domain of interpretation.
+
+      \item False. Every set in the interpretation must be of the form \(\{0, 1, 2, \dots, n\}\), and this set must necessarily be \(n + 1\). Since \(n + 1 = n \cup \{n\}\), by definition, it cannot be in \(n + 1\), since no set can be a member of itself. Therefore, no set in the interpretation can satisfy (ZF7).
+
+      \item True. Every set contains the empty set, and the empty set is disjoint from every set. Therefore, (ZF8) is satisfied.
+    \end{itemize}
 \end{enumerate}
